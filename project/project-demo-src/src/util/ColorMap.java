@@ -7,7 +7,6 @@ import java.util.Map;
 public class ColorMap {
     static Map<Integer, Color> colorMap = new HashMap<>();
 
-    //todo: add more color to the map
     //todo: complete the method to add other color
     public static void InitialColorMap() {
         colorMap.put(1, Color.RED);
