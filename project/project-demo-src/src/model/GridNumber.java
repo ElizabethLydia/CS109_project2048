@@ -132,7 +132,6 @@ public class GridNumber {
                 lastArray[i][j] = numbers[i][j];
             }
         }
-        //添加一个随机数，目前还没实现有效移动判断的逻辑
         if (checkValidMove(initialArray, lastArray) == true) {
             addRandomNumber();
         }
