@@ -1,7 +1,9 @@
 package model;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class GridNumber {
@@ -264,6 +266,59 @@ public class GridNumber {
     public void printNumber() {
         for (int[] line : numbers) {
             System.out.println(Arrays.toString(line));
+        }
+    }
+    public void saveGame() {
+        try {
+            int[][] array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+            String filePath = "data.txt";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+//不想覆盖掉用BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
+            for (int[] row : numbers) {
+                for (int value : row) {
+                    writer.write(String.valueOf(value));
+                    writer.write(" ");  // 使用空格分隔每个元素
+                }
+                writer.newLine();  // 换行
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void loadGame() {
+        try {
+            String filePath = "data.txt";
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
+            List<int[]> rows = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.trim().split(" ");
+                int[] row = Arrays.stream(values).mapToInt(Integer::parseInt).toArray();
+                rows.add(row);
+            }
+
+            int[][] restoredArray = new int[rows.size()][];
+            for (int i = 0; i < rows.size(); i++) {
+                restoredArray[i] = rows.get(i);
+            }
+
+            // 打印提取出来的数组
+            for (int[] row : restoredArray) {
+                System.out.println(Arrays.toString(row));
+            }
+
+
+
+
+
+
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
