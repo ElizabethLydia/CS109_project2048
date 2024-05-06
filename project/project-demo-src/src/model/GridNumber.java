@@ -61,7 +61,6 @@ public class GridNumber {
         //最后一个位置的索引
 
         for (int i = 0; i < numbers.length; i++) {
-            int indexY_last = Y_COUNT - 1;//这样每行判断时都能从最后一个位置开始
             //每一行都生成一个list，用于存储非0的数字
             ArrayList<Integer> list = new ArrayList<>();
             for (int j = 0; j < numbers[i].length; j++) {
@@ -78,8 +77,9 @@ public class GridNumber {
             //没有必要在这时候就把数组全填进去因为还要进行操作,直接对arraylist进行操作就行了得到这行的最终结果之后再输入
             //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
+            int indexY_last = Y_COUNT - 1;//这样每行判断时都能从最后一个位置开始
             if (list.size() > 1) {
-                for (int j = list.size()-1; j > 0; j--) {
+                for (int j = list.size()-1; j >0; j--) {
                     if (list.get(j) == list.get(j - 1)) {
                         list.set(j, list.get(j)*2);
                         list.set(j-1, 0);
@@ -94,7 +94,6 @@ public class GridNumber {
                         list2.add(list.get(j));
                     }
                 }
-
                 //将list2中的数字从右向左填充到这一行中
                 for (int j = list2.size() - 1; j >= 0; j--) {
                     numbers[i][indexY_last] = list2.get(j);
@@ -109,7 +108,6 @@ public class GridNumber {
 
     public void moveLeft() {
         for (int i = 0; i < numbers.length; i++) {
-            int indexY_last = 0;//这样每行判断时都能从第一个位置开始开始
             //每一行都生成一个list，用于存储非0的数字
             ArrayList<Integer> list = new ArrayList<>();
             for (int j = 0; j < numbers[i].length; j++) {
@@ -143,13 +141,13 @@ public class GridNumber {
                     }
                 }
                 //将list2中的数字从左向右填充到这一行中
-                for (int j = 0; j < list.size(); j++) {
-                    numbers[i][indexY_last] = list2.get(j);
-                    indexY_last++;
+                //反正都从第0未开始就没必要设置indexY_last了
+                for (int j = 0; j < list2.size(); j++) {
+                    numbers[i][j] = list2.get(j);
                 }
             }
             if (list.size() == 1){
-                numbers[i][indexY_last] = list.get(0);
+                numbers[i][0] = list.get(0);
             }
         }
     }
@@ -157,7 +155,6 @@ public class GridNumber {
 
     public void moveUp() {
         for (int j = 0; j < numbers[0].length; j++) {
-            int indexX_last = 0;//这样每列判断时都能从第一个位置开始开始
             //每一列都生成一个list，用于存储非0的数字
             ArrayList<Integer> list = new ArrayList<>();
             for (int i = 0; i < numbers.length; i++) {
@@ -165,12 +162,10 @@ public class GridNumber {
                     list.add(numbers[i][j]);
                 }
             }
-
             //将这一列的所有数字都置为0，因为数字已经被记录下来了嘛
             for (int i = 0; i < numbers.length; i++) {
                 numbers[i][j] = 0;
             }
-
             //没有必要在这时候就把数组全填进去因为还要进行操作,直接对arraylist进行操作就行了得到这行的最终结果之后再输入
             //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
@@ -191,13 +186,12 @@ public class GridNumber {
                     }
                 }
                 //将list2中的数字从上向下填充到这一行中
-                for (int i = 0; i < list.size(); i++) {
-                    numbers[indexX_last][j] = list2.get(i);
-                    indexX_last++;
+                for (int i = 0; i < list2.size(); i++) {
+                    numbers[i][j] = list2.get(i);
                 }
             }
             if (list.size() == 1) {
-                numbers[indexX_last][j] = list.get(0);
+                numbers[0][j] = list.get(0);
             }
         }
     }
@@ -212,12 +206,10 @@ public class GridNumber {
                     list.add(numbers[i][j]);
                 }
             }
-
             //将这一列的所有数字都置为0，因为数字已经被记录下来了嘛
             for (int i = 0; i < numbers.length; i++) {
                 numbers[i][j] = 0;
             }
-
             //没有必要在这时候就把数组全填进去因为还要进行操作,直接对arraylist进行操作就行了得到这行的最终结果之后再输入
             //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
