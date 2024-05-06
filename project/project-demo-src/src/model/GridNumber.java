@@ -69,22 +69,15 @@ public class GridNumber {
                     list.add(numbers[i][j]);
                 }
             }
-            /*//将list中的数字从右向左填充到这一行中
-            if (indexY_last != -1) {//？？？为啥会出现-1？？？
-                for (int j = list.size() - 1; j >= 0; j--) {
-                    numbers[i][indexY_last] = list.get(j);
-                    indexY_last--;
-                }
-            }没有必要在这时候就把数组全填进去因为还要进行操作
-            直接对arraylist进行操作就行了得到这行的最终结果之后再输入
-            */
-            //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
-            //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
 
             //将这一行的所有数字都置为0，因为数字已经被记录下来了嘛
             for (int j = 0; j < numbers[i].length; j++) {
                 numbers[i][j] = 0;
             }
+
+            //没有必要在这时候就把数组全填进去因为还要进行操作,直接对arraylist进行操作就行了得到这行的最终结果之后再输入
+            //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
+            //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             if (list.size() > 1) {
                 for (int j = list.size()-1; j > 0; j--) {
                     if (list.get(j) == list.get(j - 1)) {
@@ -115,12 +108,145 @@ public class GridNumber {
     }
 
     public void moveLeft() {
+        for (int i = 0; i < numbers.length; i++) {
+            int indexY_last = 0;//这样每行判断时都能从第一个位置开始开始
+            //每一行都生成一个list，用于存储非0的数字
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int j = 0; j < numbers[i].length; j++) {
+                if (numbers[i][j] != 0) {
+                    list.add(numbers[i][j]);
+                }
+            }
+
+            //将这一行的所有数字都置为0，因为数字已经被记录下来了嘛
+            for (int j = 0; j < numbers[i].length; j++) {
+                numbers[i][j] = 0;
+            }
+
+            //没有必要在这时候就把数组全填进去因为还要进行操作,直接对arraylist进行操作就行了得到这行的最终结果之后再输入
+            //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
+            //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
+            if (list.size() > 1) {
+                for (int j = 0; j < list.size()-1; j++) {
+                    if (list.get(j) == list.get(j + 1)) {
+                        list.set(j, list.get(j)*2);
+                        list.set(j+1, 0);
+                    }
+                }
+                //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
+                //重新上面的思路，生成一个list2，用于存储非0的数字，
+                //然后清零这一行，再从左往右填充
+                ArrayList<Integer> list2 = new ArrayList<>();
+                for (int j = 0; j < list.size(); j++) {
+                    if (list.get(j) != 0) {
+                        list2.add(list.get(j));
+                    }
+                }
+                //将list2中的数字从左向右填充到这一行中
+                for (int j = 0; j < list.size(); j++) {
+                    numbers[i][indexY_last] = list2.get(j);
+                    indexY_last++;
+                }
+            }
+            if (list.size() == 1){
+                numbers[i][indexY_last] = list.get(0);
+            }
+        }
     }
 
+
     public void moveUp() {
+        for (int j = 0; j < numbers[0].length; j++) {
+            int indexX_last = 0;//这样每列判断时都能从第一个位置开始开始
+            //每一列都生成一个list，用于存储非0的数字
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i < numbers.length; i++) {
+                if (numbers[i][j] != 0) {
+                    list.add(numbers[i][j]);
+                }
+            }
+
+            //将这一列的所有数字都置为0，因为数字已经被记录下来了嘛
+            for (int i = 0; i < numbers.length; i++) {
+                numbers[i][j] = 0;
+            }
+
+            //没有必要在这时候就把数组全填进去因为还要进行操作,直接对arraylist进行操作就行了得到这行的最终结果之后再输入
+            //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
+            //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
+            if (list.size() > 1) {
+                for (int i = 0; i < list.size() - 1; i++) {
+                    if (list.get(i) == list.get(i + 1)) {
+                        list.set(i, list.get(i) * 2);
+                        list.set(i + 1, 0);
+                    }
+                }
+                //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
+                //重新上面的思路，生成一个list2，用于存储非0的数字，
+                //然后清零这一行，再从上往下填充
+                ArrayList<Integer> list2 = new ArrayList<>();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i) != 0) {
+                        list2.add(list.get(i));
+                    }
+                }
+                //将list2中的数字从上向下填充到这一行中
+                for (int i = 0; i < list.size(); i++) {
+                    numbers[indexX_last][j] = list2.get(i);
+                    indexX_last++;
+                }
+            }
+            if (list.size() == 1) {
+                numbers[indexX_last][j] = list.get(0);
+            }
+        }
     }
 
     public void moveDown() {
+        for (int j = 0; j < numbers[0].length; j++) {
+            int indexX_last = X_COUNT - 1;//这样每列判断时都能从最后一个位置开始
+            //每一列都生成一个list，用于存储非0的数字
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i < numbers.length; i++) {
+                if (numbers[i][j] != 0) {
+                    list.add(numbers[i][j]);
+                }
+            }
+
+            //将这一列的所有数字都置为0，因为数字已经被记录下来了嘛
+            for (int i = 0; i < numbers.length; i++) {
+                numbers[i][j] = 0;
+            }
+
+            //没有必要在这时候就把数组全填进去因为还要进行操作,直接对arraylist进行操作就行了得到这行的最终结果之后再输入
+            //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
+            //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
+            if (list.size() > 1) {
+                for (int i = list.size() - 1; i > 0; i--) {
+                    if (list.get(i) == list.get(i - 1)) {
+                        list.set(i, list.get(i) * 2);
+                        list.set(i - 1, 0);
+                    }
+                }
+                //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
+                //重新上面的思路，生成一个list2，用于存储非0的数字，
+                //然后清零这一行，再从下往上填充
+                ArrayList<Integer> list2 = new ArrayList<>();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i) != 0) {
+                        list2.add(list.get(i));
+                    }
+                }
+                //将list2中的数字从下向上填充到这一行中
+                for (int i = list2.size() - 1; i >= 0; i--) {
+                    numbers[indexX_last][j] = list2.get(i);
+                    indexX_last--;
+                }
+            }
+            if (list.size() == 1) {
+                numbers[indexX_last][j] = list.get(0);
+            }
+        }
     }
 
     public void addRandomNumber() {//用于添加随机数字，需要加到上面的moveLeft()等方法最后
