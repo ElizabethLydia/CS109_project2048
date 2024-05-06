@@ -60,11 +60,29 @@ public class GamePanel extends ListenerPanel {
      * Do move right.
      */
     @Override
-    public void doMoveRight() {
-        System.out.println("Click VK_RIGHT");
-        this.afterMove();
+    public void doMoveRight() {//记得改现在是4*4的情况
+        int[][] initialArray = new int[COUNT][COUNT];
+        for (int i = 0; i < initialArray.length; i++) {
+            for (int j = 0; j < initialArray[i].length; j++) {
+                initialArray[i][j] = model.getNumber(i, j);
+            }
+        }
         this.model.moveRight();
-        this.updateGridsNumber();
+        int[][] lastArray = new int[COUNT][COUNT];
+        for (int i = 0; i < lastArray.length; i++) {
+            for (int j = 0; j < lastArray[i].length; j++) {
+                lastArray[i][j] =model.getNumber(i, j);
+            }
+        }
+        if (this.checkValidMove(initialArray,lastArray)) {
+            System.out.println("Click VK_RIGHT");
+            this.afterMove();
+            this.model.addRandomNumber();
+            this.updateGridsNumber();
+        }else{
+            System.out.println("Unable to move right,try another direction");
+            this.updateGridsNumber();
+        }
     }
     @Override
     public void doMoveLeft() {
@@ -98,5 +116,16 @@ public class GamePanel extends ListenerPanel {
 
     public void setStepLabel(JLabel stepLabel) {
         this.stepLabel = stepLabel;
+    }
+    public boolean checkValidMove(int[][] initialArray,int[][] lastArray){
+        boolean check = false;
+        for (int i = 0; i < initialArray.length ; i++) {
+            for (int j = 0; j < initialArray[i].length ; j++) {
+                if (initialArray[i][j] != lastArray[i][j]){
+                    check =true;
+                }
+            }
+        }
+        return check;
     }
 }

@@ -60,17 +60,8 @@ public class GridNumber {
         //如果存在三个相邻的相同值的瓷砖，滑动方向末端的两个块将合并在一起。
         //最后一个位置的索引
 
-        //首先生成一个最初的数组，为了后面和移动后的数组进行比较，如果是一样的，就说明无效移动，不添加新的随机数
-        //如果不一样，就说明有效移动，生成新的随机数
-        int[][] initialArray = new int[X_COUNT][Y_COUNT];
-        for (int i = 0; i < initialArray.length; i++) {
-            for (int j = 0; j < initialArray[i].length; j++) {
-                initialArray[i][j] = numbers[i][j];
-            }
-        }
-
-        int indexY_last = Y_COUNT - 1;
         for (int i = 0; i < numbers.length; i++) {
+            int indexY_last = Y_COUNT - 1;//这样每行判断时都能从最后一个位置开始
             //每一行都生成一个list，用于存储非0的数字
             ArrayList<Integer> list = new ArrayList<>();
             for (int j = 0; j < numbers[i].length; j++) {
@@ -78,62 +69,48 @@ public class GridNumber {
                     list.add(numbers[i][j]);
                 }
             }
-            //将这一行的所有数字都置为0，因为数字已经被记录下来了嘛
-            for (int j = 0; j < numbers[i].length; j++) {
-                numbers[i][j] = 0;
-            }
-            //将list中的数字从右向左填充到这一行中
-            if (indexY_last != -1) {
+            /*//将list中的数字从右向左填充到这一行中
+            if (indexY_last != -1) {//？？？为啥会出现-1？？？
                 for (int j = list.size() - 1; j >= 0; j--) {
                     numbers[i][indexY_last] = list.get(j);
                     indexY_last--;
                 }
-            }
-            //由于前面索引进行了加减，这里得恢复此时的最后一个位置的索引
-            indexY_last = Y_COUNT - 1;
+            }没有必要在这时候就把数组全填进去因为还要进行操作
+            直接对arraylist进行操作就行了得到这行的最终结果之后再输入
+            */
             //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
+
+            //将这一行的所有数字都置为0，因为数字已经被记录下来了嘛
+            for (int j = 0; j < numbers[i].length; j++) {
+                numbers[i][j] = 0;
+            }
             if (list.size() > 1) {
-                for (int j = indexY_last; j > 0; j--) {
-                    if (numbers[i][j] == numbers[i][j - 1]) {
-                        numbers[i][j] = numbers[i][j] + numbers[i][j - 1];
-                        numbers[i][j - 1] = 0;
+                for (int j = list.size()-1; j > 0; j--) {
+                    if (list.get(j) == list.get(j - 1)) {
+                        list.set(j, list.get(j)*2);
+                        list.set(j-1, 0);
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
                 //重新上面的思路，生成一个list2，用于存储非0的数字，
                 //然后清零这一行，再从右往左填充
                 ArrayList<Integer> list2 = new ArrayList<>();
-                for (int j = 0; j < numbers[i].length; j++) {
-                    if (numbers[i][j] != 0) {
-                        list2.add(numbers[i][j]);
+                for (int j = 0; j < list.size(); j++) {
+                    if (list.get(j)!= 0) {
+                        list2.add(list.get(j));
                     }
                 }
-                //将这一行的所有数字都置为0，因为数字已经被记录下来了嘛
-                for (int j = 0; j < numbers[i].length; j++) {
-                    numbers[i][j] = 0;
-                }
+
                 //将list2中的数字从右向左填充到这一行中
                 for (int j = list2.size() - 1; j >= 0; j--) {
                     numbers[i][indexY_last] = list2.get(j);
                     indexY_last--;
                 }
             }
-            //如果一行就一个数，那么直接填充到最后一个位置
             if (list.size() == 1){
                 numbers[i][indexY_last] = list.get(0);
             }
-        }
-        //首先生成一个最后的数组，和移动后的数组进行比较，如果是一样的，就说明无效移动，不添加新的随机数
-        //如果不一样，就说明有效移动，生成新的随机数
-        int[][] lastArray = new int[X_COUNT][Y_COUNT];
-        for (int i = 0; i < lastArray.length; i++) {
-            for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] = numbers[i][j];
-            }
-        }
-        if (checkValidMove(initialArray, lastArray) == true) {
-            addRandomNumber();
         }
     }
 
@@ -146,17 +123,6 @@ public class GridNumber {
     public void moveDown() {
     }
 
-    public boolean checkValidMove(int[][] initialArray,int[][] lastArray){
-        boolean check = true;
-        for (int i = 0; i < X_COUNT ; i++) {
-            for (int j = 0; j < Y_COUNT; j++) {
-                if (initialArray[i][j] != lastArray[i][j]){
-                    check = false;
-                }
-            }
-        }
-        return check;
-    }
     public void addRandomNumber() {//用于添加随机数字，需要加到上面的moveLeft()等方法最后
         while (true) {
             int X = random.nextInt(X_COUNT);
