@@ -5,7 +5,7 @@ import util.ColorMap;
 import javax.swing.*;
 import java.awt.*;
 
-public class GridComponent extends JComponent {
+public class GridComponent extends JComponent {//每一个小方格
     private int row;
     private int col;
     private int number;

@@ -6,7 +6,7 @@ import util.ColorMap;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame {//整个游戏的窗口
 
     private GameController controller;
     private JButton restartBtn;
