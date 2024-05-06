@@ -20,11 +20,11 @@ public class GameFrame extends JFrame {//整个游戏的窗口
         this.setLayout(null);
         this.setSize(width, height);
         ColorMap.InitialColorMap();
-        gamePanel = new GamePanel((int) (this.getHeight() * 0.8));
+        gamePanel = new GamePanel((int) (this.getHeight() * 0.8), 4, 4);//这行代码设置了游戏面板的大小，以及游戏4*4、5*5的大小之后要改
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
 
-        this.controller = new GameController(gamePanel, gamePanel.getModel());
+        this.controller = new GameController(gamePanel, gamePanel.getModel(),this);
         this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50);
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50);
         this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50);

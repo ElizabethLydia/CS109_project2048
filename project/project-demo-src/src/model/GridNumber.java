@@ -1,7 +1,9 @@
 package model;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class GridNumber {
@@ -260,10 +262,23 @@ public class GridNumber {
     public int getNumber(int i, int j) {
         return numbers[i][j];
     }
+    public int[][] getNumbers() {
+        return numbers;
+    }
+    public void setNumbers(int[][] numbers) {
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[i].length; j++) {
+                this.numbers[i][j] = numbers[i][j];
+            }
+        }
+
+    }
+
 
     public void printNumber() {
         for (int[] line : numbers) {
             System.out.println(Arrays.toString(line));
         }
     }
+
 }

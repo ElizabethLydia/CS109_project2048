@@ -4,26 +4,32 @@ import model.GridNumber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class GamePanel extends ListenerPanel {
-    private final int COUNT = 4;
+    private final int XCOUNT;
+    private final int YCOUNT ;
     private GridComponent[][] grids;
-
     private GridNumber model;
     private JLabel stepLabel;
     private int steps;
-    private final int GRID_SIZE;
+    private static int GRID_SIZE;
 
-    public GamePanel(int size) {
+    public GamePanel(int size, int xcount, int ycount) {
         this.setVisible(true);
         this.setFocusable(true);
         this.setLayout(null);
         this.setBackground(Color.DARK_GRAY);
         this.setSize(size, size);
-        this.GRID_SIZE = size / COUNT;
-        this.grids = new GridComponent[COUNT][COUNT];
-        this.model = new GridNumber(COUNT, COUNT);
+        this.XCOUNT = xcount;
+        this.YCOUNT = ycount;
+        this.GRID_SIZE = size / (Math.max(XCOUNT, YCOUNT));
+        this.grids = new GridComponent[XCOUNT][YCOUNT];
+        this.model = new GridNumber(XCOUNT, YCOUNT);
         initialGame();
 
     }
@@ -61,14 +67,14 @@ public class GamePanel extends ListenerPanel {
      */
     @Override
     public void doMoveRight() {//记得改现在是4*4的情况
-        int[][] initialArray = new int[COUNT][COUNT];
+        int[][] initialArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < initialArray.length; i++) {
             for (int j = 0; j < initialArray[i].length; j++) {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
         this.model.moveRight();
-        int[][] lastArray = new int[COUNT][COUNT];
+        int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
                 lastArray[i][j] =model.getNumber(i, j);
@@ -86,14 +92,14 @@ public class GamePanel extends ListenerPanel {
     }
     @Override
     public void doMoveLeft() {
-        int[][] initialArray = new int[COUNT][COUNT];
+        int[][] initialArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < initialArray.length; i++) {
             for (int j = 0; j < initialArray[i].length; j++) {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
         this.model.moveLeft();
-        int[][] lastArray = new int[COUNT][COUNT];
+        int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
                 lastArray[i][j] =model.getNumber(i, j);
@@ -112,14 +118,14 @@ public class GamePanel extends ListenerPanel {
 
     @Override
     public void doMoveUp() {
-        int[][] initialArray = new int[COUNT][COUNT];
+        int[][] initialArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < initialArray.length; i++) {
             for (int j = 0; j < initialArray[i].length; j++) {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
         this.model.moveUp();
-        int[][] lastArray = new int[COUNT][COUNT];
+        int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
                 lastArray[i][j] =model.getNumber(i, j);
@@ -138,14 +144,14 @@ public class GamePanel extends ListenerPanel {
 
     @Override
     public void doMoveDown() {
-        int[][] initialArray = new int[COUNT][COUNT];
+        int[][] initialArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < initialArray.length; i++) {
             for (int j = 0; j < initialArray[i].length; j++) {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
         this.model.moveDown();
-        int[][] lastArray = new int[COUNT][COUNT];
+        int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
                 lastArray[i][j] =model.getNumber(i, j);
