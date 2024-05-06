@@ -80,7 +80,7 @@ public class GridNumber {
             int indexY_last = Y_COUNT - 1;//这样每行判断时都能从最后一个位置开始
             if (list.size() > 1) {
                 for (int j = list.size()-1; j >0; j--) {
-                    if (list.get(j) == list.get(j - 1)) {
+                    if (list.get(j).equals(list.get(j - 1))) {
                         list.set(j, list.get(j)*2);
                         list.set(j-1, 0);
                     }
@@ -126,7 +126,7 @@ public class GridNumber {
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             if (list.size() > 1) {
                 for (int j = 0; j < list.size()-1; j++) {
-                    if (list.get(j) == list.get(j + 1)) {
+                    if (list.get(j).equals(list.get(j + 1))) {
                         list.set(j, list.get(j)*2);
                         list.set(j+1, 0);
                     }
@@ -171,8 +171,8 @@ public class GridNumber {
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             if (list.size() > 1) {
                 for (int i = 0; i < list.size() - 1; i++) {
-                    if (list.get(i) == list.get(i + 1)) {
-                        list.set(i, list.get(i) * 2);
+                    if (list.get(i).equals(list.get(i + 1))) {
+                        list.set(i, list.get(i)*2);
                         list.set(i + 1, 0);
                     }
                 }
@@ -215,8 +215,8 @@ public class GridNumber {
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             if (list.size() > 1) {
                 for (int i = list.size() - 1; i > 0; i--) {
-                    if (list.get(i) == list.get(i - 1)) {
-                        list.set(i, list.get(i) * 2);
+                    if (list.get(i).equals(list.get(i - 1))) {
+                        list.set(i, list.get(i)*2);
                         list.set(i - 1, 0);
                     }
                 }

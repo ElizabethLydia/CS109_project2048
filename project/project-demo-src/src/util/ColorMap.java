@@ -9,8 +9,15 @@ public class ColorMap {
 
     //todo: complete the method to add other color
     public static void InitialColorMap() {
-        colorMap.put(1, Color.RED);
-        colorMap.put(2, Color.ORANGE);
+        colorMap.put(2, Color.orange);
+        colorMap.put(4, Color.red);
+
+
+
+
+
+
+
     }
 
     public static Color getColor(int i) {

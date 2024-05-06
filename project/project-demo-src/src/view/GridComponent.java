@@ -9,7 +9,7 @@ public class GridComponent extends JComponent {
     private int row;
     private int col;
     private int number;
-    static Font font = new Font("Serif", Font.BOLD, 42);
+    static Font font = new Font("Serif", Font.BOLD, 42);//设置字体大小用
 
     public GridComponent(int row, int col, int gridSize) {
         this.setSize(gridSize, gridSize);
