@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
  * This class is to enable key events.
  *
  */
-public abstract class ListenerPanel extends JPanel {
+public abstract class ListenerPanel extends JPanel {//启用键盘监听
     public ListenerPanel() {
         enableEvents(AWTEvent.KEY_EVENT_MASK);
         this.setFocusable(true);
@@ -29,8 +29,6 @@ public abstract class ListenerPanel extends JPanel {
             }
         }
     }
-
-
     public abstract void doMoveRight();
     public abstract void doMoveLeft();
     public abstract void doMoveUp();

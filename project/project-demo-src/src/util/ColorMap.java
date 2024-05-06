@@ -12,12 +12,6 @@ public class ColorMap {
         colorMap.put(2, Color.orange);
         colorMap.put(4, Color.red);
 
-
-
-
-
-
-
     }
 
     public static Color getColor(int i) {
