@@ -86,27 +86,80 @@ public class GamePanel extends ListenerPanel {
     }
     @Override
     public void doMoveLeft() {
-        System.out.println("Click VK_RIGHT");
-        this.afterMove();
+        int[][] initialArray = new int[COUNT][COUNT];
+        for (int i = 0; i < initialArray.length; i++) {
+            for (int j = 0; j < initialArray[i].length; j++) {
+                initialArray[i][j] = model.getNumber(i, j);
+            }
+        }
         this.model.moveLeft();
-        this.updateGridsNumber();
+        int[][] lastArray = new int[COUNT][COUNT];
+        for (int i = 0; i < lastArray.length; i++) {
+            for (int j = 0; j < lastArray[i].length; j++) {
+                lastArray[i][j] =model.getNumber(i, j);
+            }
+        }
+        if (this.checkValidMove(initialArray,lastArray)) {
+            System.out.println("Click VK_LEFT");
+            this.afterMove();
+            this.model.addRandomNumber();
+            this.updateGridsNumber();
+        }else{
+            System.out.println("Unable to move left,try another direction");
+            this.updateGridsNumber();
+        }
     }
 
     @Override
     public void doMoveUp() {
-        System.out.println("Click VK_UP");
-        this.afterMove();
+        int[][] initialArray = new int[COUNT][COUNT];
+        for (int i = 0; i < initialArray.length; i++) {
+            for (int j = 0; j < initialArray[i].length; j++) {
+                initialArray[i][j] = model.getNumber(i, j);
+            }
+        }
         this.model.moveUp();
-        this.updateGridsNumber();
+        int[][] lastArray = new int[COUNT][COUNT];
+        for (int i = 0; i < lastArray.length; i++) {
+            for (int j = 0; j < lastArray[i].length; j++) {
+                lastArray[i][j] =model.getNumber(i, j);
+            }
+        }
+        if (this.checkValidMove(initialArray,lastArray)) {
+            System.out.println("Click VK_UP");
+            this.afterMove();
+            this.model.addRandomNumber();
+            this.updateGridsNumber();
+        }else{
+            System.out.println("Unable to move up,try another direction");
+            this.updateGridsNumber();
+        }
     }
 
     @Override
     public void doMoveDown() {
-        System.out.println("Click VK_DOWN");
-        this.afterMove();
+        int[][] initialArray = new int[COUNT][COUNT];
+        for (int i = 0; i < initialArray.length; i++) {
+            for (int j = 0; j < initialArray[i].length; j++) {
+                initialArray[i][j] = model.getNumber(i, j);
+            }
+        }
         this.model.moveDown();
-        this.updateGridsNumber();
-
+        int[][] lastArray = new int[COUNT][COUNT];
+        for (int i = 0; i < lastArray.length; i++) {
+            for (int j = 0; j < lastArray[i].length; j++) {
+                lastArray[i][j] =model.getNumber(i, j);
+            }
+        }
+        if (this.checkValidMove(initialArray,lastArray)) {
+            System.out.println("Click VK_DOWN");
+            this.afterMove();
+            this.model.addRandomNumber();
+            this.updateGridsNumber();
+        }else{
+            System.out.println("Unable to move down,try another direction");
+            this.updateGridsNumber();
+        }
     }
 
     public void afterMove() {//用于步数加1
