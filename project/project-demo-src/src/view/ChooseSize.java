@@ -13,6 +13,7 @@ public class ChooseSize extends JDialog {
         super(parent, "Choose the Size of the Game", true);
         this.setLayout(null);
         this.setSize(200, 150);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         //待调整位置
         JLabel titleLabel = createLabel("Choose the Size of the Game", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50);
         JButton Btn4x4 = createButton("4x4", new Point(100, 150), 100, 50);

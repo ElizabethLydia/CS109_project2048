@@ -25,7 +25,7 @@ public class Menu extends JFrame {
             chooseSize.setVisible(true);
         });
         this.loadGameBtn.addActionListener(e -> {
-            LoadGame loadGame = new LoadGame();
+            LoadGame loadGame = new LoadGame(this);
             loadGame.setVisible(true);
         });
         this.settingsBtn.addActionListener(e -> {
@@ -35,6 +35,8 @@ public class Menu extends JFrame {
         this.exitBtn.addActionListener(e -> {
             System.exit(0);
         });
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     private JButton createButton(String name, Point location, int width, int height) {
         JButton button = new JButton(name);
