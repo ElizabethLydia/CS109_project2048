@@ -25,6 +25,7 @@ public class GameController {
         this.frame = frame;
 
     }
+
     public void restartGame() {
         System.out.println("Do restart game here");
     }
@@ -48,6 +49,7 @@ public class GameController {
             e.printStackTrace();
         }
     }
+
     public void loadGame(String filePath) {
         try {
 //            String filePath = "data.txt";
@@ -69,7 +71,7 @@ public class GameController {
             int ycount = restoredArray[0].length;
             this.model = new GridNumber(xcount, ycount);
             this.model.setNumbers(restoredArray);
-            this.view=new GamePanel((int) (frame.getHeight() * 0.8),xcount,ycount);
+            this.view = new GamePanel((int) (frame.getHeight() * 0.8), xcount, ycount);
             this.view.updateGridsNumber();
             reader.close();
         } catch (IOException e) {

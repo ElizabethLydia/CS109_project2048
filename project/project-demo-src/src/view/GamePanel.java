@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GamePanel extends ListenerPanel {
     private final int XCOUNT;
-    private final int YCOUNT ;
+    private final int YCOUNT;
     private GridComponent[][] grids;
     private GridNumber model;
     private JLabel stepLabel;
@@ -77,19 +77,23 @@ public class GamePanel extends ListenerPanel {
         int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] =model.getNumber(i, j);
+                lastArray[i][j] = model.getNumber(i, j);
             }
         }
-        if (this.checkValidMove(initialArray,lastArray)) {
+        if (this.checkValidMove(initialArray, lastArray)) {
             System.out.println("Click VK_RIGHT");
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-        }else{
+        } else {
             System.out.println("Unable to move right,try another direction");
-            this.updateGridsNumber();
+            if (checkIfEnded(lastArray) == true) {
+                System.out.println("game is over");
+                //结束游戏界面
+            }
         }
     }
+
     @Override
     public void doMoveLeft() {
         int[][] initialArray = new int[XCOUNT][YCOUNT];
@@ -102,17 +106,20 @@ public class GamePanel extends ListenerPanel {
         int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] =model.getNumber(i, j);
+                lastArray[i][j] = model.getNumber(i, j);
             }
         }
-        if (this.checkValidMove(initialArray,lastArray)) {
+        if (this.checkValidMove(initialArray, lastArray)) {
             System.out.println("Click VK_LEFT");
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-        }else{
+        } else {
             System.out.println("Unable to move left,try another direction");
-            this.updateGridsNumber();
+            if (checkIfEnded(lastArray) == true) {
+                System.out.println("game is over");
+                //结束游戏界面
+            }
         }
     }
 
@@ -128,17 +135,20 @@ public class GamePanel extends ListenerPanel {
         int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] =model.getNumber(i, j);
+                lastArray[i][j] = model.getNumber(i, j);
             }
         }
-        if (this.checkValidMove(initialArray,lastArray)) {
+        if (this.checkValidMove(initialArray, lastArray)) {
             System.out.println("Click VK_UP");
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-        }else{
+        } else {
             System.out.println("Unable to move up,try another direction");
-            this.updateGridsNumber();
+            if (checkIfEnded(lastArray) == true) {
+                System.out.println("game is over");
+                //结束游戏界面
+            }
         }
     }
 
@@ -154,31 +164,66 @@ public class GamePanel extends ListenerPanel {
         int[][] lastArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i < lastArray.length; i++) {
             for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] =model.getNumber(i, j);
+                lastArray[i][j] = model.getNumber(i, j);
             }
         }
-        if (this.checkValidMove(initialArray,lastArray)) {
+        if (this.checkValidMove(initialArray, lastArray)) {
             System.out.println("Click VK_DOWN");
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-        }else{
+        } else {
             System.out.println("Unable to move down,try another direction");
-            this.updateGridsNumber();
+            if (checkIfEnded(lastArray) == true) {
+                System.out.println("game is over");
+                //结束游戏界面
+            }
         }
     }
+
     //判断是否是有效移动
-    public boolean checkValidMove(int[][] initialArray,int[][] lastArray){
+    public boolean checkValidMove(int[][] initialArray, int[][] lastArray) {
         boolean check = false;
-        for (int i = 0; i < initialArray.length ; i++) {
-            for (int j = 0; j < initialArray[i].length ; j++) {
-                if (initialArray[i][j] != lastArray[i][j]){
-                    check =true;
+        for (int i = 0; i < initialArray.length; i++) {
+            for (int j = 0; j < initialArray[i].length; j++) {
+                if (initialArray[i][j] != lastArray[i][j]) {
+                    check = true;
                 }
             }
         }
         return check;
     }
+
+    //判断游戏是否终止
+    public boolean checkIfEnded(int[][] lastArray) {
+        boolean check = false;
+        this.model.moveRight();
+        this.model.moveLeft();
+        this.model.moveUp();
+        this.model.moveDown();
+        int[][] afterMoveArray = new int[lastArray.length][lastArray[0].length];
+        for (int i = 0; i < afterMoveArray.length; i++) {
+            for (int j = 0; j < afterMoveArray[i].length; j++) {
+                afterMoveArray[i][j] = this.model.getNumber(i, j);
+            }
+        }
+        if (!areGridsEqual(lastArray, afterMoveArray)) {
+            check = false;
+        } else check = true;
+        return check;
+    }
+
+    private boolean areGridsEqual(int[][] lastArray, int[][] afterMoveArray) {
+        for (int i = 0; i < lastArray.length; i++) {
+            for (int j = 0; j < lastArray[i].length; j++) {
+                if (lastArray[i][j] != afterMoveArray[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void afterMove() {//用于步数加1
         this.steps++;
         this.stepLabel.setText(String.format("Step: %d", this.steps));

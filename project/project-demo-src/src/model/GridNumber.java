@@ -270,14 +270,11 @@ public class GridNumber {
                 this.numbers[i][j] = numbers[i][j];
             }
         }
-
     }
-
 
     public void printNumber() {
         for (int[] line : numbers) {
             System.out.println(Arrays.toString(line));
         }
     }
-
 }
