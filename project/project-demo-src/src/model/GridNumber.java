@@ -258,7 +258,6 @@ public class GridNumber {
             }
         }
     }
-
     public int getNumber(int i, int j) {
         return numbers[i][j];
     }

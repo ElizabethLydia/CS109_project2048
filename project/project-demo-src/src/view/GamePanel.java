@@ -27,7 +27,7 @@ public class GamePanel extends ListenerPanel {
         this.setSize(size, size);
         this.XCOUNT = xcount;
         this.YCOUNT = ycount;
-        this.GRID_SIZE = size / (Math.max(XCOUNT, YCOUNT));
+        this.GRID_SIZE = size / (Math.max(XCOUNT, YCOUNT));//
         this.grids = new GridComponent[XCOUNT][YCOUNT];
         this.model = new GridNumber(XCOUNT, YCOUNT);
         initialGame();
@@ -167,15 +167,7 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
         }
     }
-
-    public void afterMove() {//用于步数加1
-        this.steps++;
-        this.stepLabel.setText(String.format("Step: %d", this.steps));
-    }
-
-    public void setStepLabel(JLabel stepLabel) {
-        this.stepLabel = stepLabel;
-    }
+    //判断是否是有效移动
     public boolean checkValidMove(int[][] initialArray,int[][] lastArray){
         boolean check = false;
         for (int i = 0; i < initialArray.length ; i++) {
@@ -186,5 +178,14 @@ public class GamePanel extends ListenerPanel {
             }
         }
         return check;
+    }
+    public void afterMove() {//用于步数加1
+        this.steps++;
+        this.stepLabel.setText(String.format("Step: %d", this.steps));
+    }
+
+
+    public void setStepLabel(JLabel stepLabel) {//用于设置步数
+        this.stepLabel = stepLabel;
     }
 }
