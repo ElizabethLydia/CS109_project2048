@@ -14,7 +14,9 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
     private JButton loadBtn;
 
     private JLabel stepLabel;
+    private JLabel scoreLabel;
     private GamePanel gamePanel;
+
 
     public GameFrame(int width, int height) {
         this.setTitle("2024 CS109 Project Demo");//窗口名称
@@ -31,7 +33,9 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
         this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50,this);
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50,this);
         this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50,this);
+        this.scoreLabel = createLabel("Score", new Font("serif", Font.ITALIC, 22), new Point(480, 90), 180, 50,this);
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
+        gamePanel.setScoreLabel(scoreLabel);//建立gamePanel中所得到的score值与scoreLabel的联系
 
         this.restartBtn.addActionListener(e -> {
             controller.restartGame();
@@ -49,5 +53,6 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
     public GameController getController() {
         return controller;
     }
+
 
 }

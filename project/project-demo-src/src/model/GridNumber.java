@@ -9,8 +9,9 @@ import java.util.Random;
 public class GridNumber {
     private final int X_COUNT;
     private final int Y_COUNT;
+    private int score;
 
-    private int[][] numbers;
+    public int[][] numbers;
 
     static Random random = new Random();
 
@@ -85,6 +86,7 @@ public class GridNumber {
                     if (list.get(j).equals(list.get(j - 1))) {
                         list.set(j, list.get(j)*2);
                         list.set(j-1, 0);
+                        score+= list.get(j);
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -131,6 +133,8 @@ public class GridNumber {
                     if (list.get(j).equals(list.get(j + 1))) {
                         list.set(j, list.get(j)*2);
                         list.set(j+1, 0);
+                        score+= list.get(j);
+
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -176,6 +180,7 @@ public class GridNumber {
                     if (list.get(i).equals(list.get(i + 1))) {
                         list.set(i, list.get(i)*2);
                         list.set(i + 1, 0);
+                        score+= list.get(i);
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -220,6 +225,7 @@ public class GridNumber {
                     if (list.get(i).equals(list.get(i - 1))) {
                         list.set(i, list.get(i)*2);
                         list.set(i - 1, 0);
+                        score+= list.get(i);
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -276,5 +282,12 @@ public class GridNumber {
         for (int[] line : numbers) {
             System.out.println(Arrays.toString(line));
         }
+    }
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

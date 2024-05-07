@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
+
 public class GamePanel extends ListenerPanel {
     private final int XCOUNT;
     private final int YCOUNT;
@@ -18,6 +19,10 @@ public class GamePanel extends ListenerPanel {
     private JLabel stepLabel;
     private int steps;
     private static int GRID_SIZE;
+
+    private int score;
+
+    private JLabel scoreLabel;
 
     public GamePanel(int size, int xcount, int ycount) {
         this.setVisible(true);
@@ -85,6 +90,7 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            this.setScore();
         } else {
             System.out.println("Unable to move right,try another direction");
             if (checkIfEnded(lastArray) == true) {
@@ -114,6 +120,7 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            this.setScore();
         } else {
             System.out.println("Unable to move left,try another direction");
             if (checkIfEnded(lastArray) == true) {
@@ -143,6 +150,7 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            this.setScore();
         } else {
             System.out.println("Unable to move up,try another direction");
             if (checkIfEnded(lastArray) == true) {
@@ -172,6 +180,7 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            this.setScore();
         } else {
             System.out.println("Unable to move down,try another direction");
             if (checkIfEnded(lastArray) == true) {
@@ -232,5 +241,16 @@ public class GamePanel extends ListenerPanel {
 
     public void setStepLabel(JLabel stepLabel) {//用于设置步数
         this.stepLabel = stepLabel;
+    }
+    public GridNumber getmodel () {
+        return model;
+    }
+    public void setScore() {
+        this.score = model.getScore();
+        scoreLabel.setText(String.format("Score: %d", model.getScore()));
+    }
+
+    public void setScoreLabel(JLabel scoreLabel) {
+        this.scoreLabel = scoreLabel;
     }
 }

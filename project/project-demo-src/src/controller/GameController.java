@@ -28,6 +28,9 @@ public class GameController {
 
     public void restartGame() {
         System.out.println("Do restart game here");
+        this.frame.dispose();
+        GameFrame gameFrame = new GameFrame(700, 500);
+        gameFrame.setVisible(true);
     }
 
     //todo: add other methods such as loadGame, saveGame...
