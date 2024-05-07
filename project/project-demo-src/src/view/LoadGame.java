@@ -30,6 +30,7 @@ public class LoadGame extends JDialog implements CreateButtonAndLabel {
          this.setResizable(false);//用于设置窗口是否可调整大小的方法。调用这个方法可以防止用户通过拖拽边框改变窗口大小，使窗口变为固定大小。
          //待调整
          autoSaveLabel = createLabel("Auto Save", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+         //创建一个自动保存标签
          autoSaveButton = createButton("Load", new Point(100, 150), 100, 50, this);
 
          Save1Label = createLabel("Save 1", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
@@ -47,10 +48,11 @@ public class LoadGame extends JDialog implements CreateButtonAndLabel {
          Save5Label = createLabel("Save 5", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
          Save5Button = createButton("Load",new Point(100, 150), 100, 50, this);
 
-         this.autoSaveButton.addActionListener(e -> {
+         this.autoSaveButton.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下操作
              GameFrame gameFrame = new GameFrame(700, 500);//需要改GameFrame的constructor以传入4*4的值
              gameFrame.getController().loadGame("autoSave.txt");
              gameFrame.setVisible(true);
+             //我觉得这个还有问题，并没有真正实现自动保存，自动保存不应该是按钮按下之后的操作，而应该是在游戏进行中根据秒数自动保存
          });
 
          this.Save1Button.addActionListener(e -> {
@@ -82,9 +84,8 @@ public class LoadGame extends JDialog implements CreateButtonAndLabel {
              gameFrame.getController().loadGame("Save5.txt");
              gameFrame.setVisible(true);
          });
-         this.dispose();
-         parent.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+         this.dispose();//这句话的意思是销毁这个对话框
+         parent.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);//当父窗口关闭时，这个对话框也会关闭
      }
-
 }
