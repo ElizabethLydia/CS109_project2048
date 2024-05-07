@@ -4,6 +4,7 @@ import model.GridNumber;
 import view.GameFrame;
 import view.GamePanel;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,10 +28,25 @@ public class GameController {
     }
 
     public void restartGame() {
-        System.out.println("Do restart game here");
-        this.frame.dispose();
-        GameFrame gameFrame = new GameFrame(700, 500);
-        gameFrame.setVisible(true);
+        // 弹出一个带有“确定”和“取消”按钮的确认窗口
+        int result = JOptionPane.showConfirmDialog(
+                frame,//这句话的意思是将窗口放在frame上
+                "Do you want to restart the game?",
+                "Restart Game",
+                JOptionPane.YES_NO_OPTION,//弹出一个带有“确定”和“取消”按钮的确认窗口
+                JOptionPane.QUESTION_MESSAGE//如果用户点击了“确定”按钮，将会返回 JOptionPane.YES_OPTION，如果用户点击了“取消”按钮，将会返回 JOptionPane.NO_OPTION
+        );
+
+        // 根据用户的选择执行操作
+        if (result == JOptionPane.YES_OPTION) {
+            // 用户选择“确定”重启游戏
+            this.frame.dispose(); // 关闭当前窗口
+            GameFrame newGameFrame = new GameFrame(700, 500); // 创建新的游戏窗口
+            newGameFrame.setVisible(true); // 显示新的游戏窗口
+        } else if (result == JOptionPane.NO_OPTION) {
+            // 用户选择“取消”，则不执行任何操作
+            // 什么都不做，或者可以在这里添加一些取消操作的逻辑（如果有的话）
+        }
     }
 
     //todo: add other methods such as loadGame, saveGame...

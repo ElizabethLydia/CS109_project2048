@@ -37,7 +37,7 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
         gamePanel.setScoreLabel(scoreLabel);//建立gamePanel中所得到的score值与scoreLabel的联系
 
-        this.restartBtn.addActionListener(e -> {
+        this.restartBtn.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下restartGame()方法
             controller.restartGame();
             gamePanel.requestFocusInWindow();//当重启按钮被点击时，游戏将重新开始并且游戏面板会请求焦点，以便启用键盘事件监听，为玩家提供交互操作的功能。
         });
