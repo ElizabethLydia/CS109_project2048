@@ -287,7 +287,12 @@ public class GridNumber {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+
+    public void setNumber(int[][] originalArray) {
+        for (int i = 0; i < originalArray.length; i++) {
+            for (int j = 0; j < originalArray[i].length; j++) {
+                this.numbers[i][j] = originalArray[i][j];
+            }
+        }
     }
 }

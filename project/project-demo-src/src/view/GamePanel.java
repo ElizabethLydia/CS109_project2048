@@ -93,7 +93,7 @@ public class GamePanel extends ListenerPanel {
             this.setScore();
         } else {
             System.out.println("Unable to move right,try another direction");
-            if (checkIfEnded(lastArray) == true) {
+            if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
             }
@@ -123,7 +123,7 @@ public class GamePanel extends ListenerPanel {
             this.setScore();
         } else {
             System.out.println("Unable to move left,try another direction");
-            if (checkIfEnded(lastArray) == true) {
+            if (checkIfEnded() ) {
                 System.out.println("game is over");
                 //结束游戏界面
             }
@@ -153,7 +153,7 @@ public class GamePanel extends ListenerPanel {
             this.setScore();
         } else {
             System.out.println("Unable to move up,try another direction");
-            if (checkIfEnded(lastArray) == true) {
+            if (checkIfEnded() ) {
                 System.out.println("game is over");
                 //结束游戏界面
             }
@@ -183,7 +183,7 @@ public class GamePanel extends ListenerPanel {
             this.setScore();
         } else {
             System.out.println("Unable to move down,try another direction");
-            if (checkIfEnded(lastArray) == true) {
+            if (checkIfEnded() ) {
                 System.out.println("game is over");
                 //结束游戏界面
             }
@@ -204,46 +204,50 @@ public class GamePanel extends ListenerPanel {
     }
 
     //判断游戏是否终止
-    public boolean checkIfEnded(int[][] lastArray) {
-        boolean check = false;
-        this.model.moveRight();
-        this.model.moveLeft();
-        this.model.moveUp();
-        this.model.moveDown();
-        int[][] afterMoveArray = new int[lastArray.length][lastArray[0].length];
-        for (int i = 0; i < afterMoveArray.length; i++) {
-            for (int j = 0; j < afterMoveArray[i].length; j++) {
-                afterMoveArray[i][j] = this.model.getNumber(i, j);
+    public boolean checkIfEnded() {
+        boolean check = true;
+        for (int k = 0; k < 4; k++) {
+            int[][] originalArray = new int[XCOUNT][YCOUNT];
+            for (int i = 0; i < originalArray.length; i++) {
+                for (int j = 0; j < originalArray[i].length; j++) {
+                    originalArray[i][j] = this.model.getNumber(i, j);
+                }
             }
+            switch (k){
+                case 0:
+                    this.model.moveRight();
+                    break;
+                case 1:
+                    this.model.moveLeft();
+                    break;
+                case 2:
+                    this.model.moveUp();
+                    break;
+                case 3:
+                    this.model.moveDown();
+                    break;
+            }
+            for (int i = 0; i < XCOUNT; i++) {
+                for (int j = 0; j < YCOUNT; j++) {
+                    if (originalArray[i][j] != this.model.getNumber(i, j)) {
+                        check = false;
+                        this.model.setNumber(originalArray);
+                        return check;
+                    }
+                }
+            }
+            this.model.setNumber(originalArray);
         }
-        if (!areGridsEqual(lastArray, afterMoveArray)) {
-            check = false;
-        } else check = true;
         return check;
     }
 
-    private boolean areGridsEqual(int[][] lastArray, int[][] afterMoveArray) {
-        for (int i = 0; i < lastArray.length; i++) {
-            for (int j = 0; j < lastArray[i].length; j++) {
-                if (lastArray[i][j] != afterMoveArray[i][j]) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     public void afterMove() {//用于步数加1
         this.steps++;
         this.stepLabel.setText(String.format("Step: %d", this.steps));
     }
-
-
     public void setStepLabel(JLabel stepLabel) {//用于设置步数
         this.stepLabel = stepLabel;
-    }
-    public GridNumber getmodel () {
-        return model;
     }
     public void setScore() {
         this.score = model.getScore();
