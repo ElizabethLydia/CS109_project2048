@@ -1,9 +1,12 @@
 package view;
 
+import util.CreateButtonAndLabel;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class Menu extends JFrame {
+public class Menu extends JFrame implements CreateButtonAndLabel {
     private JButton startBtn;
     private JButton loadGameBtn;
     private JButton settingsBtn;
@@ -14,11 +17,11 @@ public class Menu extends JFrame {
         this.setLayout(null);
         this.setSize(300, 500);
         //待调整位置
-        this.titleLabel = createLabel("2048", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50);
-        this.startBtn = createButton("Start", new Point(100, 150), 100, 50);
-        this.loadGameBtn = createButton("Load Game", new Point(100, 250), 100, 50);
-        this.settingsBtn = createButton("Settings", new Point(100, 350), 100, 50);
-        this.exitBtn = createButton("Exit", new Point(100, 450), 100, 50);
+        this.titleLabel = createLabel("2048", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50,this);
+        this.startBtn = createButton("Start", new Point(100, 150), 100, 50, this);
+        this.loadGameBtn = createButton("Load Game", new Point(100, 250), 100, 50, this);
+        this.settingsBtn = createButton("Settings", new Point(100, 350), 100, 50, this);
+        this.exitBtn = createButton("Exit", new Point(100, 450), 100, 50, this);
         //还要setVisible(true)和setVisible(false)
         this.startBtn.addActionListener(e -> {
             ChooseSize chooseSize = new ChooseSize(this);
@@ -38,20 +41,6 @@ public class Menu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-    private JButton createButton(String name, Point location, int width, int height) {
-        JButton button = new JButton(name);
-        button.setLocation(location);
-        button.setSize(width, height);
-        this.add(button);
-        return button;
-    }
-    private JLabel createLabel(String name, Font font, Point location, int width, int height) {
-        JLabel label = new JLabel(name);
-        label.setFont(font);
-        label.setLocation(location);
-        label.setSize(width, height);
-        this.add(label);
-        return label;
-    }
+
 
 }

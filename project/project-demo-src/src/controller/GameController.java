@@ -48,9 +48,9 @@ public class GameController {
             e.printStackTrace();
         }
     }
-    public void loadGame() {
+    public void loadGame(String filePath) {
         try {
-            String filePath = "data.txt";
+//            String filePath = "data.txt";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
             List<int[]> rows = new ArrayList<>();

@@ -2,11 +2,12 @@ package view;
 
 import controller.GameController;
 import util.ColorMap;
+import util.CreateButtonAndLabel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GameFrame extends JFrame {//整个游戏的窗口
+public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个游戏的窗口
 
     private GameController controller;
     private JButton restartBtn;
@@ -27,9 +28,9 @@ public class GameFrame extends JFrame {//整个游戏的窗口
         this.add(gamePanel);
 
         this.controller = new GameController(gamePanel, gamePanel.getModel(),this);
-        this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50);
-        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50);
-        this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50);
+        this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50,this);
+        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50,this);
+        this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50,this);
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
 
         this.restartBtn.addActionListener(e -> {
@@ -45,23 +46,8 @@ public class GameFrame extends JFrame {//整个游戏的窗口
         this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）。
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//当用户点击窗口关闭按钮时，应用程序将会执行退出操作，关闭所有相关的资源，然后退出应用程序
     }
-
-
-    private JButton createButton(String name, Point location, int width, int height) {
-        JButton button = new JButton(name);
-        button.setLocation(location);
-        button.setSize(width, height);
-        this.add(button);
-        return button;
-    }
-
-    private JLabel createLabel(String name, Font font, Point location, int width, int height) {
-        JLabel label = new JLabel(name);
-        label.setFont(font);
-        label.setLocation(location);
-        label.setSize(width, height);
-        this.add(label);
-        return label;
+    public GameController getController() {
+        return controller;
     }
 
 }

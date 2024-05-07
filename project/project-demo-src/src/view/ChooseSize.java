@@ -16,6 +16,7 @@ public class ChooseSize extends JDialog implements CreateButtonAndLabel {
         this.setLayout(null);
         this.setSize(200, 150);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(parent);
         //待调整位置
         this.titleLabel = createLabel("Choose the Size of the Game", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
         this.Btn4x4 = createButton("4x4", new Point(100, 150), 100, 50, this);
@@ -24,26 +25,16 @@ public class ChooseSize extends JDialog implements CreateButtonAndLabel {
         this.Btn4x4.addActionListener(e -> {
             GameFrame gameFrame = new GameFrame(700, 500);//需要改GameFrame的constructor以传入4*4的值
             gameFrame.setVisible(true);
-            this.dispose();
-            parent.setVisible(false);
         });
         this.Btn5x5.addActionListener(e -> {
             GameFrame gameFrame = new GameFrame(700, 500);
             gameFrame.setVisible(true);
-            this.dispose();
-            parent.setVisible(false);
         });
         this.Btn6x6.addActionListener(e -> {
             GameFrame gameFrame = new GameFrame(700, 500);
             gameFrame.setVisible(true);
-            this.dispose();
-            parent.setVisible(false);
         });
-        this.setLocationRelativeTo(null);
-
+        this.dispose();
+        parent.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-
-
-
-
 }
