@@ -1,21 +1,37 @@
 package view;
 
 import controller.GameController;
-import util.CreateButtonAndLabel;
+import util.Create;
+import util.RoundedPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个游戏的窗口
+public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
     private GameController controller;
     private JButton restartBtn;
     private JButton loadBtn;
     private JButton undoBtn;
 
+    private GamePanel gamePanel;
+
+    private JLabel titleLabel;//标题2048
+
     private JLabel stepLabel;
     private JLabel scoreLabel;
-    private GamePanel gamePanel;
+    private JLabel highestScoreLabel;
+
+
+    private JPanel scorePanel;
+    private JPanel stepPanel;
+    private JPanel highestScorePanel;
+
+    private JPanel buttonPanel;
+    private JButton leftBtn;
+    private JButton rightBtn;
+    private JButton upBtn;
+    private JButton downBtn;
 
 
     public GameFrame(int width, int height) {
@@ -23,18 +39,26 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
         this.setLayout(null);
         /*在 JFrame 窗口中设置绝对定位布局（Absolute Positioning Layout）的方法。
         通过调用这个方法，并将布局管理器设置为 null，你可以自由地使用绝对坐标来定位和放置窗口中的组件，而不受默认布局管理器的影响。*/
-        this.setSize(width, height);
-        gamePanel = new GamePanel((int) (this.getHeight() * 0.8), 4, 4);//这行代码设置了游戏面板的大小，以及游戏4*4、5*5的大小之后要改
-        gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
+        this.setSize(800, 600);
+        this.setResizable(false);
+        this.titleLabel = createLabel("2048", new Font("Verdana", Font.BOLD, 80), new Point(35, 20), 240, 80,this,0x463627);
+
+        gamePanel = new GamePanel((int) (500 * 0.8), 4, 4);//这行代码设置了游戏面板的大小，以及游戏4*4、5*5的大小之后要改
+        gamePanel.setLocation(500/ 15, 500 / 15+100);
         this.add(gamePanel);
+
+        highestScorePanel = createPanel(428, 30, 100, 70);
+        scorePanel = createPanel(550, 30, 100, 70);
+        stepPanel = createPanel(670, 30, 100, 70);
 
         this.controller = new GameController(gamePanel, gamePanel.getModel(), this);
         this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50, this);
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
-        this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50, this);
-        this.scoreLabel = createLabel("Score", new Font("serif", Font.ITALIC, 22), new Point(480, 90), 180, 50, this);
-////        this.undoBtn = createButton("Undo", new Point(500, 290), 110, 50,this);//这个可以创建一个和load，restart一样形式的按钮
-        undoBtn = createButton("", new Point(500, 290), 110, 50, this); // 使用 createButton 方法创建按钮
+        this.stepLabel = createLabel("<html>Step:<br> 0 </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
+        this.scoreLabel = createLabel("<html>Score:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
+
+        this.undoBtn = createButton("Undo", new Point(500, 290), 110, 50,this);//这个可以创建一个和load，restart一样形式的按钮
+        /*undoBtn = createButton("", new Point(500, 290), 110, 50, this); // 使用 createButton 方法创建按钮
         ImageIcon undoIcon = new ImageIcon("D:\\code\\javasepro\\project\\project\\project-demo-src\\src\\view\\undo.jpg"); // 替换为你的图像路径
         undoBtn.setIcon(undoIcon);// 设置按钮的图标
         //获取图标的宽度和高度
@@ -43,9 +67,25 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
         //设置按钮的大小
         undoBtn.setSize(width1, height1);
         // 添加撤销按钮到游戏窗口
-        this.add(undoBtn);
+        this.add(undoBtn);*/
+        buttonPanel = createPanel(450, 330, 320, 210);
+        /*buttonPanel.setComponentZOrder(leftBtn, 0);
+        buttonPanel.setComponentZOrder(rightBtn, 0);
+        buttonPanel.setComponentZOrder(upBtn, 0);
+        buttonPanel.setComponentZOrder(downBtn, 0);*/
+        //要把button显示在panel上
+
+
+        this.leftBtn = createButton("Left", new Point(450, 440), 80, 80, this);
+        this.rightBtn = createButton("Right", new Point(500, 440), 80, 80, this);
+        this.upBtn = createButton("Up", new Point(300, 200), 80, 80, this);
+        this.downBtn = createButton("Down", new Point(300, 400), 80, 80, this);
+
+
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
         gamePanel.setScoreLabel(scoreLabel);//建立gamePanel中所得到的score值与scoreLabel的联系
+        stepPanel.setComponentZOrder(stepLabel, 0);
+        scorePanel.setComponentZOrder(scoreLabel, 0);
 
         this.restartBtn.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下restartGame()方法
             controller.restartGame();
@@ -56,7 +96,7 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
             System.out.println(string);
             gamePanel.requestFocusInWindow();//启用键盘事件监听？？？？
         });
-        undoBtn.addActionListener(e -> {
+        this.undoBtn.addActionListener(e -> {
             int result = JOptionPane.showConfirmDialog(GameFrame.this, "Do you want to undo the last move?", "Undo Move", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 // 撤销游戏状态
@@ -87,6 +127,12 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
 
     public GameController getController() {
         return controller;
+    }
+    public JPanel createPanel(int x,int y, int width, int height) {
+        RoundedPanel panel = new RoundedPanel(new Color(107, 78, 51),x, y, width, height,this);
+        panel.setLayout(null);
+        this.add(panel);
+        return panel;
     }
 
 

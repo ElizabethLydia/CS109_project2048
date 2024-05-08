@@ -3,12 +3,12 @@ package view;
 ChooseSize类是一个对话框，用于选择游戏的大小
  */
 
-import util.CreateButtonAndLabel;
+import util.Create;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ChooseSize extends JDialog implements CreateButtonAndLabel {
+public class ChooseSize extends JDialog implements Create {
 //JDialog是用来创建对话框的
 
     private JButton Btn4x4;
@@ -26,7 +26,8 @@ public class ChooseSize extends JDialog implements CreateButtonAndLabel {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);//设置关闭操作，这个对话框关闭时，只关闭这个对话框
         this.setLocationRelativeTo(parent);// 方法会将子窗口相对于父窗口进行定位，通常是使子窗口显示在父窗口的中央位置。
         //待调整位置
-        this.titleLabel = createLabel("Choose the Size of the Game", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+        this.titleLabel = createLabel("Choose the Size of the Game", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this,0xF3E0D1);
+
         //创建一个标签，标签名称，字体，位置，宽度，高度，父窗口
         this.Btn4x4 = createButton("4x4", new Point(100, 150), 100, 50, this);
         this.Btn5x5 = createButton("5x5", new Point(100, 250), 100, 50, this);
