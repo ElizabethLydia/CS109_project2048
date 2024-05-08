@@ -95,7 +95,6 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
-            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move right,try another direction");
             if (checkIfEnded()) {
@@ -127,7 +126,6 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
-            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move left,try another direction");
             if (checkIfEnded() ) {
@@ -159,7 +157,6 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
-            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move up,try another direction");
             if (checkIfEnded() ) {
@@ -191,7 +188,6 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
-            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move down,try another direction");
             if (checkIfEnded() ) {
@@ -263,6 +259,7 @@ public class GamePanel extends ListenerPanel {
     public void setScore() {
         this.score = model.getScore();
         scoreLabel.setText(String.format("Score: %d", model.getScore()));
+        eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
     }
 
     public void setScoreLabel(JLabel scoreLabel) {

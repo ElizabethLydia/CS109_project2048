@@ -28,11 +28,11 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
 
-        this.controller = new GameController(gamePanel, gamePanel.getModel(),this);
-        this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50,this);
-        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50,this);
-        this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50,this);
-        this.scoreLabel = createLabel("Score", new Font("serif", Font.ITALIC, 22), new Point(480, 90), 180, 50,this);
+        this.controller = new GameController(gamePanel, gamePanel.getModel(), this);
+        this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50, this);
+        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
+        this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50, this);
+        this.scoreLabel = createLabel("Score", new Font("serif", Font.ITALIC, 22), new Point(480, 90), 180, 50, this);
 ////        this.undoBtn = createButton("Undo", new Point(500, 290), 110, 50,this);//这个可以创建一个和load，restart一样形式的按钮
         undoBtn = createButton("", new Point(500, 290), 110, 50, this); // 使用 createButton 方法创建按钮
         ImageIcon undoIcon = new ImageIcon("D:\\code\\javasepro\\project\\project\\project-demo-src\\src\\view\\undo.jpg"); // 替换为你的图像路径
@@ -57,23 +57,34 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
             gamePanel.requestFocusInWindow();//启用键盘事件监听？？？？
         });
         undoBtn.addActionListener(e -> {
-            int result = JOptionPane.showConfirmDialog(this, "Do you want to undo the last move?", "Undo Move", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int result = JOptionPane.showConfirmDialog(GameFrame.this, "Do you want to undo the last move?", "Undo Move", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                gamePanel.getEachArray().remove(gamePanel.getEachArray().size() - 1);
-                gamePanel.getEachScore().remove(gamePanel.getEachScore().size() - 1);
+                // 撤销游戏状态
+                if (!gamePanel.getEachArray().isEmpty()) {
+                    gamePanel.getEachArray().remove(gamePanel.getEachArray().size() - 1);
+                    gamePanel.getEachScore().remove(gamePanel.getEachScore().size() - 1);
+                }
+
+                // 更新分数和步数标签
 //                gamePanel.setScore(gamePanel.getEachScore().get(gamePanel.getEachScore().size() - 1));
 //                gamePanel.setStep(gamePanel.getStep() - 1);
                 gamePanel.setScoreLabel(scoreLabel);
                 gamePanel.setStepLabel(stepLabel);
+
+                // 重新绘制游戏面板
                 gamePanel.repaint();
-            }else {
-                //do nothing
+                //目前问题是游戏无法继续进行，因为撤销后的游戏面板无法再次获得焦点，无法再次进行键盘操作
+                //解决方法：在撤销后，重新获取焦点
+                gamePanel.requestFocusInWindow();
+            } else {
+                // 用户选择不撤销，不执行任何操作
             }
         });
-        //todo: add other button here
+//        //todo: add other button here
         this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）。
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//当用户点击窗口关闭按钮时，应用程序将会执行退出操作，关闭所有相关的资源，然后退出应用程序
     }
+
     public GameController getController() {
         return controller;
     }
