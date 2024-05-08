@@ -1,7 +1,6 @@
 package view;
 
 import controller.GameController;
-import util.ColorMap;
 import util.CreateButtonAndLabel;
 
 import javax.swing.*;
@@ -24,7 +23,6 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
         /*在 JFrame 窗口中设置绝对定位布局（Absolute Positioning Layout）的方法。
         通过调用这个方法，并将布局管理器设置为 null，你可以自由地使用绝对坐标来定位和放置窗口中的组件，而不受默认布局管理器的影响。*/
         this.setSize(width, height);
-        ColorMap.InitialColorMap();
         gamePanel = new GamePanel((int) (this.getHeight() * 0.8), 4, 4);//这行代码设置了游戏面板的大小，以及游戏4*4、5*5的大小之后要改
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);

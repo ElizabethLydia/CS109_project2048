@@ -119,7 +119,15 @@ rewrite:在GamePanel里面新增游戏结束判断，在无法移动之后输出
 
 restart方法已经实现，可以正常运行
 ******
+版本v1.3.2 2024.5.8 bywzh
 
+rewrite:在GamePanel里面新增游戏结束判断，在无法移动之后输出game is over,还需要游戏结束窗口
+
+restart方法已经实现，可以正常运行
+
+变好康了捏~
+
+******
 
 
 

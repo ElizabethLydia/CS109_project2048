@@ -28,7 +28,7 @@ public class GamePanel extends ListenerPanel {
         this.setVisible(true);
         this.setFocusable(true);
         this.setLayout(null);
-        this.setBackground(Color.DARK_GRAY);
+        this.setBackground(new Color(0xbbada0));
         this.setSize(size, size);
         this.XCOUNT = xcount;
         this.YCOUNT = ycount;
