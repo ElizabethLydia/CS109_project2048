@@ -27,22 +27,22 @@ public class GridComponent extends JComponent {//每一个小方格
     public void paintComponent(Graphics g) {
         super.printComponents(g);
         if (number > 0) {
-            g.setColor(this.getBackground());
-            g.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10,10,10);
-            g.setColor(this.getForeground());
+            g.setColor(this.getBackground());//设置背景颜色，根据数字不同设置不同的颜色
+            g.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10,10,10);//设置圆角矩形
+            g.setColor(this.getForeground());//设置字体颜色
             g.setFont(font);
-            FontMetrics metrics = g.getFontMetrics(g.getFont());
-            int textWidth = metrics.stringWidth(String.valueOf(number));
-            int x = (getWidth() - textWidth) / 2;
-            int y = (getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
-            g.drawString(String.valueOf(number), x, y);
+            FontMetrics metrics = g.getFontMetrics(g.getFont());//获取字体的相关信息
+            int textWidth = metrics.stringWidth(String.valueOf(number));//获取字体的宽度
+            int x = (getWidth() - textWidth) / 2;//设置字体的x坐标
+            int y = (getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();//设置字体的y坐标
+            g.drawString(String.valueOf(number), x, y);//画出数字
         } else {
-            g.setColor(new Color(0xcdc1b4));
-            g.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10,10,10);
+            g.setColor(new Color(0xcdc1b4));//设置背景颜色,这一步和 g.setColor(this.getForeground());不同的是这个是设置空白的背景颜色
+            g.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10,10,10);//设置圆角矩形
         }
     }
     public Color getForeground() {
-        return number < 8 ? new Color(0x776e65) :  new Color(0xf9f6f2);
+        return number < 8 ? new Color(0x776e65) :  new Color(0xf9f6f2);//当数字小于8时，字体颜色为0x776e65，否则为0xf9f6f2
     }
 
     public Color getBackground() {

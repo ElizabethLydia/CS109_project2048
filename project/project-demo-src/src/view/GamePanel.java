@@ -22,6 +22,9 @@ public class GamePanel extends ListenerPanel {
 
     private int score;
 
+    private ArrayList<ArrayList> eachArray = new ArrayList<>();
+    private ArrayList<Integer> eachScore = new ArrayList<>();
+
     private JLabel scoreLabel;
 
     public GamePanel(int size, int xcount, int ycount) {
@@ -90,7 +93,9 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
+            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move right,try another direction");
             if (checkIfEnded()) {
@@ -120,7 +125,9 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
+            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move left,try another direction");
             if (checkIfEnded() ) {
@@ -150,7 +157,9 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
+            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move up,try another direction");
             if (checkIfEnded() ) {
@@ -180,7 +189,9 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
+            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
+            eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
         } else {
             System.out.println("Unable to move down,try another direction");
             if (checkIfEnded() ) {
@@ -256,5 +267,21 @@ public class GamePanel extends ListenerPanel {
 
     public void setScoreLabel(JLabel scoreLabel) {
         this.scoreLabel = scoreLabel;
+    }
+
+    public ArrayList<ArrayList> getEachArray() {
+        return eachArray;
+    }
+
+    public void setEachArray(ArrayList<ArrayList> eachArray) {
+        this.eachArray = eachArray;
+    }
+
+    public ArrayList<Integer> getEachScore() {
+        return eachScore;
+    }
+
+    public void setEachScore(ArrayList<Integer> eachScore) {
+        this.eachScore = eachScore;
     }
 }

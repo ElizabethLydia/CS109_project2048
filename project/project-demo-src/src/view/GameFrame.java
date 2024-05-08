@@ -11,6 +11,7 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
     private GameController controller;
     private JButton restartBtn;
     private JButton loadBtn;
+    private JButton undoBtn;
 
     private JLabel stepLabel;
     private JLabel scoreLabel;
@@ -32,6 +33,17 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50,this);
         this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50,this);
         this.scoreLabel = createLabel("Score", new Font("serif", Font.ITALIC, 22), new Point(480, 90), 180, 50,this);
+////        this.undoBtn = createButton("Undo", new Point(500, 290), 110, 50,this);//这个可以创建一个和load，restart一样形式的按钮
+        undoBtn = createButton("", new Point(500, 290), 110, 50, this); // 使用 createButton 方法创建按钮
+        ImageIcon undoIcon = new ImageIcon("D:\\code\\javasepro\\project\\project\\project-demo-src\\src\\view\\undo.jpg"); // 替换为你的图像路径
+        undoBtn.setIcon(undoIcon);// 设置按钮的图标
+        //获取图标的宽度和高度
+        int width1 = undoIcon.getIconWidth();
+        int height1 = undoIcon.getIconHeight();
+        //设置按钮的大小
+        undoBtn.setSize(width1, height1);
+        // 添加撤销按钮到游戏窗口
+        this.add(undoBtn);
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
         gamePanel.setScoreLabel(scoreLabel);//建立gamePanel中所得到的score值与scoreLabel的联系
 
@@ -43,6 +55,20 @@ public class GameFrame extends JFrame implements CreateButtonAndLabel {//整个�
             String string = JOptionPane.showInputDialog(this, "Input path:");
             System.out.println(string);
             gamePanel.requestFocusInWindow();//启用键盘事件监听？？？？
+        });
+        undoBtn.addActionListener(e -> {
+            int result = JOptionPane.showConfirmDialog(this, "Do you want to undo the last move?", "Undo Move", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                gamePanel.getEachArray().remove(gamePanel.getEachArray().size() - 1);
+                gamePanel.getEachScore().remove(gamePanel.getEachScore().size() - 1);
+//                gamePanel.setScore(gamePanel.getEachScore().get(gamePanel.getEachScore().size() - 1));
+//                gamePanel.setStep(gamePanel.getStep() - 1);
+                gamePanel.setScoreLabel(scoreLabel);
+                gamePanel.setStepLabel(stepLabel);
+                gamePanel.repaint();
+            }else {
+                //do nothing
+            }
         });
         //todo: add other button here
         this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）。
