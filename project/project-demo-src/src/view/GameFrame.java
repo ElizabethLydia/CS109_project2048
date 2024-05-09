@@ -53,9 +53,9 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         gamePanel.setLocation(500/ 15, 500 / 15+100);
         this.add(gamePanel);
 
-        highestScorePanel = createPanel(428, 30, 100, 70);
-        scorePanel = createPanel(550, 30, 100, 70);
-        stepPanel = createPanel(670, 30, 100, 70);
+        highestScorePanel = createPanel(428, 30, 100, 70,false);
+        scorePanel = createPanel(550, 30, 100, 70,false);
+        stepPanel = createPanel(670, 30, 100, 70,false);
 
         this.controller = new GameController(gamePanel, gamePanel.getModel(), this);
         this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50, this);
@@ -74,7 +74,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         undoBtn.setSize(width1, height1);
         // 添加撤销按钮到游戏窗口
         this.add(undoBtn);*/
-        buttonPanel = createPanel(450, 330, 320, 210);
+        buttonPanel = createPanel(450, 330, 320, 210,true);
 
         this.leftBtn = createButton("Left", new Point(15, 110), 90, 90, this);
         this.rightBtn = createButton("Right", new Point(215, 110), 90, 90, this);
@@ -84,6 +84,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         buttonPanel.setComponentZOrder(rightBtn, 0);
         buttonPanel.setComponentZOrder(upBtn, 0);
         buttonPanel.setComponentZOrder(downBtn, 0);
+
         //要把button显示在panel上
 
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
@@ -156,8 +157,8 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     public GameController getController() {
         return controller;
     }
-    public JPanel createPanel(int x,int y, int width, int height) {
-        RoundedPanel panel = new RoundedPanel(new Color(107, 78, 51),x, y, width, height,this);
+    public JPanel createPanel(int x,int y, int width, int height,boolean isOpaque) {
+        RoundedPanel panel = new RoundedPanel(new Color(0xbbada0),x, y, width, height,this,isOpaque);
         panel.setLayout(null);
         this.add(panel);
         return panel;
