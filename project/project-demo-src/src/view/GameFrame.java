@@ -62,7 +62,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
         this.stepLabel = createLabel("<html>Step:<br> 0 </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
         this.scoreLabel = createLabel("<html>Score:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
-
+        //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示
         this.undoBtn = createButton("Undo", new Point(500, 290), 110, 50,this);//这个可以创建一个和load，restart一样形式的按钮
         /*undoBtn = createButton("", new Point(500, 290), 110, 50, this); // 使用 createButton 方法创建按钮
         ImageIcon undoIcon = new ImageIcon("D:\\code\\javasepro\\project\\project\\project-demo-src\\src\\view\\undo.jpg"); // 替换为你的图像路径
@@ -80,7 +80,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.rightBtn = createButton("Right", new Point(215, 110), 90, 90, this);
         this.upBtn = createButton("Up", new Point(115, 10), 90, 90, this);
         this.downBtn = createButton("Down", new Point(115, 110), 90, 90, this);
-        buttonPanel.setComponentZOrder(leftBtn, 0);
+        buttonPanel.setComponentZOrder(leftBtn, 0);//设置按钮的层次,0表示最底层，这个是为了让按钮显示在panel上
         buttonPanel.setComponentZOrder(rightBtn, 0);
         buttonPanel.setComponentZOrder(upBtn, 0);
         buttonPanel.setComponentZOrder(downBtn, 0);
@@ -88,54 +88,40 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
         gamePanel.setScoreLabel(scoreLabel);//建立gamePanel中所得到的score值与scoreLabel的联系
-        stepPanel.setComponentZOrder(stepLabel, 0);
+        stepPanel.setComponentZOrder(stepLabel, 0);//设置层次，0表示最底层
         scorePanel.setComponentZOrder(scoreLabel, 0);
 
         this.restartBtn.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下restartGame()方法
             controller.restartGame();
             gamePanel.requestFocusInWindow();//当重启按钮被点击时，游戏将重新开始并且游戏面板会请求焦点，以便启用键盘事件监听，为玩家提供交互操作的功能。
         });
+
         this.loadBtn.addActionListener(e -> {
             String string = JOptionPane.showInputDialog(this, "Input path:");
             System.out.println(string);
             gamePanel.requestFocusInWindow();//启用键盘事件监听？？？？
         });
+
         this.undoBtn.addActionListener(e -> {
-            int result = JOptionPane.showConfirmDialog(GameFrame.this, "Do you want to undo the last move?", "Undo Move", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                // 撤销游戏状态
-                if (!gamePanel.getEachArray().isEmpty()) {
-                    gamePanel.getEachArray().remove(gamePanel.getEachArray().size() - 1);
-                    gamePanel.getEachScore().remove(gamePanel.getEachScore().size() - 1);
-                }
-
-                // 更新分数和步数标签
-//                gamePanel.setScore(gamePanel.getEachScore().get(gamePanel.getEachScore().size() - 1));
-//                gamePanel.setStep(gamePanel.getStep() - 1);
-                gamePanel.setScoreLabel(scoreLabel);
-                gamePanel.setStepLabel(stepLabel);
-
-                // 重新绘制游戏面板
-                gamePanel.repaint();
-                //目前问题是游戏无法继续进行，因为撤销后的游戏面板无法再次获得焦点，无法再次进行键盘操作
-                //解决方法：在撤销后，重新获取焦点
-                gamePanel.requestFocusInWindow();
-            } else {
-                // 用户选择不撤销，不执行任何操作
-            }
+            gamePanel.doUndo();
+            gamePanel.requestFocusInWindow();
         });
+
         this.leftBtn.addActionListener(e -> {
             gamePanel.doMoveLeft();
             gamePanel.requestFocusInWindow();
                 });
+
         this.rightBtn.addActionListener(e -> {
             gamePanel.doMoveRight();
             gamePanel.requestFocusInWindow();
         });
+
         this.upBtn.addActionListener(e -> {
             gamePanel.doMoveUp();
             gamePanel.requestFocusInWindow();
         });
+
         this.downBtn.addActionListener(e -> {
             gamePanel.doMoveDown();
             gamePanel.requestFocusInWindow();

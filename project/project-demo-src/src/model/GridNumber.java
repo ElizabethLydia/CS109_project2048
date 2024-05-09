@@ -15,7 +15,6 @@ public class GridNumber {
 
     static Random random = new Random();
 
-
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
         this.Y_COUNT = yCount;
