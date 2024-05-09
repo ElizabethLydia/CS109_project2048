@@ -251,15 +251,14 @@ public class GamePanel extends ListenerPanel {
 
     public void afterMove() {//用于步数加1
         this.steps++;
-        this.stepLabel.setText(String.format("Step: %d", this.steps));
+        this.stepLabel.setText(String.format("<html>Step:<br> %d</html>", this.steps));
     }
     public void setStepLabel(JLabel stepLabel) {//用于设置步数
         this.stepLabel = stepLabel;
     }
     public void setScore() {
         this.score = model.getScore();
-        scoreLabel.setText(String.format("Score: %d", model.getScore()));
-        eachScore.add(model.getScore());//每一次有效移动之后，将当前的分数存入eachScore中
+        scoreLabel.setText(String.format("<html>Score:<br> %d</html>", model.getScore()));
     }
 
     public void setScoreLabel(JLabel scoreLabel) {

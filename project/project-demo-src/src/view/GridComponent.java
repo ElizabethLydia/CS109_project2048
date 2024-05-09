@@ -7,7 +7,7 @@ public class GridComponent extends JComponent {//每一个小方格
     private int row;
     private int col;
     private int number;
-    static Font font = new Font("Serif", Font.BOLD, 42);//设置字体大小用
+    static Font font = new Font("Monaco", Font.BOLD,42);//设置字体大小用
 
     public GridComponent(int row, int col, int gridSize) {
         this.setSize(gridSize, gridSize);
@@ -41,10 +41,11 @@ public class GridComponent extends JComponent {//每一个小方格
             g.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10,10,10);//设置圆角矩形
         }
     }
+    @Override
     public Color getForeground() {
-        return number < 8 ? new Color(0x776e65) :  new Color(0xf9f6f2);//当数字小于8时，字体颜色为0x776e65，否则为0xf9f6f2
+        return number < 8 ? new Color(0x776e65) :  new Color(0xf9f6f2);
     }
-
+    @Override
     public Color getBackground() {
         switch (number) {
             case 2:    return new Color(0xF3E0D1);
@@ -53,11 +54,11 @@ public class GridComponent extends JComponent {//每一个小方格
             case 16:   return new Color(0xf59563);
             case 32:   return new Color(0xf67c5f);
             case 64:   return new Color(0xf65e3b);
-            case 128:  return new Color(0xedcf72);
-            case 256:  return new Color(0xEAC54F);
-            case 512:  return new Color(0xEAD231);
-            case 1024: return new Color(0xEDE43F);
-            case 2048: return new Color(0xD4ED2E);
+            case 128:  return new Color(0xF3D16A);
+            case 256:  return new Color(0xF4CF58);
+            case 512:  return new Color(0xF4CF38);
+            case 1024: return new Color(0xEFC82F);
+            case 2048: return new Color(0xEBC218);
             case 4096: return new Color(0xC7ED1E);
             case 8192: return new Color(0x0EAAED);
             case 16384:return new Color(0x0E7FED);

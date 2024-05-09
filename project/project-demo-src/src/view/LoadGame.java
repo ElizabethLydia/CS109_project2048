@@ -1,13 +1,12 @@
 package view;
 
-import controller.GameController;
-import util.CreateButtonAndLabel;
+import util.Create;
 
 import javax.swing.*;
 import java.awt.*;
 
 
-public class LoadGame extends JDialog implements CreateButtonAndLabel {
+public class LoadGame extends JDialog implements Create {
      private JLabel autoSaveLabel;
      private JButton autoSaveButton;
      private JLabel Save1Label;
@@ -29,23 +28,23 @@ public class LoadGame extends JDialog implements CreateButtonAndLabel {
          this.setLocationRelativeTo(parent);// 方法会将子窗口相对于父窗口进行定位，通常是使子窗口显示在父窗口的中央位置。
          this.setResizable(false);//用于设置窗口是否可调整大小的方法。调用这个方法可以防止用户通过拖拽边框改变窗口大小，使窗口变为固定大小。
          //待调整
-         autoSaveLabel = createLabel("Auto Save", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+         autoSaveLabel = createLabel("Auto Save", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this,0xF3E0D1);
          //创建一个自动保存标签
          autoSaveButton = createButton("Load", new Point(100, 150), 100, 50, this);
 
-         Save1Label = createLabel("Save 1", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+         Save1Label = createLabel("Save 1", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this,0xF3E0D1);
          Save1Button = createButton("Load", new Point(100, 150), 100, 50, this);
 
-         Save2Label = createLabel("Save 2",  new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+         Save2Label = createLabel("Save 2",  new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this,0xF3E0D1);
          Save2Button = createButton("Load",new Point(100, 150), 100, 50, this);
 
-         Save3Label = createLabel("Save 3",  new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+         Save3Label = createLabel("Save 3",  new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this,0xF3E0D1);
          Save3Button = createButton("Load", new Point(100, 150), 100, 50, this);
 
-         Save4Label = createLabel("Save 4", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+         Save4Label = createLabel("Save 4", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this,0xF3E0D1);
          Save4Button = createButton("Load",new Point(100, 150), 100, 50, this);
 
-         Save5Label = createLabel("Save 5", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this);
+         Save5Label = createLabel("Save 5", new Font("serif", Font.ITALIC, 50), new Point(480, 50), 180, 50, this,0xF3E0D1);
          Save5Button = createButton("Load",new Point(100, 150), 100, 50, this);
 
          this.autoSaveButton.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下操作
