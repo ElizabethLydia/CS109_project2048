@@ -1,9 +1,7 @@
 package model;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class GridNumber {
@@ -14,9 +12,12 @@ public class GridNumber {
     public int[][] numbers;
 
     static Random random = new Random();
-    Boolean checkIfOnlyOneUndo;
+    boolean checkIfOnlyOneUndo;
 
-    public Boolean getCheckIfOnlyOneUndo() {
+    private ArrayList<int[][]> eachArray = new ArrayList<>();
+    private ArrayList<Integer> eachScore = new ArrayList<>();
+
+    public boolean getCheckIfOnlyOneUndo() {
         return checkIfOnlyOneUndo;
     }
     public void setCheckIfOnlyOneUndo(Boolean checkIfOnlyOneUndo) {
@@ -257,6 +258,9 @@ public class GridNumber {
             }
         }
     }
+    public void undo() {
+        this.numbers = eachArray.get(eachArray.size() - 1);
+    }
 
     public void addRandomNumber() {//用于添加随机数字，需要加到上面的moveLeft()等方法最后
         while (true) {
@@ -286,7 +290,6 @@ public class GridNumber {
             }
         }
     }
-
     public void printNumber() {
         for (int[] line : numbers) {
             System.out.println(Arrays.toString(line));
@@ -296,12 +299,19 @@ public class GridNumber {
         return score;
     }
 
+    public ArrayList<int[][]> getEachArray() {
+        return eachArray;
+    }
 
-    public void setNumber(int[][] originalArray) {
-        for (int i = 0; i < originalArray.length; i++) {
-            for (int j = 0; j < originalArray[i].length; j++) {
-                this.numbers[i][j] = originalArray[i][j];
-            }
-        }
+    public void addEachArray(int[][] numbers) {
+        this.eachArray.add(numbers);
+    }
+
+    public ArrayList<Integer> getEachScore() {
+        return eachScore;
+    }
+
+    public void addEachScore(int Score) {
+        this.eachScore.add(Score);
     }
 }

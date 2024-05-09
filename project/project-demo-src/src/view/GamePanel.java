@@ -20,11 +20,8 @@ public class GamePanel extends ListenerPanel {
     private static int GRID_SIZE;
 
     private int score;
-
-    private ArrayList<int[][]> eachArray = new ArrayList<>();
-    private ArrayList<Integer> eachScore = new ArrayList<>();
-
     private JLabel scoreLabel;
+    private ArrayList<Integer> eachScore = new ArrayList<>();
 
     public GamePanel(int size, int xcount, int ycount) {
         this.setVisible(true);
@@ -64,7 +61,6 @@ public class GamePanel extends ListenerPanel {
                 grids[i][j].setNumber(model.getNumber(i, j));
             }
         }
-        eachArray.add(model.getNumbers());
         repaint();
     }
 
@@ -92,6 +88,7 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_RIGHT");
             this.afterMove();
             this.model.addRandomNumber();
+            this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
         } else {
@@ -122,6 +119,7 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_LEFT");
             this.afterMove();
             this.model.addRandomNumber();
+            this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
         } else {
@@ -152,6 +150,7 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_UP");
             this.afterMove();
             this.model.addRandomNumber();
+            this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
         } else {
@@ -182,6 +181,7 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_DOWN");
             this.afterMove();
             this.model.addRandomNumber();
+            this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
         } else {
@@ -190,6 +190,37 @@ public class GamePanel extends ListenerPanel {
                 System.out.println("game is over");
                 //结束游戏界面
             }
+        }
+    }
+
+    public void doUndo() {
+        if (model.getCheckIfOnlyOneUndo() == false) {
+            if (this.model.getEachArray().size() > 1) {
+                System.out.println("You hit the undo button");
+                int result = JOptionPane.showConfirmDialog(this, "Are you sure to undo the last step?", "Undo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                // 根据用户的选择执行操作
+                if (result == JOptionPane.NO_OPTION) {
+                    System.out.println("You choose not to undo the last step");
+                } else {
+                    if (result == JOptionPane.YES_OPTION) {
+                        System.out.println("You choose to undo the last step");
+                        model.setCheckIfOnlyOneUndo(true);
+                        this.model.undo();
+                        eachScore.remove(eachScore.size() - 1);
+                        this.updateGridsNumber();//更新游戏面板
+                        //为什么游戏面板没有更新
+                        this.steps--;
+                        this.stepLabel.setText(String.format("<html>Step:<br> %d</html>", this.steps));
+                        this.score = eachScore.get(eachScore.size() - 1);
+                        this.scoreLabel.setText(String.format("<html>Score:<br> %d</html>", this.score));
+                    }
+                }
+            } else {
+                System.out.println("No more steps to undo");
+            }
+        } else {
+            System.out.println("You can only undo once");
+            JOptionPane.showMessageDialog(this, "You can only undo once", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -234,12 +265,12 @@ public class GamePanel extends ListenerPanel {
                 for (int j = 0; j < YCOUNT; j++) {
                     if (originalArray[i][j] != this.model.getNumber(i, j)) {
                         check = false;
-                        this.model.setNumber(originalArray);
+                        this.model.setNumbers(originalArray);
                         return check;
                     }
                 }
             }
-            this.model.setNumber(originalArray);
+            this.model.setNumbers(originalArray);
         }
         return check;
     }
@@ -264,52 +295,7 @@ public class GamePanel extends ListenerPanel {
         this.scoreLabel = scoreLabel;
     }
 
-    public ArrayList<int[][]> getEachArray() {
-        return eachArray;
-    }
 
-    public void setEachArray(ArrayList<int[][]> eachArray) {
-        this.eachArray = eachArray;
-    }
 
-    public ArrayList<Integer> getEachScore() {
-        return eachScore;
-    }
 
-    public void setEachScore(ArrayList<Integer> eachScore) {
-        this.eachScore = eachScore;
-    }
-
-    public void doUndo() {
-        if (model.getCheckIfOnlyOneUndo() == false) {
-            if (eachArray.size() > 1) {
-                System.out.println("You hit the undo button");
-                int result = JOptionPane.showConfirmDialog(this, "Are you sure to undo the last step?", "Undo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                // 根据用户的选择执行操作
-                if (result == JOptionPane.NO_OPTION) {
-                    System.out.println("You choose not to undo the last step");
-                } else {
-                    if (result == JOptionPane.YES_OPTION) {
-                        System.out.println("You choose to undo the last step");
-                        model.setCheckIfOnlyOneUndo(true);
-                        eachArray.remove(eachArray.size() - 1);
-                        eachScore.remove(eachScore.size() - 1);
-                        this.model.setNumbers(eachArray.get(eachArray.size() - 1));
-                        this.updateGridsNumber();//更新游戏面板
-                        this.repaint();
-                        //为什么游戏面板没有更新
-                        this.steps--;
-                        this.stepLabel.setText(String.format("<html>Step:<br> %d</html>", this.steps));
-                        this.score = eachScore.get(eachScore.size() - 1);
-                        this.scoreLabel.setText(String.format("<html>Score:<br> %d</html>", this.score));
-                    }
-                }
-            } else {
-                System.out.println("No more steps to undo");
-            }
-        } else {
-            System.out.println("You can only undo once");
-            JOptionPane.showMessageDialog(this, "You can only undo once", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-    }
 }
