@@ -14,6 +14,14 @@ public class GridNumber {
     public int[][] numbers;
 
     static Random random = new Random();
+    Boolean checkIfOnlyOneUndo;
+
+    public Boolean getCheckIfOnlyOneUndo() {
+        return checkIfOnlyOneUndo;
+    }
+    public void setCheckIfOnlyOneUndo(Boolean checkIfOnlyOneUndo) {
+        this.checkIfOnlyOneUndo = checkIfOnlyOneUndo;
+    }
 
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
@@ -31,6 +39,7 @@ public class GridNumber {
                 //todo: update generate numbers method
             }
         }
+        checkIfOnlyOneUndo = false;//检查每一局游戏是否只有一次撤销
         int initialX_1 = random.nextInt(X_COUNT);
         int initialY_1 = random.nextInt(Y_COUNT);
         int randomNum1 = random.nextInt(2);//生成0和1的随机整数,0就对应2，1就对应4

@@ -84,7 +84,6 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         buttonPanel.setComponentZOrder(rightBtn, 0);
         buttonPanel.setComponentZOrder(upBtn, 0);
         buttonPanel.setComponentZOrder(downBtn, 0);
-
         //要把button显示在panel上
 
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
