@@ -20,6 +20,7 @@ public class RoundedPanel extends JPanel {
         this.setOpaque = setOpaque;
         setBounds(x, y, width, height);
         setOpaque(false);
+
     }
 
     @Override
