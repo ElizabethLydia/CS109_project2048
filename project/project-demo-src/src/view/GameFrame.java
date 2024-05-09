@@ -4,8 +4,12 @@ import controller.GameController;
 import util.Create;
 import util.RoundedPanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
@@ -32,6 +36,8 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     private JButton rightBtn;
     private JButton upBtn;
     private JButton downBtn;
+
+    private BufferedImage backgroundImage;
 
 
     public GameFrame(int width, int height) {
@@ -69,18 +75,16 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         // 添加撤销按钮到游戏窗口
         this.add(undoBtn);*/
         buttonPanel = createPanel(450, 330, 320, 210);
-        /*buttonPanel.setComponentZOrder(leftBtn, 0);
+
+        this.leftBtn = createButton("Left", new Point(15, 110), 90, 90, this);
+        this.rightBtn = createButton("Right", new Point(215, 110), 90, 90, this);
+        this.upBtn = createButton("Up", new Point(115, 10), 90, 90, this);
+        this.downBtn = createButton("Down", new Point(115, 110), 90, 90, this);
+        buttonPanel.setComponentZOrder(leftBtn, 0);
         buttonPanel.setComponentZOrder(rightBtn, 0);
         buttonPanel.setComponentZOrder(upBtn, 0);
-        buttonPanel.setComponentZOrder(downBtn, 0);*/
+        buttonPanel.setComponentZOrder(downBtn, 0);
         //要把button显示在panel上
-
-
-        this.leftBtn = createButton("Left", new Point(450, 440), 80, 80, this);
-        this.rightBtn = createButton("Right", new Point(500, 440), 80, 80, this);
-        this.upBtn = createButton("Up", new Point(300, 200), 80, 80, this);
-        this.downBtn = createButton("Down", new Point(300, 400), 80, 80, this);
-
 
         gamePanel.setStepLabel(stepLabel);//建立gamePanel中所得到的step值与stepLabel的联系
         gamePanel.setScoreLabel(scoreLabel);//建立gamePanel中所得到的score值与scoreLabel的联系
@@ -120,6 +124,30 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
                 // 用户选择不撤销，不执行任何操作
             }
         });
+        this.leftBtn.addActionListener(e -> {
+            gamePanel.doMoveLeft();
+            gamePanel.requestFocusInWindow();
+                });
+        this.rightBtn.addActionListener(e -> {
+            gamePanel.doMoveRight();
+            gamePanel.requestFocusInWindow();
+        });
+        this.upBtn.addActionListener(e -> {
+            gamePanel.doMoveUp();
+            gamePanel.requestFocusInWindow();
+        });
+        this.downBtn.addActionListener(e -> {
+            gamePanel.doMoveDown();
+            gamePanel.requestFocusInWindow();
+        });
+
+        /*try {
+            backgroundImage = ImageIO.read(new File("D:\\hanson\\壁纸\\1.jpeg"));  // 读取图片
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
 //        //todo: add other button here
         this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）。
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//当用户点击窗口关闭按钮时，应用程序将会执行退出操作，关闭所有相关的资源，然后退出应用程序
@@ -134,6 +162,12 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.add(panel);
         return panel;
     }
+    /*public void paint(Graphics g) {
+        super.paint(g);
+        if(backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);  // 绘制图片
+        }
+    }*/
 
 
 }
