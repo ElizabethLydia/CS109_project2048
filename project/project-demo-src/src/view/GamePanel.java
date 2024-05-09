@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
 public class GamePanel extends ListenerPanel {
     private final int XCOUNT;
     private final int YCOUNT;
@@ -22,7 +21,7 @@ public class GamePanel extends ListenerPanel {
 
     private int score;
 
-    private ArrayList<ArrayList> eachArray = new ArrayList<>();
+    private ArrayList<int[][]> eachArray = new ArrayList<>();
     private ArrayList<Integer> eachScore = new ArrayList<>();
 
     private JLabel scoreLabel;
@@ -65,6 +64,7 @@ public class GamePanel extends ListenerPanel {
                 grids[i][j].setNumber(model.getNumber(i, j));
             }
         }
+        eachArray.add(model.getNumbers());
         repaint();
     }
 
@@ -93,7 +93,6 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
         } else {
             System.out.println("Unable to move right,try another direction");
@@ -124,11 +123,10 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
         } else {
             System.out.println("Unable to move left,try another direction");
-            if (checkIfEnded() ) {
+            if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
             }
@@ -155,11 +153,10 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
         } else {
             System.out.println("Unable to move up,try another direction");
-            if (checkIfEnded() ) {
+            if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
             }
@@ -186,11 +183,10 @@ public class GamePanel extends ListenerPanel {
             this.afterMove();
             this.model.addRandomNumber();
             this.updateGridsNumber();
-            eachArray.add(new ArrayList(Arrays.asList(model.getNumbers())));//每一次有效移动之后，将当前的数组存入eachArray中
             this.setScore();
         } else {
             System.out.println("Unable to move down,try another direction");
-            if (checkIfEnded() ) {
+            if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
             }
@@ -220,7 +216,7 @@ public class GamePanel extends ListenerPanel {
                     originalArray[i][j] = this.model.getNumber(i, j);
                 }
             }
-            switch (k){
+            switch (k) {
                 case 0:
                     this.model.moveRight();
                     break;
@@ -253,23 +249,26 @@ public class GamePanel extends ListenerPanel {
         this.steps++;
         this.stepLabel.setText(String.format("<html>Step:<br> %d</html>", this.steps));
     }
+
     public void setStepLabel(JLabel stepLabel) {//用于设置步数
         this.stepLabel = stepLabel;
     }
+
     public void setScore() {
         this.score = model.getScore();
         scoreLabel.setText(String.format("<html>Score:<br> %d</html>", model.getScore()));
+        eachScore.add(model.getScore());
     }
 
     public void setScoreLabel(JLabel scoreLabel) {
         this.scoreLabel = scoreLabel;
     }
 
-    public ArrayList<ArrayList> getEachArray() {
+    public ArrayList<int[][]> getEachArray() {
         return eachArray;
     }
 
-    public void setEachArray(ArrayList<ArrayList> eachArray) {
+    public void setEachArray(ArrayList<int[][]> eachArray) {
         this.eachArray = eachArray;
     }
 
@@ -279,5 +278,24 @@ public class GamePanel extends ListenerPanel {
 
     public void setEachScore(ArrayList<Integer> eachScore) {
         this.eachScore = eachScore;
+    }
+
+    public void doUndo() {
+        if (eachArray.size() > 1) {
+            System.out.println("You are undoing the last step");
+            // 根据用户的选择执行操作
+            eachArray.remove(eachArray.size() - 1);
+            eachScore.remove(eachScore.size() - 1);
+            this.model.setNumbers(eachArray.get(eachArray.size() - 1));
+            this.updateGridsNumber();//更新游戏面板
+            this.repaint();
+            //为什么游戏面板没有更新
+            this.steps--;
+            this.stepLabel.setText(String.format("<html>Step:<br> %d</html>", this.steps));
+            this.score = eachScore.get(eachScore.size() - 1);
+            this.scoreLabel.setText(String.format("<html>Score:<br> %d</html>", this.score));
+        } else {
+            System.out.println("No more steps to undo");
+        }
     }
 }
