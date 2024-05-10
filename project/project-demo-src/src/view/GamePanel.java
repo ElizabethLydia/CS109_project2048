@@ -294,6 +294,13 @@ public class GamePanel extends ListenerPanel {
     public void setScoreLabel(JLabel scoreLabel) {
         this.scoreLabel = scoreLabel;
     }
+    public int getXCOUNT(){
+        return XCOUNT;
+    }
+    public int getYCOUNT(){
+        return YCOUNT;
+    }
+
 
 
 
