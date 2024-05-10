@@ -104,4 +104,11 @@ public class GameController {
 
     public void returnToHomePage() {
     }
+
+    public void loadGame() {
+    }
+
+    public void exit() {
+        frame.dispose();
+    }
 }
