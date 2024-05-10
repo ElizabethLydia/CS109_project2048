@@ -25,8 +25,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     private JLabel stepLabel;
     private JLabel scoreLabel;
     private JLabel highestScoreLabel;
-
-
+    GameMenu gameMenu;
     private JPanel scorePanel;
     private JPanel stepPanel;
     private JPanel highestScorePanel;
@@ -45,13 +44,19 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.setLayout(null);
         /*在 JFrame 窗口中设置绝对定位布局（Absolute Positioning Layout）的方法。
         通过调用这个方法，并将布局管理器设置为 null，你可以自由地使用绝对坐标来定位和放置窗口中的组件，而不受默认布局管理器的影响。*/
-        this.setSize(800, 600);
-        this.setResizable(false);
+        this.setSize(800, 650);
+        this.setResizable(false);//设置窗口大小不可变
+        createGameMenu();//创建游戏菜单,这个是在窗口上方的菜单栏,怎么让他显示出来？？？？
+        //可以通过setJMenuBar()方法将菜单栏添加到窗口中
+
         this.titleLabel = createLabel("2048", new Font("Verdana", Font.BOLD, 80), new Point(35, 20), 240, 80,this,0x463627);
+        getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
 
         gamePanel = new GamePanel((int) (500 * 0.8), 4, 4);//这行代码设置了游戏面板的大小，以及游戏4*4、5*5的大小之后要改
         gamePanel.setLocation(500/ 15, 500 / 15+100);
         this.add(gamePanel);
+
+
 
         highestScorePanel = createPanel(428, 30, 100, 70,false);
         scorePanel = createPanel(550, 30, 100, 70,false);
@@ -137,6 +142,11 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 //        //todo: add other button here
         this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）。
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//当用户点击窗口关闭按钮时，应用程序将会执行退出操作，关闭所有相关的资源，然后退出应用程序
+    }
+
+    private void createGameMenu() {
+        gameMenu = new GameMenu(this);
+        this.setJMenuBar(gameMenu);//将菜单栏添加到窗口中
     }
 
     public GameController getController() {

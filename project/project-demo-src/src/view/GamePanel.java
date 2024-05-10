@@ -23,7 +23,7 @@ public class GamePanel extends ListenerPanel {
     private JLabel scoreLabel;
     private ArrayList<Integer> eachScore = new ArrayList<>();
 
-    public GamePanel(int size, int xcount, int ycount) {
+    public GamePanel(int size, int xcount, int ycount) {//构造方法
         this.setVisible(true);
         this.setFocusable(true);
         this.setLayout(null);

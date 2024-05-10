@@ -102,4 +102,13 @@ public class GameController {
     public void undo() {
 
     }
+
+    public void newGame(int i, int i1) {
+    }
+
+    public void setVolume() {
+    }
+
+    public void returnToHomePage() {
+    }
 }
