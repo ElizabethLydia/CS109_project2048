@@ -33,15 +33,15 @@ public class ChooseSize extends JDialog implements Create {
         this.Btn5x5 = createButton("5x5", new Point(100, 250), 100, 50, this);
         this.Btn6x6 = createButton("6x6", new Point(100, 350), 100, 50, this);
         this.Btn4x4.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下操作
-            GameFrame gameFrame = new GameFrame(700, 500);//需要改GameFrame的constructor以传入4*4的值
+            GameFrame gameFrame = new GameFrame(4,4);//需要改GameFrame的constructor以传入4*4的值
             gameFrame.setVisible(true);
         });
         this.Btn5x5.addActionListener(e -> {
-            GameFrame gameFrame = new GameFrame(700, 500);
+            GameFrame gameFrame = new GameFrame(5,5);
             gameFrame.setVisible(true);
         });
         this.Btn6x6.addActionListener(e -> {
-            GameFrame gameFrame = new GameFrame(700, 500);
+            GameFrame gameFrame = new GameFrame(6,6);
             gameFrame.setVisible(true);
         });
         this.dispose();//

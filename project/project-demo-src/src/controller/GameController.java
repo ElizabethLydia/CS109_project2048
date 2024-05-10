@@ -42,7 +42,7 @@ public class GameController {
         if (result == JOptionPane.YES_OPTION) {
             // 用户选择“确定”重启游戏
             this.frame.dispose(); // 关闭当前窗口
-            GameFrame newGameFrame = new GameFrame(700, 500); // 创建新的游戏窗口
+            GameFrame newGameFrame = new GameFrame(4,4); // 创建新的游戏窗口
             newGameFrame.setVisible(true); // 显示新的游戏窗口
         } else if (result == JOptionPane.NO_OPTION) {
             // 用户选择“取消”，则不执行任何操作
@@ -97,13 +97,6 @@ public class GameController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void undo() {
-
-    }
-
-    public void newGame(int i, int i1) {
     }
 
     public void setVolume() {

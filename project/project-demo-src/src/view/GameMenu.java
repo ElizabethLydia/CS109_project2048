@@ -4,36 +4,35 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameMenu extends JMenuBar {
-    //这个用于显示游戏菜单
+    //这个用于显示游戏菜单（游戏上面的一栏）
     public GameMenu(GameFrame gameFrame) {
-        Font font = new Font("Verdana", Font.PLAIN, 20);
+        Font font = new Font("Arial", Font.PLAIN, 20);
         Color color = new Color(0x545151);
         JMenuBar menuBar = new JMenuBar();
         JMenu newGame = new JMenu("newGame");
         JMenu loadGame = new JMenu("load");
         JMenu saveGame = new JMenu("save");
-        JMenu exitGame = new JMenu("exit");
         JMenu settings = new JMenu("settings");
         JMenu help = new JMenu("help");
+        JMenu exit = new JMenu("exit");
         menuBar.add(newGame);
         menuBar.add(loadGame);
         menuBar.add(saveGame);
-        menuBar.add(exitGame);
         menuBar.add(settings);
         menuBar.add(help);
+        menuBar.add(exit);
         newGame.setFont(font);
         loadGame.setFont(font);
         saveGame.setFont(font);
-        exitGame.setFont(font);
         settings.setFont(font);
         help.setFont(font);
+        exit.setFont(font);
         newGame.setForeground(color);
         loadGame.setForeground(color);
         saveGame.setForeground(color);
-        exitGame.setForeground(color);
         settings.setForeground(color);
         help.setForeground(color);
-
+        exit.setForeground(color);
         //创建子项
         JMenuItem newGame1 = new JMenuItem("4*4");
         JMenuItem newGame2 = new JMenuItem("5*5");
@@ -60,20 +59,18 @@ public class GameMenu extends JMenuBar {
             System.out.println("you choose new game");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                gameFrame.getController().newGame(4, 4);
-                gameFrame.setVisible(true);
-            } else {
-                return;
+                gameFrame.dispose(); // 关闭当前窗口
+                GameFrame newGameFrame = new GameFrame(4,4); // 创建新的游戏窗口
+                newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         });
         newGame2.addActionListener(e -> {
             System.out.println("you choose new game");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                gameFrame.getController().newGame(5, 5);
-                gameFrame.setVisible(true);
-            } else {
-                return;
+                gameFrame.dispose(); // 关闭当前窗口
+                GameFrame newGameFrame = new GameFrame(5,5); // 创建新的游戏窗口
+                newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         });
         loadGame.addActionListener(e -> {
@@ -86,15 +83,15 @@ public class GameMenu extends JMenuBar {
             System.out.println("you choose save game");
             gameFrame.getController().saveGame();
         });
-        exitGame.addActionListener(e -> {
-            System.out.println("you choose exit game");
-            int result = JOptionPane.showConfirmDialog(null, "Are you sure to exit the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        exit.addActionListener(e -> {
+            System.out.println("you choose exit");
+            int result = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                gameFrame.dispose();
-            } else {
-                return;
+                System.exit(0);
             }
         });
+
+
         settings1.addActionListener(e -> {
             System.out.println("you choose settings");
             gameFrame.getController().setVolume();
@@ -104,8 +101,6 @@ public class GameMenu extends JMenuBar {
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to return to home page?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 gameFrame.getController().returnToHomePage();
-            } else {
-                return;
             }
         });
 

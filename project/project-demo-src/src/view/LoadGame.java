@@ -48,38 +48,38 @@ public class LoadGame extends JDialog implements Create {
          Save5Button = createButton("Load",new Point(100, 150), 100, 50, this);
 
          this.autoSaveButton.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下操作
-             GameFrame gameFrame = new GameFrame(700, 500);//需要改GameFrame的constructor以传入4*4的值
+             GameFrame gameFrame = new GameFrame(4,4);//需要改GameFrame的constructor以传入4*4的值
              gameFrame.getController().loadGame("autoSave.txt");
              gameFrame.setVisible(true);
              //我觉得这个还有问题，并没有真正实现自动保存，自动保存不应该是按钮按下之后的操作，而应该是在游戏进行中根据秒数自动保存
          });
 
          this.Save1Button.addActionListener(e -> {
-             GameFrame gameFrame = new GameFrame(700, 500);
+             GameFrame gameFrame = new GameFrame(4,4);
              gameFrame.getController().loadGame("Save1.txt");
              gameFrame.setVisible(true);
          });
 
          this.Save2Button.addActionListener(e -> {
-             GameFrame gameFrame = new GameFrame(700, 500);
+             GameFrame gameFrame = new GameFrame(4,4);
              gameFrame.getController().loadGame("Save2.txt");
              gameFrame.setVisible(true);
          });
 
          this.Save3Button.addActionListener(e -> {
-             GameFrame gameFrame = new GameFrame(700, 500);
+             GameFrame gameFrame = new GameFrame(4,4);
              gameFrame.getController().loadGame("Save3.txt");
              gameFrame.setVisible(true);
          });
 
          this.Save4Button.addActionListener(e -> {
-             GameFrame gameFrame = new GameFrame(700, 500);
+             GameFrame gameFrame = new GameFrame(4,4);
              gameFrame.getController().loadGame("Save4.txt");
              gameFrame.setVisible(true);
          });
 
          this.Save5Button.addActionListener(e -> {
-             GameFrame gameFrame = new GameFrame(700, 500);
+             GameFrame gameFrame = new GameFrame(4,4);
              gameFrame.getController().loadGame("Save5.txt");
              gameFrame.setVisible(true);
          });
