@@ -261,6 +261,23 @@ public class GridNumber {
     public void undo() {
         this.numbers = eachArray.get(eachArray.size() - 1);
     }
+    public void dead() {
+        if (X_COUNT == 4 || Y_COUNT == 4) {
+            numbers=new int[][]{{2,4,2,4},
+                                 {4,2,4,2},
+                                 {2,4,2,4},
+                                 {4,2,4,2}
+            };
+        }else {
+            numbers=new int[][]{{2,4,2,4,2},
+                                {4,2,4,2,4},
+                                {2,4,2,4,2},
+                                {4,2,4,2,4},
+                                {2,4,2,4,2}
+            };
+        }
+
+    }
 
     public void addRandomNumber() {//用于添加随机数字，需要加到上面的moveLeft()等方法最后
         while (true) {

@@ -230,6 +230,10 @@ public class GamePanel extends ListenerPanel {
             JOptionPane.showMessageDialog(this, "You can only undo once", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }
+    public void dead() {
+            this.model.dead();
+            this.updateGridsNumber();
+    }
 
     //判断是否是有效移动
     public boolean checkValidMove(int[][] initialArray, int[][] lastArray) {
@@ -297,6 +301,9 @@ public class GamePanel extends ListenerPanel {
         scoreLabel.setText(String.format("<html>Score:<br> %d</html>", model.getScore()));
         eachScore.add(model.getScore());
     }
+    public void setController(GameController controller) {
+        this.controller = controller;
+    }
 
     public void setScoreLabel(JLabel scoreLabel) {
         this.scoreLabel = scoreLabel;
@@ -306,9 +313,6 @@ public class GamePanel extends ListenerPanel {
     }
     public int getYCOUNT(){
         return YCOUNT;
-    }
-    public void setController(GameController controller) {
-        this.controller = controller;
     }
 
     public void setGameOverDialog() {

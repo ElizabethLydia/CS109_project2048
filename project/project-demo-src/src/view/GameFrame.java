@@ -15,9 +15,11 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
     private GameController controller;
     private JButton restartBtn;
-    private JButton loadBtn;
     private JButton magicBtn;
     private JButton undoBtn;
+
+    private JButton loadBtn;
+    private JButton deadBtn;
 
     private GamePanel gamePanel;
 
@@ -70,6 +72,8 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.magicBtn = createButtonWithIcon("Magic", new Point(700, 130), 50, 50, this);
 
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
+        this.deadBtn = createButton("Dead", new Point(500, 290), 110, 50, this);
+
 
         buttonPanel = createPanel(450, 330, 320, 210,true);
         this.leftBtn = createButtonWithIcon("Left", new Point(15, 110), 90, 90, this);
@@ -100,6 +104,10 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
         this.undoBtn.addActionListener(e -> {
             gamePanel.doUndo();
+            gamePanel.requestFocusInWindow();
+        });
+        this.deadBtn.addActionListener(e -> {
+            gamePanel.dead();
             gamePanel.requestFocusInWindow();
         });
 
