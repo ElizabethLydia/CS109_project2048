@@ -98,8 +98,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move right,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -130,8 +130,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move left,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -162,8 +162,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move up,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -194,8 +194,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move down,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -229,6 +229,10 @@ public class GamePanel extends ListenerPanel {
             System.out.println("You can only undo once");
             JOptionPane.showMessageDialog(this, "You can only undo once", "Warning", JOptionPane.WARNING_MESSAGE);
         }
+    }
+    public void dead() {
+            this.model.dead();
+            this.updateGridsNumber();
     }
 
     //判断是否是有效移动
@@ -297,6 +301,9 @@ public class GamePanel extends ListenerPanel {
         scoreLabel.setText(String.format("<html>Score:<br> %d</html>", model.getScore()));
         eachScore.add(model.getScore());
     }
+    public void setController(GameController controller) {
+        this.controller = controller;
+    }
 
     public void setScoreLabel(JLabel scoreLabel) {
         this.scoreLabel = scoreLabel;
@@ -308,12 +315,13 @@ public class GamePanel extends ListenerPanel {
         return YCOUNT;
     }
 
-    public void setController(GameController controller) {
-        this.controller = controller;
-    }
-
     public void setGameOverDialog() {
         gameOverDialog = new GameOverDialog(null, "Game Over", this.score, 0, controller);
         gameOverDialog.setVisible(true);
     }
+
+
+
+
+
 }

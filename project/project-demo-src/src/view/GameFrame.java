@@ -15,8 +15,11 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
     private GameController controller;
     private JButton restartBtn;
-    private JButton loadBtn;
+    private JButton magicBtn;
     private JButton undoBtn;
+
+    private JButton loadBtn;
+    private JButton deadBtn;
 
     private GamePanel gamePanel;
 
@@ -60,28 +63,27 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         highestScorePanel = createPanel(428, 30, 100, 70,false);
         scorePanel = createPanel(550, 30, 100, 70,false);
         stepPanel = createPanel(670, 30, 100, 70,false);
-        this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50, this);
-        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
+
+        this.controller = new GameController(gamePanel, gamePanel.getModel(), this);
+        gamePanel.setController(controller);
+
         this.stepLabel = createLabel("<html>Step:<br> 0 </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
         this.scoreLabel = createLabel("<html>Score:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
         //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示
-        this.undoBtn = createButton("Undo", new Point(500, 290), 110, 50,this);//这个可以创建一个和load，restart一样形式的按钮
-        /*undoBtn = createButton("", new Point(500, 290), 110, 50, this); // 使用 createButton 方法创建按钮
-        ImageIcon undoIcon = new ImageIcon("D:\\code\\javasepro\\project\\project\\project-demo-src\\src\\view\\undo.jpg"); // 替换为你的图像路径
-        undoBtn.setIcon(undoIcon);// 设置按钮的图标
-        //获取图标的宽度和高度
-        int width1 = undoIcon.getIconWidth();
-        int height1 = undoIcon.getIconHeight();
-        //设置按钮的大小
-        undoBtn.setSize(width1, height1);
-        // 添加撤销按钮到游戏窗口
-        this.add(undoBtn);*/
-        buttonPanel = createPanel(450, 330, 320, 210,true);
 
-        this.leftBtn = createButton("Left", new Point(15, 110), 90, 90, this);
-        this.rightBtn = createButton("Right", new Point(215, 110), 90, 90, this);
-        this.upBtn = createButton("Up", new Point(115, 10), 90, 90, this);
-        this.downBtn = createButton("Down", new Point(115, 110), 90, 90, this);
+        this.restartBtn = createButtonWithIcon("Restart", new Point(560, 130), 50, 50, this);
+        this.undoBtn = createButtonWithIcon("Undo", new Point(630, 130), 50, 50,this);
+        this.magicBtn = createButtonWithIcon("Magic", new Point(700, 130), 50, 50, this);
+
+        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
+        this.deadBtn = createButton("Dead", new Point(500, 290), 110, 50, this);
+
+
+        buttonPanel = createPanel(450, 330, 320, 210,true);
+        this.leftBtn = createButtonWithIcon("Left", new Point(15, 110), 90, 90, this);
+        this.rightBtn = createButtonWithIcon("Right", new Point(215, 110), 90, 90, this);
+        this.upBtn = createButtonWithIcon("Up", new Point(115, 10), 90, 90, this);
+        this.downBtn = createButtonWithIcon("Down", new Point(115, 110), 90, 90, this);
         buttonPanel.setComponentZOrder(leftBtn, 0);//设置按钮的层次,0表示最底层，这个是为了让按钮显示在panel上
         buttonPanel.setComponentZOrder(rightBtn, 0);
         buttonPanel.setComponentZOrder(upBtn, 0);
@@ -106,6 +108,10 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
         this.undoBtn.addActionListener(e -> {
             gamePanel.doUndo();
+            gamePanel.requestFocusInWindow();
+        });
+        this.deadBtn.addActionListener(e -> {
+            gamePanel.dead();
             gamePanel.requestFocusInWindow();
         });
 
