@@ -53,13 +53,14 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         gamePanel.setLocation(500/ 15, 500 / 15+100);
         this.add(gamePanel);
 
+        this.controller = new GameController(gamePanel, gamePanel.getModel(), this);
+        gamePanel.setController(controller);
+
 
 
         highestScorePanel = createPanel(428, 30, 100, 70,false);
         scorePanel = createPanel(550, 30, 100, 70,false);
         stepPanel = createPanel(670, 30, 100, 70,false);
-
-        this.controller = new GameController(gamePanel, gamePanel.getModel(), this);
         this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50, this);
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
         this.stepLabel = createLabel("<html>Step:<br> 0 </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
