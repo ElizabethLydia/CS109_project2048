@@ -20,12 +20,44 @@ public interface Create {//创建按钮和标签
         //创建标签,标签名称，字体，位置，宽度，高度，父窗口,返回标签
         JLabel label = new JLabel(name);
         label.setFont(font);
-        Color c= new Color(0xF1EDEA);
+        Color c= new Color(0x8F725E);
         label.setForeground(new Color(color));
         label.setLocation(location);
         label.setSize(width, height);
         parent.add(label);
         return label;
     }
-
+    default JButton createButtonWithIcon(String name, Point location, int width, int height, Container parent) {
+        ImageIcon icon=null;
+        switch (name) {
+            case "Undo":
+                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\undo.png");
+                break;
+            case "Restart":
+                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\restart.png");
+                break;
+            case "Magic":
+                icon =new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\magic.png");
+                break;
+            case "Left":
+                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\left.png");
+                break;
+            case "Right":
+                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\right.png");
+                break;
+            case "Up":
+                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\up.png");
+                break;
+            case "Down":
+                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\down.png");
+                break;
+        }
+        Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(img);
+        JButtonWithIcon button = new JButtonWithIcon(resizedIcon);
+        button.setLocation(location);//设置按钮位置
+        button.setSize(width, height);//设置按钮大小
+        parent.add(button);//将按钮添加到父窗口
+        return button;//返回按钮
+    }
 }

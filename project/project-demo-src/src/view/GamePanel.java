@@ -98,8 +98,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move right,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -130,8 +130,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move left,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -162,8 +162,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move up,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -194,8 +194,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move down,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
-                //结束游戏界面
                 setGameOverDialog();
+                //结束游戏界面
             }
         }
     }
@@ -307,7 +307,6 @@ public class GamePanel extends ListenerPanel {
     public int getYCOUNT(){
         return YCOUNT;
     }
-
     public void setController(GameController controller) {
         this.controller = controller;
     }
@@ -316,4 +315,9 @@ public class GamePanel extends ListenerPanel {
         gameOverDialog = new GameOverDialog(null, "Game Over", this.score, 0, controller);
         gameOverDialog.setVisible(true);
     }
+
+
+
+
+
 }

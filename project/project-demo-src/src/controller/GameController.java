@@ -109,6 +109,6 @@ public class GameController {
     }
 
     public void exit() {
-        frame.dispose();
+        System.exit(0);
     }
 }
