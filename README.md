@@ -150,6 +150,16 @@ loadGame saveGame exit 不知道为什么完全没反应
 
 退出游戏，选择游戏4*4 或者5*5 都已经实现
 
+*****
+版本v1.5 2024.5.11 fjy
+
+开始写gameisover的界面了，目前正在完善中
+
+*****
+版本v15.1 2024.5.11 fjy & wzh
+
+gameisover的restart已经实现
+
 
 
 

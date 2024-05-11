@@ -54,9 +54,8 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.add(gamePanel);
 
         this.controller = new GameController(gamePanel, gamePanel.getModel(), this);
-        gamePanel.setController(controller);
-
-
+        gamePanel.setController(controller);//建立gamePanel中所得到的controller值与controller的联系,这个是为了让gamePanel中的controller和GameFrame中的controller保持一致
+        //Controller是用来控制游戏的，所以gamePanel中的controller和GameFrame中的controller应该保持一致
 
         highestScorePanel = createPanel(428, 30, 100, 70,false);
         scorePanel = createPanel(550, 30, 100, 70,false);

@@ -19,8 +19,6 @@ public class GameController {
     private GridNumber model;
     private GameFrame frame;
 
-
-
     public GameController(GamePanel view, GridNumber model, GameFrame frame) {
         this.view = view;
         this.model = model;

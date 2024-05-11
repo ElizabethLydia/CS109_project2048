@@ -16,7 +16,7 @@ public class GameOverDialog extends JDialog {
         this.currentScore = currentScore;
         this.highScore = highScore;
         this.controller = controller;
-        this.setSize(400, 300); // 对话框大小
+        this.setSize(300, 450); // 对话框大小
         this.setLayout(new BorderLayout()); // 使用 BorderLayout
         this.setLocationRelativeTo(parent); // 居中显示
         this.controller = controller;
@@ -25,16 +25,27 @@ public class GameOverDialog extends JDialog {
         this.add(messageLabel, BorderLayout.NORTH);
 
         // 添加配图，这里假设您有一个图像文件 "gameover.png"
-        JLabel imageLabel = new JLabel(new ImageIcon("gameIsOver.png"));
-        this.add(imageLabel, BorderLayout.WEST);
+        JLabel imageLabel = new JLabel(new ImageIcon("D:\\code\\javasepro\\project\\project\\project-demo-src\\src\\view\\gameIsOver.png"));
+        //修改图片的大小
+        ImageIcon icon = (ImageIcon) imageLabel.getIcon();
+        Image img = icon.getImage().getScaledInstance(300, 250, Image.SCALE_DEFAULT);
+        imageLabel.setIcon(new ImageIcon(img));
+        // 设置图片的位置
+
+
 
         // 添加得分显示
         JLabel scoreLabel = new JLabel("Current Score: " + currentScore);
-        this.add(scoreLabel, BorderLayout.CENTER);
+        // 设置字体颜色
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        //设置位置
+
 
         // 添加历史最高分显示
         JLabel highScoreLabel = new JLabel("High Score: " + highScore);
-        this.add(highScoreLabel, BorderLayout.EAST);
+        // 设置字体颜色
+        highScoreLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
 
         // 添加按钮，允许玩家选择重新开始或回到主页
         JPanel buttonPanel = new JPanel();
@@ -42,7 +53,7 @@ public class GameOverDialog extends JDialog {
         JButton homeButton = new JButton("Back to Home");
         buttonPanel.add(playAgainButton);
         buttonPanel.add(homeButton);
-        this.add(buttonPanel, BorderLayout.SOUTH);
+
 
         // 为按钮添加事件监听器
         playAgainButton.addActionListener(e -> {
