@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameController;
 import model.GridNumber;
 
 import javax.swing.*;
@@ -22,6 +23,8 @@ public class GamePanel extends ListenerPanel {
     private int score;
     private JLabel scoreLabel;
     private ArrayList<Integer> eachScore = new ArrayList<>();
+    GameOverDialog gameOverDialog;
+    GameController controller;
 
     public GamePanel(int size, int xcount, int ycount) {//构造方法
         this.setVisible(true);
@@ -96,6 +99,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
+                setGameOverDialog();
             }
         }
     }
@@ -127,6 +131,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
+                setGameOverDialog();
             }
         }
     }
@@ -158,6 +163,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
+                setGameOverDialog();
             }
         }
     }
@@ -189,6 +195,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 //结束游戏界面
+                setGameOverDialog();
             }
         }
     }
@@ -301,8 +308,12 @@ public class GamePanel extends ListenerPanel {
         return YCOUNT;
     }
 
+    public void setController(GameController controller) {
+        this.controller = controller;
+    }
 
-
-
-
+    public void setGameOverDialog() {
+        gameOverDialog = new GameOverDialog(null, "Game Over", this.score, 0, controller);
+        gameOverDialog.setVisible(true);
+    }
 }
