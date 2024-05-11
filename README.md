@@ -165,7 +165,9 @@ loadGame saveGame exit 不知道为什么完全没反应
 *****
 版本v15.1 2024.5.11 fjy & wzh
 
-gameisover的restart已经实现
+gameisover的restart已经实现，修改了图片的相对路径，便于不同电脑都可以看到
+
+*****
 
 
 

@@ -25,7 +25,7 @@ public class GameOverDialog extends JDialog {
         this.add(messageLabel, BorderLayout.NORTH);
 
         // 添加配图，这里假设您有一个图像文件 "gameover.png"
-        JLabel imageLabel = new JLabel(new ImageIcon("D:\\code\\javasepro\\project\\project\\project-demo-src\\src\\view\\gameIsOver.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/view/gameIsOver.png"));
         //修改图片的大小
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
         Image img = icon.getImage().getScaledInstance(300, 250, Image.SCALE_DEFAULT);

@@ -4,6 +4,7 @@ package util;//util包本身是用来存放工具类的，所以这个接口应�
  */
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public interface Create {//创建按钮和标签
     default JButton createButton(String name, Point location, int width, int height,Container parent) {
@@ -20,7 +21,7 @@ public interface Create {//创建按钮和标签
         //创建标签,标签名称，字体，位置，宽度，高度，父窗口,返回标签
         JLabel label = new JLabel(name);
         label.setFont(font);
-        Color c= new Color(0x8F725E);
+        Color c= new Color(0x8F725E);//设置label的背景颜色，这里是浅灰色
         label.setForeground(new Color(color));
         label.setLocation(location);
         label.setSize(width, height);
@@ -31,25 +32,25 @@ public interface Create {//创建按钮和标签
         ImageIcon icon=null;
         switch (name) {
             case "Undo":
-                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\undo.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/undo.png");
                 break;
             case "Restart":
-                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\restart.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/restart.png");
                 break;
             case "Magic":
-                icon =new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\magic.png");
+                icon =new ImageIcon("project/project-demo-src/src/util/pictures/magic.png");
                 break;
             case "Left":
-                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\left.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/left.png");//这里的路径是相对路径，所以要加上"project/project-demo-src/src/util/pictures/"
                 break;
             case "Right":
-                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\right.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/right.png");
                 break;
             case "Up":
-                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\up.png");
-                break;
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/up.png");
+            break;
             case "Down":
-                icon = new ImageIcon("D:\\hanson\\Java\\git\\project\\project-demo-src\\src\\util\\pictures\\down.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/down.png");
                 break;
         }
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
