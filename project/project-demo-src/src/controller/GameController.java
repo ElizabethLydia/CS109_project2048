@@ -9,15 +9,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+//导入音乐播放器
+//import javazoom.jl.decoder.JavaLayerException;
+//import javazoom.jl.player.Player;
 
-
-/**
- * This class is used for interactive with JButton in GameFrame.
- */
 public class GameController {
     private GamePanel view;
     private GridNumber model;
     private GameFrame frame;
+//    private Player player; // 用于播放音乐的 Player 对象
+//    private boolean isMusicPlaying = true; // 音乐播放状态
 
     public GameController(GamePanel view, GridNumber model, GameFrame frame) {
         this.view = view;
@@ -110,3 +111,4 @@ public class GameController {
         System.exit(0);
     }
 }
+
