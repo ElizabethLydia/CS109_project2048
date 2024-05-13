@@ -94,7 +94,15 @@ public class GameMenu extends JMenuBar {
 
         loadGame.addActionListener(e -> {
             System.out.println("you choose load game");
-            gameFrame.getController().loadGame();
+            //我想这里先不要直接加载，而是弹出一个对话框，让用户选择是否加载
+
+            int result = JOptionPane.showConfirmDialog(null, "Are you sure to load the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                gameFrame.getController().loadGame();
+            }else if (result == JOptionPane.NO_OPTION){
+                System.out.println("you choose not to load the game");
+                this.requestFocusInWindow();
+            }
         });
 
 

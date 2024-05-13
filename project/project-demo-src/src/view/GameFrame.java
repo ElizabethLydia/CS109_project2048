@@ -6,6 +6,8 @@ import util.RoundedPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
@@ -132,8 +134,15 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         });
 
 //        //todo: add other button here
-        this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）。
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//当用户点击窗口关闭按钮时，应用程序将会执行退出操作，关闭所有相关的资源，然后退出应用程序
+        this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // 弹出一个带有“确定”和“取消”按钮的确认窗口
+                controller.exit();
+            }
+        });
     }
 
     private void createGameMenu() {
