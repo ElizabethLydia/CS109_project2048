@@ -50,24 +50,7 @@ public class GameController {
     }
 
     //todo: add other methods such as loadGame, saveGame...
-//    public void saveGame() {
-//        try {
-//            String filePath = "data.txt";
-//            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-//            //不想覆盖掉用BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
-//            for (int i = 0; i < model.getNumbers().length; i++) {
-//                for (int j = 0; j < model.getNumbers()[i].length; j++) {
-//                    writer.write(String.valueOf(model.getNumbers()[i][j]));
-//                    writer.write(" ");  // 使用空格分隔每个元素
-//                }
-//                writer.newLine();  // 换行
-//            }
-//
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
     public void saveGame() {
         try {
             //创建一个文件写入器,文件名为savegame.txt,如果文件不存在会自动创建,如果文件存在会覆盖原文件
@@ -89,7 +72,7 @@ public class GameController {
             }
             //写入得分和步数
             writer.write("Score: " + model.getScore());
-            writer.write("\nStep: " + model.getStep());
+            writer.write("\nStep: " + view.getSteps());
             writer.close();
         } catch (IOException e) {//捕获IO异常
             e.printStackTrace();

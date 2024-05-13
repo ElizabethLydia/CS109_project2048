@@ -327,4 +327,8 @@ public class GamePanel extends ListenerPanel {
         this.steps = step;
         stepLabel.setText(String.format("<html>Step:<br> %d</html>", step));
     }
+
+    public int getSteps() {
+        return steps;
+    }
 }
