@@ -52,6 +52,18 @@ public interface Create {//创建按钮和标签
             case "Down":
                 icon = new ImageIcon("project/project-demo-src/src/util/pictures/down.png");
                 break;
+            case "StartGame":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/startgamebtn.png");
+                break;
+            case "LoadGame":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/loadgamebtn.png");
+                break;
+            case "Settings":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/settingsbtn.png");
+                break;
+            case "Exit":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/exitbtn.png");
+                break;
         }
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(img);

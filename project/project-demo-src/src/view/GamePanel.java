@@ -35,11 +35,6 @@ public class GamePanel extends ListenerPanel {
         this.grids = new GridComponent[XCOUNT][YCOUNT];
         this.model = new GridNumber(XCOUNT, YCOUNT);
         initialGame();
-
-    }
-
-    public GridNumber getModel() {
-        return model;
     }
 
     public void initialGame() {
@@ -330,4 +325,8 @@ public class GamePanel extends ListenerPanel {
     public int getSteps() {
         return steps;
     }
+    public GridNumber getModel() {
+        return model;
+    }
+
 }
