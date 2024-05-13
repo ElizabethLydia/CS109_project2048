@@ -4,12 +4,8 @@ import controller.GameController;
 import util.Create;
 import util.RoundedPanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 

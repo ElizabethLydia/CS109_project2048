@@ -8,6 +8,7 @@ public class GridNumber {
     private final int X_COUNT;
     private final int Y_COUNT;
     private int score;
+    private int step;
 
     public int[][] numbers;
 
@@ -330,5 +331,18 @@ public class GridNumber {
 
     public void addEachScore(int Score) {
         this.eachScore.add(Score);
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setStep(int steps) {
+        //todo: add step
+        this.step = steps;
     }
 }

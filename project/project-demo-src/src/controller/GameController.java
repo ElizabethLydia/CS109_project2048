@@ -6,12 +6,10 @@ import view.GamePanel;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 //导入音乐播放器
 //import javazoom.jl.decoder.JavaLayerException;
 //import javazoom.jl.player.Player;
+
 
 public class GameController {
     private GamePanel view;
@@ -25,6 +23,8 @@ public class GameController {
         this.model = model;
         this.frame = frame;
 
+        Timer timer = new Timer(60000, e -> saveGame()); // 每60秒保存一次
+        timer.start(); // 启动定时器
     }
 
     public void restartGame() {
@@ -50,52 +50,116 @@ public class GameController {
     }
 
     //todo: add other methods such as loadGame, saveGame...
+//    public void saveGame() {
+//        try {
+//            String filePath = "data.txt";
+//            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+//            //不想覆盖掉用BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
+//            for (int i = 0; i < model.getNumbers().length; i++) {
+//                for (int j = 0; j < model.getNumbers()[i].length; j++) {
+//                    writer.write(String.valueOf(model.getNumbers()[i][j]));
+//                    writer.write(" ");  // 使用空格分隔每个元素
+//                }
+//                writer.newLine();  // 换行
+//            }
+//
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void saveGame() {
         try {
-            String filePath = "data.txt";
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            //不想覆盖掉用BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
+            //创建一个文件写入器,文件名为savegame.txt,如果文件不存在会自动创建,如果文件存在会覆盖原文件
+            BufferedWriter writer = new BufferedWriter(new FileWriter("savegame.txt"));
+            //首先写入棋盘的大小
+            writer.write(model.getNumbers().length + " " + model.getNumbers()[0].length);
+            //换行
+            writer.newLine();
+            System.out.println("you have saved the game");
+            //接下来写入棋盘上的数字
             for (int i = 0; i < model.getNumbers().length; i++) {
                 for (int j = 0; j < model.getNumbers()[i].length; j++) {
                     writer.write(String.valueOf(model.getNumbers()[i][j]));
-                    writer.write(" ");  // 使用空格分隔每个元素
+                    if (j < model.getNumbers()[i].length - 1) {
+                        writer.write(","); // 用逗号分隔数字
+                    }
                 }
-                writer.newLine();  // 换行
+                writer.newLine(); // 每行结束后换行
             }
-
+            //写入得分和步数
+            writer.write("Score: " + model.getScore());
+            writer.write("\nStep: " + model.getStep());
             writer.close();
-        } catch (IOException e) {
+        } catch (IOException e) {//捕获IO异常
             e.printStackTrace();
         }
     }
 
-    public void loadGame(String filePath) {
+    public void loadGame() {
         try {
-//            String filePath = "data.txt";
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-
-            List<int[]> rows = new ArrayList<>();
+            //创建一个文件读取器,读取文件savegame.txt,如果文件不存在会抛出异常
+            BufferedReader reader = new BufferedReader(new FileReader("savegame.txt"));
+            //读取文件的每一行
             String line;
-            while ((line = reader.readLine()) != null) {
-                String[] values = line.trim().split(" ");
-                int[] row = Arrays.stream(values).mapToInt(Integer::parseInt).toArray();
-                rows.add(row);
+            System.out.println("you have loaded the game");
+
+            // 首先读取棋盘的大小
+            line = reader.readLine();
+            String[] sizeParts = line.split(" ");
+            int xCount = Integer.parseInt(sizeParts[0]);
+            int yCount = Integer.parseInt(sizeParts[1]);
+            int[][] numbers = new int[xCount][yCount];
+
+            // 接下来读取棋盘上的数字
+            for (int i = 0; i < xCount; i++) {
+                line = reader.readLine();
+                String[] numberStrings = line.split(",");
+                for (int j = 0; j < yCount; j++) {
+                    numbers[i][j] = Integer.parseInt(numberStrings[j]);
+                }
             }
 
-            int[][] restoredArray = new int[rows.size()][];
-            for (int i = 0; i < rows.size(); i++) {
-                restoredArray[i] = rows.get(i);
-            }
-            int xcount = restoredArray.length;
-            int ycount = restoredArray[0].length;
-            this.model = new GridNumber(xcount, ycount);
-            this.model.setNumbers(restoredArray);
-            this.view = new GamePanel((int) (frame.getHeight() * 0.8), xcount, ycount);
+            // 读取得分
+            line = reader.readLine();
+            String[] scoreParts = line.split(": ");
+            this.model.setScore(Integer.parseInt(scoreParts[1]));
+
+            // 读取步数
+            line = reader.readLine();
+            String[] stepParts = line.split(": ");
+            this.model.setStep(Integer.parseInt(stepParts[1]));
+
+            // 设置棋盘状态
+            this.model.setNumbers(numbers);
+
+            // 更新分数和步数显示
+            this.view.setScoreLabel(this.model.getScore());
+            this.view.setStepLabel(this.model.getStep());
+
+            // 更新游戏面板以显示加载的状态
             this.view.updateGridsNumber();
+
             reader.close();
-        } catch (IOException e) {
+        } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         }
+    }
+
+    public void playMusic() {
+//        try {
+//            FileInputStream fileInputStream = new FileInputStream("music.mp3");
+//            player = new Player(fileInputStream);
+//            new Thread(() -> {
+//                try {
+//                    player.play();
+//                } catch (JavaLayerException e) {
+//                    e.printStackTrace();
+//                }
+//            }).start();
+//        } catch (FileNotFoundException | JavaLayerException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void setVolume() {
@@ -104,10 +168,8 @@ public class GameController {
     public void returnToHomePage() {
     }
 
-    public void loadGame() {
-    }
-
     public void exit() {
+        saveGame();//退出游戏时保存游戏
         System.exit(0);
     }
 }

@@ -79,15 +79,25 @@ public class GameMenu extends JMenuBar {
             }
         });
 
+        saveGame.addActionListener(e -> {
+            System.out.println("you choose save game");
+            //我想这里先不要直接保存，而是弹出一个对话框，让用户选择是否保存
+            int result = JOptionPane.showConfirmDialog(null, "Are you sure to save the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                gameFrame.getController().saveGame();
+            }else if (result == JOptionPane.NO_OPTION){
+                System.out.println("you choose not to save the game");
+                //这里应该是不保存游戏，并且游戏还可以继续操作
+                this.requestFocusInWindow();//这句话的意思是让这个窗口获得焦点
+            }
+        });
+
         loadGame.addActionListener(e -> {
             System.out.println("you choose load game");
             gameFrame.getController().loadGame();
         });
 
-        saveGame.addActionListener(e -> {
-            System.out.println("you choose save game");
-            gameFrame.getController().saveGame();
-        });
+
 
 
         settings1.addActionListener(e -> {

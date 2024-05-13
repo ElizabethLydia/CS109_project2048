@@ -27,10 +27,10 @@ public class Menu extends JFrame implements Create {
             ChooseSize chooseSize = new ChooseSize(this);
             chooseSize.setVisible(true);
         });
-        this.loadGameBtn.addActionListener(e -> {
-            LoadGame loadGame = new LoadGame(this);
-            loadGame.setVisible(true);
-        });
+//        this.loadGameBtn.addActionListener(e -> {
+//            LoadGame loadGame = new LoadGame(this);
+//            loadGame.setVisible(true);
+//        });
         this.settingsBtn.addActionListener(e -> {
             Settings settings = new Settings();
             settings.setVisible(true);

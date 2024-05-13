@@ -5,10 +5,7 @@ import model.GridNumber;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class GamePanel extends ListenerPanel {
@@ -321,7 +318,13 @@ public class GamePanel extends ListenerPanel {
     }
 
 
+    public void setScoreLabel(int score) {
+        this.score = score;
+        scoreLabel.setText(String.format("<html>Score:<br> %d</html>", score));
+    }
 
-
-
+    public void setStepLabel(int step) {
+        this.steps = step;
+        stepLabel.setText(String.format("<html>Step:<br> %d</html>", step));
+    }
 }
