@@ -24,10 +24,6 @@ public class GameOverDialog extends JDialog {
         this.controller = controller;
         this.setResizable(false); // 不可调整大小
 
-        // 添加游戏结束的消息
-        JLabel messageLabel = new JLabel(gameOverMessage);
-        this.add(messageLabel, BorderLayout.NORTH);
-
         // 添加配图，这里假设您有一个图像文件 "gameover.png"
         JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/view/gameIsOver.png"));
         //修改图片的大小
