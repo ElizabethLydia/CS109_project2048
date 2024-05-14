@@ -159,5 +159,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.add(panel);
         return panel;
     }
-
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
 }

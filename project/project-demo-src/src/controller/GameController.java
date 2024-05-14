@@ -102,27 +102,26 @@ public class GameController {
                     numbers[i][j] = Integer.parseInt(numberStrings[j]);
                 }
             }
+            frame.dispose(); // 关闭当前窗口
+            GameFrame newGameFrame = new GameFrame(xCount, yCount); // 创建新的游戏窗口
+            newGameFrame.setVisible(true); // 显示新的游戏窗口
+            newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
 
             // 读取得分
             line = reader.readLine();
             String[] scoreParts = line.split(": ");
-            this.model.setScore(Integer.parseInt(scoreParts[1]));
+            newGameFrame.getGamePanel().getModel().setScore(Integer.parseInt(scoreParts[1]));
 
             // 读取步数
             line = reader.readLine();
             String[] stepParts = line.split(": ");
-            this.model.setStep(Integer.parseInt(stepParts[1]));
-
-            // 设置棋盘状态
-            this.model.setNumbers(numbers);
+            newGameFrame.getGamePanel().getModel().setStep(Integer.parseInt(stepParts[1]));
 
             // 更新分数和步数显示
-            this.view.setScoreLabel(this.model.getScore());
-            this.view.setStepLabel(this.model.getStep());
-
+            newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
+            newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
             // 更新游戏面板以显示加载的状态
-            this.view.updateGridsNumber();
-
+            newGameFrame.getGamePanel().updateGridsNumber();
             reader.close();
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();

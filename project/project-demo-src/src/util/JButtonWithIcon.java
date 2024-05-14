@@ -14,7 +14,7 @@ public class JButtonWithIcon extends JButton {
         if (getModel().isArmed()) {
             g.setColor(Color.lightGray);
         } else {
-            g.setColor(getBackground());
+            g.setColor(new Color(0xF6ECDF));
         }
         g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
         super.paintComponent(g);
