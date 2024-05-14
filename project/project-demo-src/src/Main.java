@@ -9,6 +9,7 @@ public class Main {
             Menu menu = new Menu();
             menu.setVisible(true);
             //要改变逻辑了先调出menu界面
+            //fjy同学生日快乐！！
         });
     }
 }
