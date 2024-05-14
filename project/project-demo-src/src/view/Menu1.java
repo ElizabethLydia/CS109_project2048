@@ -38,9 +38,8 @@ public class Menu1 extends JFrame implements Create {
             this.setVisible(false);
         });
         this.visitorsloginBtn.addActionListener(e -> {
-            Menu2 menu2 = new Menu2();
-            menu2.setVisible(true);
-            this.setVisible(false);
+            ChooseGamemode chooseSize = new ChooseGamemode(this);
+            chooseSize.setVisible(true);
         });
         this.settingsBtn.addActionListener(e -> {
             Settings settings = new Settings(this);
