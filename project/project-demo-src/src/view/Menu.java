@@ -84,7 +84,7 @@ public class Menu extends JFrame implements Create {
             }
         });
         this.settingsBtn.addActionListener(e -> {
-            Settings settings = new Settings();
+            Settings settings = new Settings(this);
             settings.setVisible(true);
         });
         this.exitBtn.addActionListener(e -> {
