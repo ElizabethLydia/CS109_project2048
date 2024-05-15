@@ -49,7 +49,7 @@ public class ChooseGamemode extends JDialog implements Create {
             parent.dispose();
         });
         this.BtnTiming.addActionListener(e -> {//待写计时模式的方法
-            GameFrame gameFrame = new GameFrame(4,4);
+            TimingGameFrame gameFrame = new TimingGameFrame(4,4,60);
             gameFrame.setVisible(true);
             this.dispose();
             parent.dispose();

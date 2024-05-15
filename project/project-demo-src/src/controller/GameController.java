@@ -3,6 +3,7 @@ package controller;
 import model.GridNumber;
 import view.GameFrame;
 import view.GamePanel;
+import view.TimingGameFrame;
 
 import javax.swing.*;
 import java.io.*;
@@ -12,9 +13,9 @@ import java.io.*;
 
 
 public class GameController {
-    private GamePanel view;
+    public GamePanel view;
     private GridNumber model;
-    private GameFrame frame;
+    public GameFrame frame;
 //    private Player player; // 用于播放音乐的 Player 对象
 //    private boolean isMusicPlaying = true; // 音乐播放状态
 
@@ -40,9 +41,18 @@ public class GameController {
         // 根据用户的选择执行操作
         if (result == JOptionPane.YES_OPTION) {
             // 用户选择“确定”重启游戏
-            this.frame.dispose(); // 关闭当前窗口
-            GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT()); // 创建新的游戏窗口
-            newGameFrame.setVisible(true); // 显示新的游戏窗口
+            if (frame instanceof TimingGameFrame) {
+                TimingGameFrame timingGameFrame = (TimingGameFrame) frame;
+                timingGameFrame.timer.stop();
+                timingGameFrame.dispose(); // 关闭当前窗口
+                TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(),60); // 创建新的游戏窗口
+                newGameFrame.setVisible(true); // 显示新的游戏窗口
+                // 停止定时器
+            }else {
+                this.frame.dispose(); // 关闭当前窗口
+                GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT()); // 创建新的游戏窗口
+                newGameFrame.setVisible(true); // 显示新的游戏窗口
+            }
         } else if (result == JOptionPane.NO_OPTION) {
             // 用户选择“取消”，则不执行任何操作
             // 什么都不做，或者可以在这里添加一些取消操作的逻辑（如果有的话）
@@ -74,6 +84,10 @@ public class GameController {
             writer.write("Score: " + model.getScore());
             writer.write("\nStep: " + view.getSteps());
             writer.close();
+            if (frame instanceof TimingGameFrame) {
+                TimingGameFrame timingGameFrame = (TimingGameFrame) frame;
+                writer.write("\nTime: " + timingGameFrame.timeLeft);
+            }
         } catch (IOException e) {//捕获IO异常
             e.printStackTrace();
         }
@@ -142,6 +156,12 @@ public class GameController {
 //        } catch (FileNotFoundException | JavaLayerException e) {
 //            e.printStackTrace();
 //        }
+    }
+    public void callParentMethod(GameFrame object) {
+        if (object instanceof TimingGameFrame) {
+            System.out.println("调用对象是 ChildClass1");
+        }
+        // 调用父类的方法
     }
 
     public void setVolume() {

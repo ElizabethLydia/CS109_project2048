@@ -19,17 +19,17 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     private JButton loadBtn;
     private JButton deadBtn;
 
-    private GamePanel gamePanel;
+    protected GamePanel gamePanel;
 
     private JLabel titleLabel;//标题2048
 
     private JLabel stepLabel;
     private JLabel scoreLabel;
-    private JLabel highestScoreLabel;
-    GameMenu gameMenu;
+    protected JLabel XLabel;
+    protected GameMenu gameMenu;
     private JPanel scorePanel;
     private JPanel stepPanel;
-    private JPanel highestScorePanel;
+    private JPanel XPanel;
 
     private JPanel buttonPanel;
     private JButton leftBtn;
@@ -58,7 +58,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         gamePanel.setController(controller);//建立gamePanel中所得到的controller值与controller的联系,这个是为了让gamePanel中的controller和GameFrame中的controller保持一致
         //Controller是用来控制游戏的，所以gamePanel中的controller和GameFrame中的controller应该保持一致
 
-        highestScorePanel = createPanel(428, 30, 100, 70,false);
+        XPanel = createPanel(428, 30, 100, 70,false);
         scorePanel = createPanel(550, 30, 100, 70,false);
         stepPanel = createPanel(670, 30, 100, 70,false);
 
@@ -67,6 +67,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
         this.stepLabel = createLabel("<html>Step:<br> 0 </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
         this.scoreLabel = createLabel("<html>Score:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
+        this.XLabel = createLabel("<html>X:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50,this,0xF1EDEA);
         //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示
 
         this.restartBtn = createButtonWithIcon("Restart", new Point(560, 130), 50, 50, this);
@@ -92,6 +93,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         gamePanel.setScoreLabel(scoreLabel);//建立gamePanel中所得到的score值与scoreLabel的联系
         stepPanel.setComponentZOrder(stepLabel, 0);//设置层次，0表示最底层
         scorePanel.setComponentZOrder(scoreLabel, 0);
+        XPanel.setComponentZOrder(XLabel, 0);
 
         this.restartBtn.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下restartGame()方法
             controller.restartGame();

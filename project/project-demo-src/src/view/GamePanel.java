@@ -90,6 +90,11 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move right,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
                 setGameOverDialog();
                 //结束游戏界面
             }
@@ -122,6 +127,11 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move left,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
                 setGameOverDialog();
                 //结束游戏界面
             }
@@ -154,8 +164,14 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move up,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
                 setGameOverDialog();
                 //结束游戏界面
+
             }
         }
     }
@@ -186,8 +202,14 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Unable to move down,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
                 setGameOverDialog();
                 //结束游戏界面
+
             }
         }
     }
