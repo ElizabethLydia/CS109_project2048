@@ -53,16 +53,37 @@ public interface Create {//创建按钮和标签
                 icon = new ImageIcon("project/project-demo-src/src/util/pictures/down.png");
                 break;
             case "StartGame":
-                icon = new ImageIcon("project/project-demo-src/src/util/pictures/startgamebtn.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/startGame.png");
                 break;
             case "LoadGame":
-                icon = new ImageIcon("project/project-demo-src/src/util/pictures/loadgamebtn.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/loadGame.png");
                 break;
             case "Settings":
-                icon = new ImageIcon("project/project-demo-src/src/util/pictures/settingsbtn.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/settings.png");
                 break;
             case "Exit":
-                icon = new ImageIcon("project/project-demo-src/src/util/pictures/exitbtn.png");
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/exit.png");
+                break;
+            case "4x4":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/4x4.png");
+                break;
+            case "5x5":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/5x5.png");
+                break;
+            case "Timing":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/timing.png");
+                break;
+            case "AI":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/ai.png");
+                break;
+            case "Return":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/return.png");
+                break;
+            case "usersLogin":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/usersLogin.png");
+                break;
+            case "visitorsLogin":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/visitorsLogin.png");
                 break;
         }
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

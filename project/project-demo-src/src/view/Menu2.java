@@ -8,13 +8,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Menu extends JFrame implements Create {
+public class Menu2 extends JFrame implements Create {//选择游戏第二个主界面
     private JButton startBtn;
     private JButton loadGameBtn;
     private JButton settingsBtn;
-    private JButton exitBtn;
+    private JButton returnBtn;
 
-    public Menu() {
+    public Menu2() {
         this.setTitle("2024 CS109 Project Demo");
         this.setLayout(null);
         this.setSize(500, 700);
@@ -30,7 +30,7 @@ public class Menu extends JFrame implements Create {
         this.startBtn = createButtonWithIcon("StartGame", new Point(120, 300), 250, 70, this);
         this.loadGameBtn = createButtonWithIcon("LoadGame", new Point(120, 400), 250, 70, this);
         this.settingsBtn = createButtonWithIcon("Settings", new Point(120, 500), 80, 80, this);
-        this.exitBtn = createButtonWithIcon("Exit", new Point(290, 500), 80, 80, this);
+        this.returnBtn = createButtonWithIcon("Return", new Point(290, 500), 80, 80, this);
         //还要setVisible(true)和setVisible(false)
         this.startBtn.addActionListener(e -> {
             ChooseGamemode chooseSize = new ChooseGamemode(this);
@@ -84,11 +84,13 @@ public class Menu extends JFrame implements Create {
             }
         });
         this.settingsBtn.addActionListener(e -> {
-            Settings settings = new Settings();
+            Settings settings = new Settings(this);
             settings.setVisible(true);
         });
-        this.exitBtn.addActionListener(e -> {
-            System.exit(0);
+        this.returnBtn.addActionListener(e -> {
+            Menu1 menu1 = new Menu1();
+            menu1.setVisible(true);
+            this.setVisible(false);
         });
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
