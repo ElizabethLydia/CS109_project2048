@@ -43,14 +43,14 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
                 //读取文件的每一行
                 String line;
                 System.out.println("you have loaded the game");
-
                 // 首先读取棋盘的大小
                 line = reader.readLine();
                 String[] sizeParts = line.split(" ");
                 int xCount = Integer.parseInt(sizeParts[0]);
                 int yCount = Integer.parseInt(sizeParts[1]);
                 int[][] numbers = new int[xCount][yCount];
-
+                int score;
+                int step;
                 // 接下来读取棋盘上的数字
                 for (int i = 0; i < xCount; i++) {
                     line = reader.readLine();
@@ -59,26 +59,47 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
                         numbers[i][j] = Integer.parseInt(numberStrings[j]);
                     }
                 }
-                GameFrame newGameFrame = new GameFrame(xCount, yCount); // 创建新的游戏窗口
-                newGameFrame.setVisible(true); // 显示新的游戏窗口
-                newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
-
                 // 读取得分
                 line = reader.readLine();
                 String[] scoreParts = line.split(": ");
-                newGameFrame.getGamePanel().getModel().setScore(Integer.parseInt(scoreParts[1]));
-
+                score = Integer.parseInt(scoreParts[1]);
                 // 读取步数
                 line = reader.readLine();
                 String[] stepParts = line.split(": ");
-                newGameFrame.getGamePanel().getModel().setStep(Integer.parseInt(stepParts[1]));
-
-                // 更新分数和步数显示
-                newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
-                newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
-                // 更新游戏面板以显示加载的状态
-                newGameFrame.getGamePanel().updateGridsNumber();
+                step = Integer.parseInt(stepParts[1]);
+                //读取时间
+                line = reader.readLine();
+                if (line .isEmpty()) {
+                    GameFrame newGameFrame = new GameFrame(xCount, yCount); // 创建新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                    newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
+                    // 设置分数
+                    newGameFrame.getGamePanel().getModel().setScore(score);
+                    // 设置步数
+                    newGameFrame.getGamePanel().getModel().setStep(step);
+                    // 更新分数和步数显示
+                    newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
+                    newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
+                    // 更新游戏面板以显示加载的状态
+                    newGameFrame.getGamePanel().updateGridsNumber();
+                } else {
+                    String[] timeParts = line.split(": ");
+                    int time = Integer.parseInt(timeParts[1]);
+                    TimingGameFrame newGameFrame = new TimingGameFrame(xCount, yCount, time); // 创建新的计时游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                    newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
+                    // 设置分数
+                    newGameFrame.getGamePanel().getModel().setScore(score);
+                    // 设置步数
+                    newGameFrame.getGamePanel().getModel().setStep(step);
+                    // 更新分数和步数显示
+                    newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
+                    newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
+                    // 更新游戏面板以显示加载的状态
+                    newGameFrame.getGamePanel().updateGridsNumber();
+                }
                 reader.close();
+                this.dispose(); // 关闭当前窗口
             } catch (IOException | NumberFormatException event) {
                 event.printStackTrace();
             }
