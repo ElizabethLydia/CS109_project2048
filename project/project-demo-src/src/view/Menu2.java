@@ -69,7 +69,7 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
                 step = Integer.parseInt(stepParts[1]);
                 //读取时间
                 line = reader.readLine();
-                if (line .isEmpty()) {
+                if (line ==null) {
                     GameFrame newGameFrame = new GameFrame(xCount, yCount); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态

@@ -127,7 +127,7 @@ public class GameController {
             //读取时间
             line = reader.readLine();
 
-            if (line .isEmpty()) {
+            if (line ==null) {
                 GameFrame newGameFrame = new GameFrame(xCount, yCount); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
