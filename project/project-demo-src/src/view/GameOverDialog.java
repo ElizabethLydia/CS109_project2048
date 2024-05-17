@@ -18,17 +18,19 @@ public class GameOverDialog extends JDialog {
         this.highScore = highScore;
         this.controller = controller;
         this.step = step;
-        this.setSize(300, 450); // 对话框大小
+        this.setSize(500, 500); // 对话框大小
         this.setLayout(new BorderLayout()); // 使用 BorderLayout
         this.setLocationRelativeTo(parent); // 居中显示
         this.controller = controller;
         this.setResizable(false); // 不可调整大小
+        //设置背景颜色
+        getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
 
         // 添加配图，这里假设您有一个图像文件 "gameover.png"
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/view/gameIsOver.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/GameOver.png"));
         //修改图片的大小
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
-        Image img = icon.getImage().getScaledInstance(300, 250, Image.SCALE_DEFAULT);
+        Image img = icon.getImage().getScaledInstance(300, 200, Image.SCALE_DEFAULT);
         imageLabel.setIcon(new ImageIcon(img));
         // 设置图片的位置
         this.add(imageLabel, BorderLayout.NORTH);//将图片添加到对话框中,并设置位置
