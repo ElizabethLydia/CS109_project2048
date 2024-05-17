@@ -1,5 +1,7 @@
 package view;
 
+import controller.GameController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -116,7 +118,7 @@ public class GameMenu extends JMenuBar {
             System.out.println("you choose settings");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to return to home page?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                gameFrame.getController().returnToHomePage();
+                gameFrame.getController().gotoHome();
             }
         });
         settings3.addActionListener(e -> {
