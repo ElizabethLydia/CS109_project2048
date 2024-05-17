@@ -1,10 +1,7 @@
 package controller;
 
 import model.GridNumber;
-import view.ChooseGamemode;
-import view.GameFrame;
-import view.GamePanel;
-import view.TimingGameFrame;
+import view.*;
 
 import javax.swing.*;
 import java.io.*;
@@ -200,11 +197,13 @@ public class GameController {
     }
 
     public void gotoHome() {
-        this.frame.dispose(); // 关闭当前窗口
         // 跳转到主页
-        ChooseGamemode chooseGamemode = new ChooseGamemode(frame);
-        chooseGamemode.setVisible(true);
-        frame.dispose(); // 关闭当前窗口
+        Menu2 menu2 = new Menu2();
+        menu2.setVisible(true);
+        frame.dispose();
+        /*ChooseGamemode chooseGamemode = new ChooseGamemode(frame);
+        chooseGamemode.setVisible(true);*/
+
     }
 }
 
