@@ -85,6 +85,12 @@ public interface Create {//创建按钮和标签
             case "visitorsLogin":
                 icon = new ImageIcon("project/project-demo-src/src/util/pictures/visitorsLogin.png");
                 break;
+            case "playAgain":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/playAgain.png");
+                break;
+            case "home":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/home.png");
+                break;
         }
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(img);
