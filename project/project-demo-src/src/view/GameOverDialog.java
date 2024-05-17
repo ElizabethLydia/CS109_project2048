@@ -79,8 +79,21 @@ public class GameOverDialog extends JDialog {
         });
         homeButton.addActionListener(e -> {
             // 触发回到主页的逻辑
-            this.dispose(); // 关闭对话框
+            //弹出一个带有“确定”和“取消”按钮的确认窗口
+            int result = JOptionPane.showConfirmDialog(
+                    parent,//这句话的意思是将窗口放在frame上
+                    "Do you want to go back to the home page?",
+                    "Back to Home",
+                    JOptionPane.YES_NO_OPTION,//弹出一个带有“确定”和“取消”按钮的确认窗口
+                    JOptionPane.QUESTION_MESSAGE//如果用户点击了“确定”按钮，将会返回 JOptionPane.YES_OPTION，如果用户点击了“取消”按钮，将会返回 JOptionPane.NO_OPTION
+            );
+            if (result == JOptionPane.YES_OPTION) {
+                GameOverDialog.this.dispose(); // 关闭当前窗口
+            controller.gotoHome();
             // 这里应该调用回到主页的方法
+            }else{
+                this.dispose();
+            }
         });
 
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // 对话框关闭时销毁

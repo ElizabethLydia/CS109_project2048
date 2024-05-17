@@ -45,6 +45,7 @@ public class ChooseGamemode extends JDialog implements Create {
         this.Btn5x5.addActionListener(e -> {
             GameFrame gameFrame = new GameFrame(5,5);
             gameFrame.setVisible(true);
+            //让界面显示在正中间
             this.dispose();
             parent.dispose();
         });
