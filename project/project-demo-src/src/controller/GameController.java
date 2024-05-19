@@ -40,7 +40,7 @@ public class GameController {
         if (result == JOptionPane.YES_OPTION) {
             // 用户选择“确定”重启游戏
             if (frame instanceof TimingGameFrame) {
-                TimingGameFrame timingGameFrame = (TimingGameFrame) frame;
+                TimingGameFrame timingGameFrame = (TimingGameFrame) frame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 timingGameFrame.timer.stop();
                 timingGameFrame.dispose(); // 关闭当前窗口
                 TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(),60); // 创建新的游戏窗口

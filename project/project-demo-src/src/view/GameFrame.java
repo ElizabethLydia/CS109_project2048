@@ -1,6 +1,8 @@
 package view;
 
 import controller.GameController;
+import user.LoginView;
+import user.UserManager;
 import util.Create;
 import util.RoundedPanel;
 
@@ -163,5 +165,11 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     }
     public GamePanel getGamePanel() {
         return gamePanel;
+    }
+
+    public void showLoginView() {
+        UserManager userManager = new UserManager();
+        LoginView loginView = new LoginView(this, userManager);
+        loginView.setVisible(true);
     }
 }

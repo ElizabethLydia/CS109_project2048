@@ -4,15 +4,13 @@ import util.Create;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class Menu1 extends JFrame implements Create {
     private JButton usersloginBtn;
     private JButton visitorsloginBtn;
     private JButton settingsBtn;
     private JButton exitBtn;
+//    Login login;
 
     public Menu1() {//用户登录界面
         this.setTitle("2024 CS109 Project Demo");
@@ -33,9 +31,8 @@ public class Menu1 extends JFrame implements Create {
         this.exitBtn = createButtonWithIcon("Exit", new Point(290, 500), 80, 80, this);
         //还要setVisible(true)和setVisible(false)
         this.usersloginBtn.addActionListener(e -> {
-            Menu2 menu2 = new Menu2();
-            menu2.setVisible(true);
-            this.setVisible(false);
+//            Login login = new Login(this);
+//            login.setVisible(true);
         });
         this.visitorsloginBtn.addActionListener(e -> {
             ChooseGamemode chooseSize = new ChooseGamemode(this);

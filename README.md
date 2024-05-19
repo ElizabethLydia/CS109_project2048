@@ -196,6 +196,10 @@ gameisover界面完全写完，布局已经修改，还缺少读档存档得到�
 GameMenu中返回游戏主页的按钮已经实现
 
 GameOverDialog界面返回游戏主页的按钮已经实现
+*****
+版本v1.6.5 2024.5.17 by fjy and wzh
+
+GameOverDialog界面全部完成
 
 
 
