@@ -1,11 +1,14 @@
 package view;
 
+import user.LoginView;
+import user.UserManager;
 import util.Create;
 
 import javax.swing.*;
 import java.awt.*;
-
 public class Menu1 extends JFrame implements Create {
+    LoginView loginView;
+    UserManager userManager;
     private JButton usersloginBtn;
     private JButton visitorsloginBtn;
     private JButton settingsBtn;
@@ -31,8 +34,8 @@ public class Menu1 extends JFrame implements Create {
         this.exitBtn = createButtonWithIcon("Exit", new Point(290, 500), 80, 80, this);
         //还要setVisible(true)和setVisible(false)
         this.usersloginBtn.addActionListener(e -> {
-//            Login login = new Login(this);
-//            login.setVisible(true);
+            LoginView loginView = new LoginView(this, userManager);
+            loginView.setVisible(true);
         });
         this.visitorsloginBtn.addActionListener(e -> {
             ChooseGamemode chooseSize = new ChooseGamemode(this);

@@ -25,72 +25,53 @@ public class LoginView extends JDialog implements Create {
         this.setLocationRelativeTo(null);//设置对话框的位置,这里设置为居中显示
         this.setModal(true);//设置对话框是否为模态的,即用户必须先关闭对话框才能回到父窗口
 
-        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);//设置对话框关闭时的默认操作,这里设置为关闭对话框
-        initializeComponents();
-        layoutComponents();
-        setListeners();
-        pack();
-        setLocationRelativeTo(parent);
-        setResizable(false);//设置对话框是否可以改变大小
-    }
+        //当用户关闭对话框时,默认操作是关闭对话框
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //设置对话框的界面元素
+        this.usernameLabel = new JLabel("Username:");//设置标签的文本内容
+        this.usernameLabel.setBounds(10, 10, 100, 25);
+        this.add(this.usernameLabel);
 
-    private void setListeners() {//设置监听器,当用户点击登录按钮时,触发登录事件,并进行登录验证
-        loginButton.addActionListener(new ActionListener() {
+
+        this.usernameField = new JTextField(); //设置文本框的大小和位置
+        this.usernameField.setBounds(10, 35, 280, 25);
+        this.add(this.usernameField);
+
+        this.passwordLabel = new JLabel("Password:");
+        this.passwordLabel.setBounds(10, 70, 100, 25);
+        this.add(this.passwordLabel);
+
+        this.passwordField = new JPasswordField();
+        this.passwordField.setBounds(10, 95, 280, 25);
+        this.add(this.passwordField);
+
+        this.loginButton = new JButton("Login");
+        this.loginButton.setBounds(10, 130, 100, 25);
+        this.loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 if (userManager.validateUser(username, password)) {
-                    System.out.println("Login successful!");
+                    JOptionPane.showMessageDialog(null, "Login successful", "Success", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
-                    // Open the main window
-//                    ChooseGameMode chooseGameMode = new ChooseGameMode(null, userManager);
-//                    chooseGameMode.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(LoginView.this, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+        this.add(this.loginButton);
 
-        registerButton.addActionListener(new ActionListener() {
+        this.registerButton = new JButton("Register");
+        this.registerButton.setBounds(120, 130, 100, 25);
+        this.registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RegisterView registerView = new RegisterView(null, userManager);
-                registerView.setVisible(true);
                 dispose();
+                RegisterView registerView = new RegisterView(LoginView.this, userManager);
+                registerView.setVisible(true);
             }
         });
-    }
-
-    private void initializeComponents() {
-        usernameField = new JTextField();//创建一个文本框组件,用于用户输入文本信息,这个文本框是空的
-        passwordField = new JPasswordField();//创建一个密码框组件,用于用户输入密码信息,这个密码框是空的
-        loginButton = new JButton("Login");//创建一个按钮组件,用于用户点击登录
-        loginButton.setBounds(10, 180, 80, 30);
-        registerButton = new JButton("Register");//创建一个按钮组件,用于用户点击注册
-        registerButton.setBounds(100, 180, 80, 30);
-        usernameLabel = new JLabel("Username:");//创建一个标签组件,用于显示文本信息
-        usernameLabel.setBounds(10, 10, 80, 30);
-        passwordLabel = new JLabel("Password:");//创建一个标签组件,用于显示文本信息
-        passwordLabel.setBounds(10, 50, 80, 30);
-    }
-
-    private void layoutComponents() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Username:"));
-        panel.add(usernameField);
-        panel.add(new JLabel("Password:"));
-        panel.add(passwordField);
-        panel.add(loginButton);
-        panel.add(registerButton);
-        panel.setBounds(10, 10, 280, 160);
-        panel.setLayout(null);
-        add(panel);
-    }
-
-    public static void main(String[] args) {
-        UserManager userManager = new UserManager();
-        LoginView loginView = new LoginView(null, userManager);
-        loginView.setVisible(true);
+        this.add(this.registerButton);
     }
 }

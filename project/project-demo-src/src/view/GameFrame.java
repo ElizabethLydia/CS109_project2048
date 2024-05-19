@@ -166,10 +166,4 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     public GamePanel getGamePanel() {
         return gamePanel;
     }
-
-    public void showLoginView() {
-        UserManager userManager = new UserManager();
-        LoginView loginView = new LoginView(this, userManager);
-        loginView.setVisible(true);
-    }
 }
