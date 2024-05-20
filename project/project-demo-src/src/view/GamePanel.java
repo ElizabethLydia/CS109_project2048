@@ -331,9 +331,9 @@ public class GamePanel extends ListenerPanel {
 
     public void setGameOverDialog() {
         gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over", this.score, 0, this.steps ,controller);
+       //this.controller.frame和null的区别，null是为了在游戏结束时关闭窗口，而controller.frame是为了显示游戏结束的对话框
         gameOverDialog.setVisible(true);
     }
-
 
     public void setScoreLabel(int score) {
         this.score = score;

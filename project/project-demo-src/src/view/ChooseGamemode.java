@@ -19,7 +19,8 @@ public class ChooseGamemode extends JDialog implements Create {
     //建议还添加提示信息，用于提示用户选择游戏大小
     //建议还添加一个自定义按钮，用于自定义游戏大小
 
-    public ChooseGamemode(JFrame parent, User user) {//JFrame parent是父窗口
+    public ChooseGamemode(JFrame parent, User user) {
+        //JFrame parent是父窗口，User user是用户信息，将这两个参数传入到构造函数中
         super(parent, "Choose the Size of the Game", true);
         //modal为true时，表示对话框是模态的，即用户必须先关闭对话框才能回到父窗口
         this.setLayout(null);//使用linear布局,这句话说的是这个对话框的布局方式是null
@@ -38,7 +39,9 @@ public class ChooseGamemode extends JDialog implements Create {
         this.BtnTiming = createButtonWithIcon("Timing", new Point(100, 350), 120, 60, this);
         this.BtnAi = createButtonWithIcon("AI", new Point(280, 350), 120, 60, this);
         this.Btn4x4.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下操作
-            GameFrame gameFrame = new GameFrame(4,4,user);//需要改GameFrame的constructor以传入4*4的值
+            GameFrame gameFrame = new GameFrame(4,4,user);
+            //需要改GameFrame的constructor以传入4*4的值，user是用户信息，他是这里的父窗口，所以传入到这里，实现了父窗口和子窗口的关联
+            //如果是游客模式，user为null，则不需要传入user，直接传入4,4即可，所以这么写不会产生问题
             gameFrame.setVisible(true);
             this.dispose();
             parent.dispose();

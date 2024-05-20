@@ -39,6 +39,7 @@ public class Menu1 extends JFrame implements Create {
         });
         this.visitorsloginBtn.addActionListener(e -> {
             ChooseGamemode chooseSize = new ChooseGamemode(this,null);
+            //此时是游客模式，所以userManager为null
             chooseSize.setVisible(true);
         });
         this.settingsBtn.addActionListener(e -> {
