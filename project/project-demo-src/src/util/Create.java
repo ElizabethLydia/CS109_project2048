@@ -91,6 +91,15 @@ public interface Create {//创建按钮和标签
             case "home":
                 icon = new ImageIcon("project/project-demo-src/src/util/pictures/home.png");
                 break;
+            case"Login":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/login.png");
+                break;
+            case "Register":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/register.png");
+                break;
+            case "Cancel":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/cancel.png");
+                break;
         }
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(img);

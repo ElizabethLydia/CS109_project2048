@@ -59,24 +59,30 @@ public class GameController {
     //todo: add other methods such as loadGame, saveGame...
 
     public void saveGame() {
-        frame.user.xCount=model.getNumbers().length;
-        frame.user.yCount=model.getNumbers()[0].length;
-        for (int i = 0; i < model.getNumbers().length; i++) {
-            for (int j = 0; j < model.getNumbers()[i].length; j++) {
-                frame.user.numbers[i][j]=model.getNumbers()[i][j];
+        if(frame.user != null) {
+            frame.user.xCount=model.getNumbers().length;
+            frame.user.yCount=model.getNumbers()[0].length;
+            for (int i = 0; i < model.getNumbers().length; i++) {
+                for (int j = 0; j < model.getNumbers()[i].length; j++) {
+                    frame.user.numbers[i][j]=model.getNumbers()[i][j];
+                }
             }
+            frame.user.score=model.getScore();
+            frame.user.step=view.getSteps();
+            if (frame instanceof TimingGameFrame) {
+                frame.user.time=((TimingGameFrame) frame).timeLeft;
+            }
+            frame.user.userManager.updateUser();
+        }else{
+            System.out.println("用户未登录，无法保存游戏");
         }
-        frame.user.score=model.getScore();
-        frame.user.step=view.getSteps();
-        if (frame instanceof TimingGameFrame) {
-            frame.user.time=((TimingGameFrame) frame).timeLeft;
-        }
-        frame.user.userManager.updateUser();
+
     }
 
     public void loadGame() {
-            if (frame.user.time==0) {
-                GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount,frame.user); // 创建新的游戏窗口
+        if(frame.user != null) {
+            if (frame.user.time == 0) {
+                GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
                 // 设置分数
@@ -89,7 +95,7 @@ public class GameController {
                 // 更新游戏面板以显示加载的状态
                 newGameFrame.getGamePanel().updateGridsNumber();
             } else {
-                TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user,frame.user.time); // 创建新的计时游戏窗口
+                TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user, frame.user.time); // 创建新的计时游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
                 // 设置分数
@@ -103,6 +109,9 @@ public class GameController {
                 newGameFrame.getGamePanel().updateGridsNumber();
             }
             frame.dispose(); // 关闭当前窗口
+        }else{
+            System.out.println("用户未登录，无法加载游戏");
+        }
     }
 
     public void playMusic() {
@@ -135,15 +144,23 @@ public class GameController {
     }
 
     public void exit() {
-        saveGame();//退出游戏时保存游戏
+        if(frame.user != null) {
+            saveGame();//退出游戏时保存游戏
+        }
         System.exit(0);
     }
 
     public void gotoHome() {
-        // 跳转到主页
-        Menu2 menu2 = new Menu2(frame.user);
-        menu2.setVisible(true);
-        frame.dispose();
+        if(frame.user != null){
+            // 跳转到主页
+            Menu2 menu2 = new Menu2(frame.user);
+            menu2.setVisible(true);
+            frame.dispose();
+        } else{
+            Menu1 menu = new Menu1();
+            menu.setVisible(true);
+            frame.dispose();
+        }
 
     }
 }

@@ -138,9 +138,13 @@ load方法已完成，可以读取本地存档，但是目前还没有实现存�
 
 用户信息存储功能全部已完成，可以存储到本地（我真厉害）
 *****
+版本v2.0 2024.5.21 by wzh
 
+登录模式、游客模式均已全部完成
 
+问题：Gamemenubar里无法判断传入的Game Frame的user是否为null？？？会一直显示为null
 
+拜托拜托在GameController的save和load方法加个如果user为null时弹一个是否要注册的弹窗（JoptionPane用不明白）(｡･ω･｡)
 
 
 

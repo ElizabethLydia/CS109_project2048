@@ -17,12 +17,7 @@ public class User {
         TimeModeHighestScore = 0;
         xCount = 4;
         yCount = 4;
-        numbers = new int[xCount][yCount];
-        for(int i = 0 ; i < xCount ; i++){
-            for(int j = 0 ; j < yCount ; j++){
-                numbers[i][j] = 0;
-            }
-        }
+        numbers = new int[][]{{0, 0, 2, 0}, {0, 0, 0, 0}, {0, 0, 4, 0}, {0, 0, 0, 0}};
         score = 0;
         step = 0;
         time = 0;

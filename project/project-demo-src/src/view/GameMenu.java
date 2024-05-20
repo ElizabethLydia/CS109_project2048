@@ -1,5 +1,7 @@
 package view;
 
+import user.User;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,11 +13,8 @@ public class GameMenu extends JMenuBar {
         JMenuBar menuBar = new JMenuBar();
         JMenu newGame = new JMenu("newGame");
         JMenu GameFile = new JMenu("GameFile");
-//        JMenu loadGame = new JMenu("load");
-//        JMenu saveGame = new JMenu("save");
         JMenu settings = new JMenu("settings");
         JMenu help = new JMenu("help");
-//        JMenu exit = new JMenu("exit");
         menuBar.add(newGame);
         menuBar.add(GameFile);
         menuBar.add(settings);

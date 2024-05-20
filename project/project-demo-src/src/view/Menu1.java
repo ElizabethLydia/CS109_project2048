@@ -13,7 +13,6 @@ public class Menu1 extends JFrame implements Create {
     private JButton visitorsloginBtn;
     private JButton settingsBtn;
     private JButton exitBtn;
-//    Login login;
 
     public Menu1() {//用户登录界面
         this.setTitle("2024 CS109 Project Demo");

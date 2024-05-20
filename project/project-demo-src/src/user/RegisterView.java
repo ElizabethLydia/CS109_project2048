@@ -1,9 +1,12 @@
 package user;
 
+import util.Create;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class RegisterView extends JDialog {
+public class RegisterView extends JDialog implements Create {
     private JTextField usernameField;//JTextField是一个文本框组件,用于用户输入文本信息
     private JPasswordField passwordField;//JPasswordField是一个密码框组件,用于用户输入密码信息
     private JPasswordField confirmPasswordField;//JPasswordField是一个密码框组件,用于用户输入密码信息
@@ -24,32 +27,44 @@ public class RegisterView extends JDialog {
         this.setResizable(false);//设置对话框是否可以改变大小
         this.getContentPane().setBackground(new Color(0xF6ECDF));//设置对话框的背景颜色
 
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/RegisterTitle.png"));
+        ImageIcon icon = (ImageIcon) imageLabel.getIcon();
+        Image img = icon.getImage().getScaledInstance(330, 200, Image.SCALE_DEFAULT);
+        imageLabel.setIcon(new ImageIcon(img));
+        imageLabel.setBounds(0, 10, 500, 200);
+        this.add(imageLabel);
+
         this.usernameLabel = new JLabel("Username:");//创建一个标签组件,用于显示提示信息
-        this.usernameLabel.setBounds(10, 10, 100, 30); // 可以调整位置和大小
+        this.usernameLabel.setBounds(20, 230, 200, 30); // 可以调整位置和大小
+        usernameLabel.setFont(new Font("Arial", Font.BOLD, 20));
         this.add(this.usernameLabel);
 
         this.passwordLabel = new JLabel("Password:");
-        this.passwordLabel.setBounds(10, 50, 100, 30);
+        this.passwordLabel.setBounds(20, 270, 200, 30);
+        passwordLabel.setFont(new Font("Arial", Font.BOLD, 20));
         this.add(this.passwordLabel);
 
         this.confirmPasswordLabel = new JLabel("Confirm Password:");
-        this.confirmPasswordLabel.setBounds(10, 90, 150, 30);
+        this.confirmPasswordLabel.setBounds(15, 310, 200, 30);
+        confirmPasswordLabel.setFont(new Font("Arial", Font.BOLD, 20));
         this.add(this.confirmPasswordLabel);
 
         this.usernameField = new JTextField();
-        this.usernameField.setBounds(120, 10, 280, 30);
+        this.usernameField.setBounds(200, 230, 280, 30);
+        this.usernameField.setFont(new Font("Arial", Font.BOLD, 20));
         this.add(this.usernameField);
 
         this.passwordField = new JPasswordField();
-        this.passwordField.setBounds(120, 50, 280, 30);
+        this.passwordField.setBounds(200, 270, 280, 30);
+        this.passwordField.setFont(new Font("Arial", Font.BOLD, 20));
         this.add(this.passwordField);
 
         this.confirmPasswordField = new JPasswordField();
-        this.confirmPasswordField.setBounds(120, 90, 280, 30);
+        this.confirmPasswordField.setBounds(200, 310, 280, 30);
+        this.confirmPasswordField.setFont(new Font("Arial", Font.BOLD, 20));
         this.add(this.confirmPasswordField);
 
-        this.registerButton = new JButton("Register");
-        this.registerButton.setBounds(10, 130, 100, 30);
+        this.registerButton = createButtonWithIcon("Register",new Point(80, 360), 140, 60, this);
         this.registerButton.addActionListener(e -> {
             String username = this.usernameField.getText();
             String password = new String(this.passwordField.getPassword());
@@ -65,21 +80,18 @@ public class RegisterView extends JDialog {
                     }else{//如果用户不存在,则注册用户,并将用户的用户名和密码存储到users中
                         userManager.registerUser(username, password);
                         this.dispose();//关闭对话框
-                        parent.setVisible(true);
+                        LoginView loginView = new LoginView(parent.getParent(), userManager);
+                        loginView.setVisible(true);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Passwords do not match! Please try again.");
                 }
-
             }
         });
-        this.add(this.registerButton);
-        this.cancelButton = new JButton("Cancel");
-        this.cancelButton.setBounds(200, 130, 100, 30);
+        this.cancelButton = createButtonWithIcon("Cancel",new Point(280, 360), 140, 60, this);
         this.cancelButton.addActionListener(e -> {
             this.dispose();
             parent.setVisible(true);
         });
-        this.add(this.cancelButton);
     }
 }

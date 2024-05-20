@@ -157,6 +157,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.setJMenuBar(gameMenu);//将菜单栏添加到窗口中
     }
 
+
     public GameController getController() {
         return controller;
     }
