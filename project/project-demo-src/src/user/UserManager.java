@@ -20,7 +20,7 @@ public class UserManager {
             String line;
             System.out.println("loading data...");
             while ((line = reader.readLine()) != null) {
-                User user = new User();
+                User user = new User(this);
                 String[] nameParts = line.split(":");
                 user.name =nameParts[1];
                 //第二行为密码
@@ -90,7 +90,7 @@ public class UserManager {
     //在注册用户的dialog中,调用这个方法,如果用户不存在,则成功注册用户,并将用户的用户名和密码存储到users中,如果用户存在,则提示用户用户名已存在
     public void registerUser(String username, String password) {
         if (!isUserExists(username)) {//判断用户是否存在,如果用户不存在,则告知用户注册成功,并将用户的用户名和密码存储到users中
-            User newuser = new User();
+            User newuser = new User(this);
             newuser.name = username;
             newuser.indexLine =users.size()*14;
             JOptionPane.showMessageDialog(null, "User registered successfully!Return to login page to login.");

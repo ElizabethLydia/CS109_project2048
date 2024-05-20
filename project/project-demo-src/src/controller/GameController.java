@@ -21,7 +21,6 @@ public class GameController {
         this.view = view;
         this.model = model;
         this.frame = frame;
-
         Timer timer = new Timer(60000, e -> saveGame()); // 每60秒保存一次
         timer.start(); // 启动定时器
     }
@@ -60,35 +59,19 @@ public class GameController {
     //todo: add other methods such as loadGame, saveGame...
 
     public void saveGame() {
-        try {
-            //创建一个文件写入器,文件名为savegame.txt,如果文件不存在会自动创建,如果文件存在会覆盖原文件
-            BufferedWriter writer = new BufferedWriter(new FileWriter("savegame.txt"));
-            //首先写入棋盘的大小
-            writer.write(model.getNumbers().length + " " + model.getNumbers()[0].length);
-            //换行
-            writer.newLine();
-            System.out.println("you have saved the game");
-            //接下来写入棋盘上的数字
-            for (int i = 0; i < model.getNumbers().length; i++) {
-                for (int j = 0; j < model.getNumbers()[i].length; j++) {
-                    writer.write(String.valueOf(model.getNumbers()[i][j]));
-                    if (j < model.getNumbers()[i].length - 1) {
-                        writer.write(","); // 用逗号分隔数字
-                    }
-                }
-                writer.newLine(); // 每行结束后换行
+        frame.user.xCount=model.getNumbers().length;
+        frame.user.yCount=model.getNumbers()[0].length;
+        for (int i = 0; i < model.getNumbers().length; i++) {
+            for (int j = 0; j < model.getNumbers()[i].length; j++) {
+                frame.user.numbers[i][j]=model.getNumbers()[i][j];
             }
-            //写入得分和步数
-            writer.write("Score: " + model.getScore());
-            writer.write("\nStep: " + view.getSteps());
-            if (frame instanceof TimingGameFrame) {//判断是否为计时模式
-                TimingGameFrame timingGameFrame = (TimingGameFrame) frame;
-                writer.write("\nTime: " + timingGameFrame.timeLeft); // 是则增加一行时间
-            }
-            writer.close();
-        } catch (IOException e) {//捕获IO异常
-            e.printStackTrace();
         }
+        frame.user.score=model.getScore();
+        frame.user.step=view.getSteps();
+        if (frame instanceof TimingGameFrame) {
+            frame.user.time=((TimingGameFrame) frame).timeLeft;
+        }
+        frame.user.userManager.updateUser();
     }
 
     public void loadGame() {
