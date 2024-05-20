@@ -11,7 +11,8 @@ public class User {
     public int step;
     public int time ;
     public int indexLine;//行索引
-    public User(){
+    public UserManager userManager;
+    public User(UserManager userManager){
         HighestScore = 0;
         TimeModeHighestScore = 0;
         xCount = 4;
@@ -26,5 +27,6 @@ public class User {
         step = 0;
         time = 0;
         indexLine = 0;
+        this.userManager = userManager;
     }
 }

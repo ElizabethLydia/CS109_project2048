@@ -1,47 +1,19 @@
-UseName:1234
-Password:111
-HighestScore:0
-TimeModeHighestScore:0
-4 4
-0,0,0,0
-0,0,0,0
-0,0,0,0
-0,0,0,0
-
-Score:0
-Step:0
-Time:0
-********
-UseName:u1
-Password:12345
+UseName:u3
+Password:23333
 HighestScore:1220
 TimeModeHighestScore:30
 4 4
-4,2,16,2
-0,4,8,32
-0,0,0,0
-0,0,0,0
+8,8,64,2
+4,2,256,4
+8,16,2,0
+8,4,0,0
 
-Score:1220
-Step:102
-Time:30
+Score:2012
+Step:130
+Time:21
 ********
-UseName:12345
-Password:12345
-HighestScore:0
-TimeModeHighestScore:0
-4 4
-0,0,0,0
-0,0,0,0
-0,0,0,0
-0,0,0,0
-
-Score:0
-Step:0
-Time:0
-********
-UseName:Fu Jingyu
-Password:12313351
+UseName:u4
+Password:56789
 HighestScore:0
 TimeModeHighestScore:0
 4 4
@@ -62,79 +34,37 @@ TimeModeHighestScore:30
 4,2,16,2
 0,4,8,32
 0,0,0,0
-0,0,0,0
-
-Score:1220
-Step:102
-Time:30
-********
-UseName:u3
-Password:23333
-HighestScore:1220
-TimeModeHighestScore:30
-4 4
 4,2,16,2
-0,4,8,32
-0,0,0,0
-0,0,0,0
 
 Score:1220
 Step:102
 Time:30
-********
-UseName:u4
-Password:56789
-HighestScore:0
-TimeModeHighestScore:0
-4 4
-0,0,0,0
-0,0,0,0
-0,0,0,0
-0,0,0,0
-
-Score:0
-Step:0
-Time:0
-********
-UseName:111
-Password:111
-HighestScore:0
-TimeModeHighestScore:0
-4 4
-0,0,0,0
-0,0,0,0
-0,0,0,0
-0,0,0,0
-
-Score:0
-Step:0
-Time:0
 ********
 UseName:u5
 Password:12345
 HighestScore:0
 TimeModeHighestScore:0
-4 4
-0,0,0,0
-0,0,0,0
-0,0,0,0
-0,0,0,0
-
-Score:0
-Step:0
+5 5
+4096,128,16,8,2
+2,64,32,2,0
+16,4,0,0,4
+2,8,0,0,0
+4,0,0,0,0
+Score:151980
+Step:2003
 Time:0
 ********
-UseName:new
-Password:12345678
-HighestScore:0
-TimeModeHighestScore:0
+UseName:u1
+Password:12345
+HighestScore:1220
+TimeModeHighestScore:30
 4 4
-0,0,0,0
-0,0,0,0
-0,0,0,0
+4,2,16,2
+2048,4,8,32
+4,2,16,2
 0,0,0,0
 
-Score:0
-Step:0
-Time:0
+Score:1220
+Step:102
+Time:30
 ********
