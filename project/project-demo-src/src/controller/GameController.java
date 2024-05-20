@@ -92,74 +92,34 @@ public class GameController {
     }
 
     public void loadGame() {
-        try {
-            //创建一个文件读取器,读取文件savegame.txt,如果文件不存在会抛出异常
-            BufferedReader reader = new BufferedReader(new FileReader("savegame.txt"));
-            //读取文件的每一行
-            String line;
-            System.out.println("you have loaded the game");
-            // 首先读取棋盘的大小
-            line = reader.readLine();
-            String[] sizeParts = line.split(" ");
-            int xCount = Integer.parseInt(sizeParts[0]);
-            int yCount = Integer.parseInt(sizeParts[1]);
-            int[][] numbers = new int[xCount][yCount];
-            int score;
-            int step;
-            // 接下来读取棋盘上的数字
-            for (int i = 0; i < xCount; i++) {
-                line = reader.readLine();
-                String[] numberStrings = line.split(",");
-                for (int j = 0; j < yCount; j++) {
-                    numbers[i][j] = Integer.parseInt(numberStrings[j]);
-                }
-            }
-            // 读取得分
-            line = reader.readLine();
-            String[] scoreParts = line.split(": ");
-            score = Integer.parseInt(scoreParts[1]);
-            // 读取步数
-            line = reader.readLine();
-            String[] stepParts = line.split(": ");
-            step = Integer.parseInt(stepParts[1]);
-            //读取时间
-            line = reader.readLine();
-
-            if (line ==null) {
-                GameFrame newGameFrame = new GameFrame(xCount, yCount,frame.user); // 创建新的游戏窗口
+            if (frame.user.time==0) {
+                GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount,frame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
-                newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
+                newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
                 // 设置分数
-                newGameFrame.getGamePanel().getModel().setScore(score);
+                newGameFrame.getGamePanel().getModel().setScore(frame.user.score);
                 // 设置步数
-                newGameFrame.getGamePanel().getModel().setStep(step);
+                newGameFrame.getGamePanel().getModel().setStep(frame.user.step);
                 // 更新分数和步数显示
                 newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
                 newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
                 // 更新游戏面板以显示加载的状态
                 newGameFrame.getGamePanel().updateGridsNumber();
             } else {
-                String[] timeParts = line.split(": ");
-                int time = Integer.parseInt(timeParts[1]);
-                TimingGameFrame newGameFrame = new TimingGameFrame(xCount, yCount, frame.user,time); // 创建新的计时游戏窗口
+                TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user,frame.user.time); // 创建新的计时游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
-                newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
+                newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
                 // 设置分数
-                newGameFrame.getGamePanel().getModel().setScore(score);
+                newGameFrame.getGamePanel().getModel().setScore(frame.user.score);
                 // 设置步数
-                newGameFrame.getGamePanel().getModel().setStep(step);
+                newGameFrame.getGamePanel().getModel().setStep(frame.user.step);
                 // 更新分数和步数显示
                 newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
                 newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
                 // 更新游戏面板以显示加载的状态
                 newGameFrame.getGamePanel().updateGridsNumber();
             }
-            reader.close();
             frame.dispose(); // 关闭当前窗口
-
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-        }
     }
 
     public void playMusic() {
