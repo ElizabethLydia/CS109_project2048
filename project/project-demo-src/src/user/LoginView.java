@@ -71,9 +71,12 @@ public class LoginView extends JDialog implements Create {
         this.registerButton = new JButton("Register");
         this.registerButton.setBounds(120, 130, 100, 25);
         this.registerButton.addActionListener(e -> {
-            this.setVisible(false);
+            this.setVisible(false);//关闭登录界面
+
             RegisterView registerView = new RegisterView(LoginView.this, userManager);
             registerView.setVisible(true);
+            //注册成功后,返回登录界面
+
         });
         this.add(this.registerButton);
     }
