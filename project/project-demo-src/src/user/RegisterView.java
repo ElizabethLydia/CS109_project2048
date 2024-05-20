@@ -54,26 +54,32 @@ public class RegisterView extends JDialog {
             String username = this.usernameField.getText();
             String password = new String(this.passwordField.getPassword());
             String confirmPassword = new String(this.confirmPasswordField.getPassword());
-            //首先判断两次输入的密码是否一致
-            if (password.equals(confirmPassword)) {
-                //然后调用userManager的registerUser方法判断用户是否存在,如果用户不存在,则注册用户,如果用户存在,则提示用户已存在
-              if(userManager.isUserExists(username)){//判断用户是否存在,如果用户存在,则提示用户用户名已存在，就提醒用户名已存在，让用户重新输入用户名
-                  JOptionPane.showMessageDialog(null, "Username already exists! Please try again with a different username.");
-                }else{//如果用户不存在,则注册用户,并将用户的用户名和密码存储到users中
-                  userManager.registerUser(username, password);
-                  dispose();//关闭对话框
-            }
-            } else {
-                JOptionPane.showMessageDialog(null, "Passwords do not match! Please try again.");
+            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All fields are required! Please try again.");
+            }else {
+                //首先判断两次输入的密码是否一致
+                if (password.equals(confirmPassword)) {
+                    //然后调用userManager的registerUser方法判断用户是否存在,如果用户不存在,则注册用户,如果用户存在,则提示用户已存在
+                    if(userManager.isUserExists(username)){//判断用户是否存在,如果用户存在,则提示用户用户名已存在，就提醒用户名已存在，让用户重新输入用户名
+                        JOptionPane.showMessageDialog(null, "Username already exists! Please try again with a different username.");
+                    }else{//如果用户不存在,则注册用户,并将用户的用户名和密码存储到users中
+                        userManager.registerUser(username, password);
+                        this.dispose();//关闭对话框
+                        parent.setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match! Please try again.");
+                }
+
             }
         });
         this.add(this.registerButton);
-
         this.cancelButton = new JButton("Cancel");
         this.cancelButton.setBounds(200, 130, 100, 30);
-        this.cancelButton.addActionListener(e -> this.dispose());
+        this.cancelButton.addActionListener(e -> {
+            this.dispose();
+            parent.setVisible(true);
+        });
         this.add(this.cancelButton);
-
-        this.setVisible(true);
     }
 }

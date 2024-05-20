@@ -28,6 +28,7 @@ public class Menu1 extends JFrame implements Create {
         imageLabel.setIcon(new ImageIcon(img));
         imageLabel.setBounds(0, 0, 500, 300);
         this.add(imageLabel);
+        this.userManager = new UserManager();
         this.usersloginBtn = createButtonWithIcon("usersLogin", new Point(120, 300), 250, 70, this);
         this.visitorsloginBtn = createButtonWithIcon("visitorsLogin", new Point(120, 400), 250, 70, this);
         this.settingsBtn = createButtonWithIcon("Settings", new Point(120, 500), 80, 80, this);
@@ -38,7 +39,7 @@ public class Menu1 extends JFrame implements Create {
             loginView.setVisible(true);
         });
         this.visitorsloginBtn.addActionListener(e -> {
-            ChooseGamemode chooseSize = new ChooseGamemode(this);
+            ChooseGamemode chooseSize = new ChooseGamemode(this,null);
             chooseSize.setVisible(true);
         });
         this.settingsBtn.addActionListener(e -> {

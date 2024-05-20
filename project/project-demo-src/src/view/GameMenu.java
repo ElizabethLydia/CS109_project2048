@@ -65,7 +65,7 @@ public class GameMenu extends JMenuBar {
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 gameFrame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(4, 4); // 创建新的游戏窗口
+                GameFrame newGameFrame = new GameFrame(4, 4,gameFrame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         });
@@ -74,7 +74,7 @@ public class GameMenu extends JMenuBar {
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 gameFrame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(5, 5); // 创建新的游戏窗口
+                GameFrame newGameFrame = new GameFrame(5, 5,gameFrame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         });

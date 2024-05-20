@@ -47,10 +47,10 @@ public class GameOverDialog extends JDialog implements Create {
         JLabel stepLabel = createLabel("Step:           "+Step, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70,this,0x545454);
         endLabel.setComponentZOrder(stepLabel, 0);
 
-        JLabel scoreLabel = createLabel("Score:         "+Score, new Font("Arial", Font.BOLD, 40), new Point(100, 90), 500, 70,this,0x545454);
+        JLabel scoreLabel = createLabel("Score:       "+Score, new Font("Arial", Font.BOLD, 40), new Point(100, 90), 500, 70,this,0x545454);
         endLabel.setComponentZOrder(scoreLabel, 0);
 
-        JLabel highScoreLabel = createLabel("Highest:      "+highestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 165), 500, 70,this,0x545454);
+        JLabel highScoreLabel = createLabel("Highest:    "+highestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 165), 500, 70,this,0x545454);
         endLabel.setComponentZOrder(highScoreLabel, 0);
 
 
@@ -76,13 +76,13 @@ public class GameOverDialog extends JDialog implements Create {
                 if (controller.frame instanceof TimingGameFrame) {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.dispose();
-                    TimingGameFrame newGameFrame = new TimingGameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT(),60); // 创建新的游戏窗口
+                    TimingGameFrame newGameFrame = new TimingGameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT(),controller.frame.user,60); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     this.dispose(); // 关闭当前窗口
                     // 停止定时器
                 }else {
                     controller.frame.dispose(); // 关闭当前窗口
-                    GameFrame newGameFrame = new GameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT()); // 创建新的游戏窗口
+                    GameFrame newGameFrame = new GameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT(),controller.frame.user); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     this.dispose(); // 关闭当前窗口
                 }

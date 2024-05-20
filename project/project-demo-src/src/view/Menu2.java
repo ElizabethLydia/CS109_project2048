@@ -1,5 +1,6 @@
 package view;
 
+import user.User;
 import util.Create;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
     private JButton settingsBtn;
     private JButton returnBtn;
 
-    public Menu2() {
+    public Menu2(User user) {
         this.setTitle("2024 CS109 Project Demo");
         this.setLayout(null);
         this.setSize(500, 700);
@@ -33,7 +34,7 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
         this.returnBtn = createButtonWithIcon("Return", new Point(290, 500), 80, 80, this);
         //还要setVisible(true)和setVisible(false)
         this.startBtn.addActionListener(e -> {
-            ChooseGamemode chooseSize = new ChooseGamemode(this);
+            ChooseGamemode chooseSize = new ChooseGamemode(this,user);
             chooseSize.setVisible(true);
         });
         this.loadGameBtn.addActionListener(e -> {
@@ -70,7 +71,7 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
                 //读取时间
                 line = reader.readLine();
                 if (line ==null) {
-                    GameFrame newGameFrame = new GameFrame(xCount, yCount); // 创建新的游戏窗口
+                    GameFrame newGameFrame = new GameFrame(xCount, yCount, user); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
                     // 设置分数
@@ -85,7 +86,7 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
                 } else {
                     String[] timeParts = line.split(": ");
                     int time = Integer.parseInt(timeParts[1]);
-                    TimingGameFrame newGameFrame = new TimingGameFrame(xCount, yCount, time); // 创建新的计时游戏窗口
+                    TimingGameFrame newGameFrame = new TimingGameFrame(xCount, yCount,user, time); // 创建新的计时游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
                     // 设置分数
@@ -111,7 +112,7 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
         this.returnBtn.addActionListener(e -> {
             Menu1 menu1 = new Menu1();
             menu1.setVisible(true);
-            this.setVisible(false);
+            this.dispose();
         });
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

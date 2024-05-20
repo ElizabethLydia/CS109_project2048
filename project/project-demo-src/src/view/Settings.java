@@ -29,7 +29,7 @@ public class Settings extends JDialog implements Create {//现在Settings类copi
         this.Btn5x5 = createButtonWithIcon("5x5", new Point(280, 270), 120, 60, this);
         this.BtnTiming = createButtonWithIcon("Timing", new Point(100, 350), 120, 60, this);
         this.BtnAi = createButtonWithIcon("AI", new Point(280, 350), 120, 60, this);
-        this.Btn4x4.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下操作
+       /* this.Btn4x4.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下操作
             GameFrame gameFrame = new GameFrame(4,4);//需要改GameFrame的constructor以传入4*4的值
             gameFrame.setVisible(true);
             this.dispose();
@@ -52,7 +52,7 @@ public class Settings extends JDialog implements Create {//现在Settings类copi
             gameFrame.setVisible(true);
             this.dispose();
             parent.dispose();
-        });
+        });*/
         parent.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 

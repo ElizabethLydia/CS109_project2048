@@ -43,12 +43,12 @@ public class GameController {
                 TimingGameFrame timingGameFrame = (TimingGameFrame) frame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 timingGameFrame.timer.stop();
                 timingGameFrame.dispose(); // 关闭当前窗口
-                TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(),60); // 创建新的游戏窗口
+                TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(),frame.user,60); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 // 停止定时器
             }else {
                 this.frame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT()); // 创建新的游戏窗口
+                GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT(),frame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         } else if (result == JOptionPane.NO_OPTION) {
@@ -126,7 +126,7 @@ public class GameController {
             line = reader.readLine();
 
             if (line ==null) {
-                GameFrame newGameFrame = new GameFrame(xCount, yCount); // 创建新的游戏窗口
+                GameFrame newGameFrame = new GameFrame(xCount, yCount,frame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
                 // 设置分数
@@ -141,7 +141,7 @@ public class GameController {
             } else {
                 String[] timeParts = line.split(": ");
                 int time = Integer.parseInt(timeParts[1]);
-                TimingGameFrame newGameFrame = new TimingGameFrame(xCount, yCount, time); // 创建新的计时游戏窗口
+                TimingGameFrame newGameFrame = new TimingGameFrame(xCount, yCount, frame.user,time); // 创建新的计时游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 newGameFrame.getGamePanel().getModel().setNumbers(numbers); // 设置棋盘状态
                 // 设置分数
@@ -198,11 +198,9 @@ public class GameController {
 
     public void gotoHome() {
         // 跳转到主页
-        Menu2 menu2 = new Menu2();
+        Menu2 menu2 = new Menu2(frame.user);
         menu2.setVisible(true);
         frame.dispose();
-        /*ChooseGamemode chooseGamemode = new ChooseGamemode(frame);
-        chooseGamemode.setVisible(true);*/
 
     }
 }

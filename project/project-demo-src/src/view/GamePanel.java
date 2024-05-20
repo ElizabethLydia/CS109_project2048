@@ -330,7 +330,7 @@ public class GamePanel extends ListenerPanel {
     }
 
     public void setGameOverDialog() {
-        gameOverDialog = new GameOverDialog(null, "Game Over", this.score, 0, this.steps ,controller);
+        gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over", this.score, 0, this.steps ,controller);
         gameOverDialog.setVisible(true);
     }
 

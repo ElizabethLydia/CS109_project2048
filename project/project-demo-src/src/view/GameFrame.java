@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import user.LoginView;
+import user.User;
 import user.UserManager;
 import util.Create;
 import util.RoundedPanel;
@@ -14,6 +15,7 @@ import java.awt.event.WindowEvent;
 public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
     private GameController controller;
+    public User user;
     private JButton restartBtn;
     private JButton magicBtn;
     private JButton undoBtn;
@@ -39,7 +41,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     private JButton upBtn;
     private JButton downBtn;
 
-    public GameFrame(int xcount, int ycount) {
+    public GameFrame(int xcount, int ycount, User user) {
         this.setTitle("2024 CS109 Project Demo");//窗口名称
         this.setLayout(null);
         /*在 JFrame 窗口中设置绝对定位布局（Absolute Positioning Layout）的方法。
@@ -48,6 +50,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.setResizable(false);//设置窗口大小不可变
         createGameMenu();//创建游戏菜单,这个是在窗口上方的菜单栏,怎么让他显示出来？？？？
         //可以通过setJMenuBar()方法将菜单栏添加到窗口中
+        this.user = user;
 
         this.titleLabel = createLabel("2048", new Font("Verdana", Font.BOLD, 80), new Point(35, 20), 240, 80,this,0x463627);
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色

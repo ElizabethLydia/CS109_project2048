@@ -1,8 +1,10 @@
 package user;
 
 import util.Create;
+import view.Menu2;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //ChooseGamemode chooseSize = new ChooseGamemode(userManager);
@@ -16,6 +18,7 @@ public class LoginView extends JDialog implements Create {
     private JButton loginButton;
     private JButton registerButton;
     private UserManager userManager;
+    private User user;
 
     public LoginView(JFrame parent, UserManager userManager) {
         super(parent, "Login", true);//设置对话框的标题和是否可见,这个对话框是模态的，即用户必须先关闭对话框才能回到父窗口
@@ -23,7 +26,9 @@ public class LoginView extends JDialog implements Create {
         this.setLayout(null);//设置对话框的布局方式为null,即不使用布局管理器
         this.setSize(300, 250);//设置对话框的大小
         this.setLocationRelativeTo(null);//设置对话框的位置,这里设置为居中显示
-        this.setModal(true);//设置对话框是否为模态的,即用户必须先关闭对话框才能回到父窗口
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//设置对话框关闭时的默认操作,这里设置为关闭对话框
+        this.setResizable(false);//设置对话框是否可以改变大小
+        this.getContentPane().setBackground(new Color(0xF6ECDF));//设置对话框的背景颜色
 
         //当用户关闭对话框时,默认操作是关闭对话框
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,30 +52,28 @@ public class LoginView extends JDialog implements Create {
 
         this.loginButton = new JButton("Login");
         this.loginButton.setBounds(10, 130, 100, 25);
-        this.loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = new String(passwordField.getPassword());
-                if (userManager.validateUser(username, password)) {
-                    JOptionPane.showMessageDialog(null, "Login successful", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+        this.loginButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+            this.user = userManager.validateUser(username, password);
+            if (user!= null) {
+                JOptionPane.showMessageDialog(null, "Login successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                parent.dispose();
+                Menu2 menu2 = new Menu2(user);
+                menu2.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
         this.add(this.loginButton);
 
         this.registerButton = new JButton("Register");
         this.registerButton.setBounds(120, 130, 100, 25);
-        this.registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                RegisterView registerView = new RegisterView(LoginView.this, userManager);
-                registerView.setVisible(true);
-            }
+        this.registerButton.addActionListener(e -> {
+            this.setVisible(false);
+            RegisterView registerView = new RegisterView(LoginView.this, userManager);
+            registerView.setVisible(true);
         });
         this.add(this.registerButton);
     }
