@@ -4,7 +4,6 @@ import model.GridNumber;
 import view.*;
 
 import javax.swing.*;
-import java.io.*;
 //导入音乐播放器
 //import javazoom.jl.decoder.JavaLayerException;
 //import javazoom.jl.player.Player;
@@ -45,7 +44,14 @@ public class GameController {
                 TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user, 60); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 // 停止定时器
-            } else {
+            } else if (frame instanceof AIGameFrame) {
+                AIGameFrame AiGameFrame = (AIGameFrame) frame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                AiGameFrame.timer.stop();
+                AiGameFrame.dispose(); // 关闭当前窗口
+                AIGameFrame newGameFrame = new AIGameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user); // 创建新的游戏窗口
+                newGameFrame.setVisible(true); // 显示新的游戏窗口
+                // 停止定时器
+            } else{
                 this.frame.dispose(); // 关闭当前窗口
                 GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
@@ -59,58 +65,51 @@ public class GameController {
     //todo: add other methods such as loadGame, saveGame...
 
     public void saveGame() {
-        if (frame.user != null) {
-            frame.user.xCount = model.getNumbers().length;
-            frame.user.yCount = model.getNumbers()[0].length;
-            for (int i = 0; i < model.getNumbers().length; i++) {
-                for (int j = 0; j < model.getNumbers()[i].length; j++) {
-                    frame.user.numbers[i][j] = model.getNumbers()[i][j];
-                }
+        frame.user.xCount = model.getNumbers().length;
+        frame.user.yCount = model.getNumbers()[0].length;
+        for (int i = 0; i < model.getNumbers().length; i++) {
+            for (int j = 0; j < model.getNumbers()[i].length; j++) {
+                frame.user.numbers[i][j] = model.getNumbers()[i][j];
             }
-            frame.user.score = model.getScore();
-            frame.user.step = view.getSteps();
-            if (frame instanceof TimingGameFrame) {
-                frame.user.time = ((TimingGameFrame) frame).timeLeft;
-            }
-            frame.user.userManager.updateUser();
-        } else {
-            System.out.println("用户未登录，无法保存游戏");
         }
+        frame.user.score = model.getScore();
+        frame.user.step = view.getSteps();
+        if (frame instanceof TimingGameFrame) {
+            frame.user.time = ((TimingGameFrame) frame).timeLeft;
+        }
+        frame.user.userManager.updateUser();
     }
 
     public void loadGame() {
-        if (frame.user != null) {
-            if (frame.user.time == 0) {
-                GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user); // 创建新的游戏窗口
-                newGameFrame.setVisible(true); // 显示新的游戏窗口
-                newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
-                // 设置分数
-                newGameFrame.getGamePanel().getModel().setScore(frame.user.score);
-                // 设置步数
-                newGameFrame.getGamePanel().getModel().setStep(frame.user.step);
-                // 更新分数和步数显示
-                newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
-                newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
-                // 更新游戏面板以显示加载的状态
-                newGameFrame.getGamePanel().updateGridsNumber();
-            } else {
-                TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user, frame.user.time); // 创建新的计时游戏窗口
-                newGameFrame.setVisible(true); // 显示新的游戏窗口
-                newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
-                // 设置分数
-                newGameFrame.getGamePanel().getModel().setScore(frame.user.score);
-                // 设置步数
-                newGameFrame.getGamePanel().getModel().setStep(frame.user.step);
-                // 更新分数和步数显示
-                newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
-                newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
-                // 更新游戏面板以显示加载的状态
-                newGameFrame.getGamePanel().updateGridsNumber();
-            }
-            frame.dispose(); // 关闭当前窗口
+        if (frame.user.time == 0) {
+            GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user); // 创建新的游戏窗口
+            newGameFrame.setVisible(true); // 显示新的游戏窗口
+            newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
+            // 设置分数
+            newGameFrame.getGamePanel().getModel().setScore(frame.user.score);
+            // 设置步数
+            newGameFrame.getGamePanel().getModel().setStep(frame.user.step);
+            // 更新分数和步数显示
+            newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
+            newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
+            // 更新游戏面板以显示加载的状态
+            newGameFrame.getGamePanel().updateGridsNumber();
         } else {
-            System.out.println("用户未登录，无法加载游戏");
+            TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user, frame.user.time); // 创建新的计时游戏窗口
+            newGameFrame.setVisible(true); // 显示新的游戏窗口
+            newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
+            // 设置分数
+            newGameFrame.getGamePanel().getModel().setScore(frame.user.score);
+            // 设置步数
+            newGameFrame.getGamePanel().getModel().setStep(frame.user.step);
+            // 更新分数和步数显示
+            newGameFrame.getGamePanel().setScoreLabel(newGameFrame.getGamePanel().getModel().getScore());
+            newGameFrame.getGamePanel().setStepLabel(newGameFrame.getGamePanel().getModel().getStep());
+            // 更新游戏面板以显示加载的状态
+            newGameFrame.getGamePanel().updateGridsNumber();
         }
+        frame.dispose(); // 关闭当前窗口
+
     }
 
     public void playMusic() {

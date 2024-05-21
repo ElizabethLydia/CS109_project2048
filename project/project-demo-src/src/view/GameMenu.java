@@ -63,28 +63,75 @@ public class GameMenu extends JMenuBar {
             System.out.println("you choose new game");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                gameFrame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(4, 4, gameFrame.user);
-                // 创建新的游戏窗口,gamframe.user是用户信息,这里传入建立这位用户的新的游戏窗口
-                newGameFrame.setVisible(true); // 显示新的游戏窗口
+                if (gameFrame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                    timingGameFrame.timer.stop();
+                    timingGameFrame.dispose(); // 关闭当前窗口
+                    TimingGameFrame newGameFrame = new TimingGameFrame(4, 5, gameFrame.user, 60); // 创建新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                    // 停止定时器
+                } else if (gameFrame instanceof AIGameFrame) {
+                    AIGameFrame AIGameFrame = (AIGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                    AIGameFrame.timer.stop();
+                    AIGameFrame.dispose(); // 关闭当前窗口
+                    AIGameFrame newGameFrame = new AIGameFrame(4, 4, gameFrame.user); // 创建新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                    // 停止定时器
+                } else{
+                    gameFrame.dispose(); // 关闭当前窗口
+                    GameFrame newGameFrame = new GameFrame(4, 4, gameFrame.user); // 创建新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                }
             }
         });
         newGame2.addActionListener(e -> {
             System.out.println("you choose new game");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                gameFrame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(5, 5, gameFrame.user); // 创建新的游戏窗口
-                newGameFrame.setVisible(true); // 显示新的游戏窗口
+                if (gameFrame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                    timingGameFrame.timer.stop();
+                    timingGameFrame.dispose(); // 关闭当前窗口
+                    TimingGameFrame newGameFrame = new TimingGameFrame(5, 5, gameFrame.user, 60); // 创建新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                    // 停止定时器
+                } else if (gameFrame instanceof AIGameFrame) {
+                    AIGameFrame AiGameFrame = (AIGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                    AiGameFrame.timer.stop();
+                    AiGameFrame.dispose(); // 关闭当前窗口
+                    AIGameFrame newGameFrame = new AIGameFrame(5, 5, gameFrame.user); // 创建新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                    // 停止定时器
+                } else{
+                    gameFrame.dispose(); // 关闭当前窗口
+                    GameFrame newGameFrame = new GameFrame(5, 5, gameFrame.user); // 创建新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                }
             }
         });
 
         saveGame.addActionListener(e -> {
             System.out.println("you choose save game");
+            if (gameFrame instanceof TimingGameFrame) {
+                TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                timingGameFrame.timer.stop();
+            } else if (gameFrame instanceof AIGameFrame) {
+                AIGameFrame AiGameFrame = (AIGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                AiGameFrame.timer.stop();
+                AiGameFrame.StartAIBtn.setEnabled(true);
+                AiGameFrame.StartAIBtn.setVisible(true);
+                AiGameFrame.StopAIBtn.setEnabled(false);
+                AiGameFrame.StopAIBtn.setVisible(false);
+            }
             if (gameFrame.user == null) {
                 JOptionPane.showMessageDialog(null, "Please login first!", "Warning", JOptionPane.WARNING_MESSAGE);
+                System.out.println("用户未登录，无法保存游戏");
                 return;
-            } else {
+            } else if (gameFrame instanceof AIGameFrame) {
+                JOptionPane.showMessageDialog(null, "AI mode cannot save game!", "Warning", JOptionPane.WARNING_MESSAGE);
+                System.out.println("AI模式无法保存游戏");
+                return;
+            } else{
                 //我想这里先不要直接保存，而是弹出一个对话框，让用户选择是否保存
                 int result = JOptionPane.showConfirmDialog(null, "Are you sure to save the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (result == JOptionPane.YES_OPTION) {
@@ -99,10 +146,26 @@ public class GameMenu extends JMenuBar {
 
         loadGame.addActionListener(e -> {
             System.out.println("you choose load game");
+            if (gameFrame instanceof TimingGameFrame) {
+                TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                timingGameFrame.timer.stop();
+            } else if (gameFrame instanceof AIGameFrame) {
+                AIGameFrame AiGameFrame = (AIGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                AiGameFrame.timer.stop();
+                AiGameFrame.StartAIBtn.setEnabled(true);
+                AiGameFrame.StartAIBtn.setVisible(true);
+                AiGameFrame.StopAIBtn.setEnabled(false);
+                AiGameFrame.StopAIBtn.setVisible(false);
+            }
             if (gameFrame.user == null) {
                 JOptionPane.showMessageDialog(null, "Please login first!", "Warning", JOptionPane.WARNING_MESSAGE);
+                System.out.println("用户未登录，无法加载游戏");
                 return;
-            } else {
+            } else if (gameFrame instanceof AIGameFrame) {
+                JOptionPane.showMessageDialog(null, "AI mode cannot load game!", "Warning", JOptionPane.WARNING_MESSAGE);
+                System.out.println("AI模式无法加载游戏");
+                return;
+            } else{
                 //我想这里先不要直接加载，而是弹出一个对话框，让用户选择是否加载
                 int result = JOptionPane.showConfirmDialog(null, "Are you sure to load the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (result == JOptionPane.YES_OPTION) {
@@ -120,6 +183,13 @@ public class GameMenu extends JMenuBar {
         });
         settings2.addActionListener(e -> {
             System.out.println("you choose settings");
+            if (gameFrame instanceof TimingGameFrame) {
+                TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                timingGameFrame.timer.stop();
+            } else if (gameFrame instanceof AIGameFrame) {
+                AIGameFrame AiGameFrame = (AIGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                AiGameFrame.timer.stop();
+            }
             int result1 = JOptionPane.showConfirmDialog(null, "Do you want to save the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result1 == JOptionPane.YES_OPTION) {
                 gameFrame.getController().saveGame();

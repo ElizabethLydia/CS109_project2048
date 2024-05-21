@@ -61,7 +61,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         gamePanel.setController(controller);//建立gamePanel中所得到的controller值与controller的联系,这个是为了让gamePanel中的controller和GameFrame中的controller保持一致
         //Controller是用来控制游戏的，所以gamePanel中的controller和GameFrame中的controller应该保持一致
 
-        if (user != null) {
+        if (user != null&!(this instanceof AIGameFrame)) {
             HighestScorePanel = createPanel(418, 30, 110, 70, false);
             this.HighestScoreLabel = createLabel("<html>Highest:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
             //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示
@@ -106,9 +106,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
             gamePanel.requestFocusInWindow();
         });
 
-        this.restartBtn.addActionListener(e ->
-
-        {//给按钮添加监听器,当按钮被点击时，执行以下restartGame()方法
+        this.restartBtn.addActionListener(e -> {//给按钮添加监听器,当按钮被点击时，执行以下restartGame()方法
             controller.restartGame();
             gamePanel.requestFocusInWindow();//当重启按钮被点击时，游戏将重新开始并且游戏面板会请求焦点，以便启用键盘事件监听，为玩家提供交互操作的功能。
         });
@@ -128,55 +126,42 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 //            gamePanel.requestFocusInWindow();
 //        });
 
-        this.leftBtn.addActionListener(e ->
-
-        {
+        this.leftBtn.addActionListener(e -> {
             gamePanel.doMoveLeft();
             gamePanel.requestFocusInWindow();
         });
 
-        this.rightBtn.addActionListener(e ->
-
-        {
+        this.rightBtn.addActionListener(e -> {
             gamePanel.doMoveRight();
             gamePanel.requestFocusInWindow();
         });
 
-        this.upBtn.addActionListener(e ->
-
-        {
+        this.upBtn.addActionListener(e -> {
             gamePanel.doMoveUp();
             gamePanel.requestFocusInWindow();
         });
 
-        this.downBtn.addActionListener(e ->
-
-        {
+        this.downBtn.addActionListener(e -> {
             gamePanel.doMoveDown();
             gamePanel.requestFocusInWindow();
         });
 
 //        //todo: add other button here
-        this.
+        this.setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）
 
-                setLocationRelativeTo(null);//调用这个方法后，窗口将在屏幕的中心位置显示，而不是默认的窗口初始位置（通常是在左上角）
-
-        this.
-
-                addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        // 弹出一个带有“确定”和“取消”按钮的确认窗口
-                        controller.exit();
-                    }
-                });
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // 弹出一个带有“确定”和“取消”按钮的确认窗口
+                controller.exit();
+            }
+        });
     }
 
     private void createGameMenu() {
         gameMenu = new GameMenu(this, user);
         this.setJMenuBar(gameMenu);//将菜单栏添加到窗口中
     }
-
 
     public GameController getController() {
         return controller;

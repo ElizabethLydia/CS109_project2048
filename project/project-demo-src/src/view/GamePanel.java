@@ -22,6 +22,7 @@ public class GamePanel extends ListenerPanel {
     private ArrayList<Integer> eachScore = new ArrayList<>();
     GameOverDialog gameOverDialog;
     GameController controller;
+    private int state;
 
     public GamePanel(int size, int xcount, int ycount) {//构造方法
         this.setVisible(true);
@@ -34,6 +35,7 @@ public class GamePanel extends ListenerPanel {
         this.GRID_SIZE = size / (Math.max(XCOUNT, YCOUNT));
         this.grids = new GridComponent[XCOUNT][YCOUNT];
         this.model = new GridNumber(XCOUNT, YCOUNT);
+        this.state=0;
         initialGame();
     }
 
@@ -264,7 +266,7 @@ public class GamePanel extends ListenerPanel {
     }
 
     //判断游戏是否终止
-    public boolean checkIfEnded() {
+    public boolean checkIfEnded() {//false为未结束
         boolean check = true;
         for (int k = 0; k < 4; k++) {
             int[][] originalArray = new int[XCOUNT][YCOUNT];

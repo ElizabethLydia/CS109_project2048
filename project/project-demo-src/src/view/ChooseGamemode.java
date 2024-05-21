@@ -60,7 +60,7 @@ public class ChooseGamemode extends JDialog implements Create {
             parent.dispose();
         });
         this.BtnAi.addActionListener(e -> {//待写ai模式的方法
-            GameFrame gameFrame = new GameFrame(4,4,user);
+            AIGameFrame gameFrame = new AIGameFrame(4,4,user);
             gameFrame.setVisible(true);
             this.dispose();
             parent.dispose();
