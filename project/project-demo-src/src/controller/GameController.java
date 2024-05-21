@@ -130,7 +130,7 @@ public class GameController {
 
     public void callParentMethod(GameFrame object) {
         if (object instanceof TimingGameFrame) {
-            System.out.println("调用对象是 ChildClass1");
+            System.out.println("调用对象是 ChildClass1。");
         }
         // 调用父类的方法
     }

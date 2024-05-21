@@ -60,7 +60,7 @@ public class GameMenu extends JMenuBar {
         GameFile.add(saveGame);
 
         newGame1.addActionListener(e -> {
-            System.out.println("you choose new game");
+            System.out.println("you choose new game.");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 if (gameFrame instanceof TimingGameFrame) {
@@ -85,7 +85,7 @@ public class GameMenu extends JMenuBar {
             }
         });
         newGame2.addActionListener(e -> {
-            System.out.println("you choose new game");
+            System.out.println("you choose new game.");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 if (gameFrame instanceof TimingGameFrame) {
@@ -111,7 +111,7 @@ public class GameMenu extends JMenuBar {
         });
 
         saveGame.addActionListener(e -> {
-            System.out.println("you choose save game");
+            System.out.println("you choose save game.");
             if (gameFrame instanceof TimingGameFrame) {
                 TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 timingGameFrame.timer.stop();
@@ -137,7 +137,7 @@ public class GameMenu extends JMenuBar {
                 if (result == JOptionPane.YES_OPTION) {
                     gameFrame.getController().saveGame();
                 } else if (result == JOptionPane.NO_OPTION) {
-                    System.out.println("you choose not to save the game");
+                    System.out.println("you choose not to save the game.");
                     //这里应该是不保存游戏，并且游戏还可以继续操作
                     this.requestFocusInWindow();//这句话的意思是让这个窗口获得焦点
                 }
@@ -145,7 +145,7 @@ public class GameMenu extends JMenuBar {
         });
 
         loadGame.addActionListener(e -> {
-            System.out.println("you choose load game");
+            System.out.println("you choose load game.");
             if (gameFrame instanceof TimingGameFrame) {
                 TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 timingGameFrame.timer.stop();
@@ -171,18 +171,18 @@ public class GameMenu extends JMenuBar {
                 if (result == JOptionPane.YES_OPTION) {
                     gameFrame.getController().loadGame();
                 } else if (result == JOptionPane.NO_OPTION) {
-                    System.out.println("you choose not to load the game");
+                    System.out.println("you choose not to load the game.");
                     this.requestFocusInWindow();
                 }
             }
         });
 
         settings1.addActionListener(e -> {
-            System.out.println("you choose settings");
+            System.out.println("you choose settings.");
             gameFrame.getController().setVolume();
         });
         settings2.addActionListener(e -> {
-            System.out.println("you choose settings");
+            System.out.println("you choose settings.");
             if (gameFrame instanceof TimingGameFrame) {
                 TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 timingGameFrame.timer.stop();
@@ -194,7 +194,7 @@ public class GameMenu extends JMenuBar {
             if (result1 == JOptionPane.YES_OPTION) {
                 gameFrame.getController().saveGame();
             } else if (result1 == JOptionPane.NO_OPTION) {
-                System.out.println("you choose not to save the game");
+                System.out.println("you choose not to save the game.");
                 //这里应该是不保存游戏，并且游戏还可以继续操作
                 this.requestFocusInWindow();//这句话的意思是让这个窗口获得焦点
             }
@@ -204,7 +204,7 @@ public class GameMenu extends JMenuBar {
             }
         });
         settings3.addActionListener(e -> {
-            System.out.println("you choose settings");
+            System.out.println("you choose settings.");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to exit the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 gameFrame.getController().exit();
@@ -212,11 +212,11 @@ public class GameMenu extends JMenuBar {
         });
 
         help1.addActionListener(e -> {
-            System.out.println("how to play");
+            System.out.println("how to play.");
             JOptionPane.showMessageDialog(null, "Use arrow keys to move the tiles. When two tiles with the same number touch, they merge into one!", "How to play", JOptionPane.INFORMATION_MESSAGE);
         });
         help2.addActionListener(e -> {
-            System.out.println("how to win");
+            System.out.println("how to win.");
             JOptionPane.showMessageDialog(null, "Get to the 2048 tile!", "How to win", JOptionPane.INFORMATION_MESSAGE);
         });
         this.add(menuBar);
