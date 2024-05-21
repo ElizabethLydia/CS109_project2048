@@ -61,7 +61,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         gamePanel.setController(controller);//建立gamePanel中所得到的controller值与controller的联系,这个是为了让gamePanel中的controller和GameFrame中的controller保持一致
         //Controller是用来控制游戏的，所以gamePanel中的controller和GameFrame中的controller应该保持一致
 
-        if (user != null&!(this instanceof AIGameFrame)|(this instanceof TimingGameFrame)) {
+        if ((user != null&!(this instanceof AIGameFrame))||(this instanceof TimingGameFrame)) {
             HighestScorePanel = createPanel(418, 30, 110, 70, false);
             this.HighestScoreLabel = createLabel("<html>Highest:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
             //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示

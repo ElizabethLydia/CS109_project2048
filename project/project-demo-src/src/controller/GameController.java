@@ -4,7 +4,6 @@ import model.GridNumber;
 import view.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 //导入音乐播放器
 //import javazoom.jl.decoder.JavaLayerException;
 //import javazoom.jl.player.Player;
@@ -22,8 +21,9 @@ public class GameController {
         this.model = model;
         this.frame = frame;
         if (frame.user!= null) {
-            Timer timer = new Timer(60000, e ->{
+            Timer timer = new Timer(5000, e ->{
                 saveGame();
+                System.out.println(111);
             }); // 每60秒保存一次
             timer.start(); // 启动定时器
         }
@@ -72,6 +72,7 @@ public class GameController {
     public void saveGame() {
         frame.user.xCount = model.getNumbers().length;
         frame.user.yCount = model.getNumbers()[0].length;
+        frame.user.numbers=new int[model.getNumbers().length][model.getNumbers()[0].length];
         for (int i = 0; i < model.getNumbers().length; i++) {
             for (int j = 0; j < model.getNumbers()[i].length; j++) {
                 frame.user.numbers[i][j] = model.getNumbers()[i][j];
@@ -81,6 +82,8 @@ public class GameController {
         frame.user.step = view.getSteps();
         if (frame instanceof TimingGameFrame) {
             frame.user.time = ((TimingGameFrame) frame).timeLeft;
+        }else{
+            frame.user.time =0;
         }
         frame.user.userManager.updateUser();
     }
@@ -135,7 +138,7 @@ public class GameController {
 
     public void callParentMethod(GameFrame object) {
         if (object instanceof TimingGameFrame) {
-            System.out.println("调用对象是 ChildClass1");
+            System.out.println("调用对象是 ChildClass1。");
         }
         // 调用父类的方法
     }

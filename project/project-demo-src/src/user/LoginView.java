@@ -67,13 +67,13 @@ public class LoginView extends JDialog implements Create {
             String password = new String(passwordField.getPassword());
             this.user = userManager.validateUser(username, password);
             if (user!= null) {
-                JOptionPane.showMessageDialog(null, "Login successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Login successful.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 parent.dispose();
                 Menu2 menu2 = new Menu2(user);
                 menu2.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 

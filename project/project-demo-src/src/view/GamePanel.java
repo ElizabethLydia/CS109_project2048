@@ -22,6 +22,7 @@ public class GamePanel extends ListenerPanel {
     private ArrayList<Integer> eachScore = new ArrayList<>();
     GameOverDialog gameOverDialog;
     GameController controller;
+    private int state;
 
     public GamePanel(int size, int xcount, int ycount) {//构造方法
         this.setVisible(true);
@@ -34,6 +35,7 @@ public class GamePanel extends ListenerPanel {
         this.GRID_SIZE = size / (Math.max(XCOUNT, YCOUNT));
         this.grids = new GridComponent[XCOUNT][YCOUNT];
         this.model = new GridNumber(XCOUNT, YCOUNT);
+        this.state=0;
         initialGame();
         int[][] initialArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i <XCOUNT ; i++) {
@@ -97,9 +99,9 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             this.setScore();
         } else {
-            System.out.println("Unable to move right,try another direction");
+            System.out.println("Unable to move right,try another direction.");
             if (checkIfEnded()) {
-                System.out.println("game is over");
+                System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
@@ -134,9 +136,9 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             this.setScore();
         } else {
-            System.out.println("Unable to move left,try another direction");
+            System.out.println("Unable to move left,try another direction.");
             if (checkIfEnded()) {
-                System.out.println("game is over");
+                System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
@@ -171,9 +173,9 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             this.setScore();
         } else {
-            System.out.println("Unable to move up,try another direction");
+            System.out.println("Unable to move up,try another direction.");
             if (checkIfEnded()) {
-                System.out.println("game is over");
+                System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
@@ -209,9 +211,9 @@ public class GamePanel extends ListenerPanel {
             this.updateGridsNumber();
             this.setScore();
         } else {
-            System.out.println("Unable to move down,try another direction");
+            System.out.println("Unable to move down,try another direction.");
             if (checkIfEnded()) {
-                System.out.println("game is over");
+                System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
@@ -227,14 +229,14 @@ public class GamePanel extends ListenerPanel {
     public void doUndo() {
         if (model.getCheckIfOnlyOneUndo() == false) {
             if (this.model.getEachArray().size() > 1) {
-                System.out.println("You hit the undo button");
-                int result = JOptionPane.showConfirmDialog(this, "Are you sure to undo the last step?", "Undo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                System.out.println("You hit the undo button.");
+                int result = JOptionPane.showConfirmDialog(null, "Are you sure to undo the last step?", "Undo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 // 根据用户的选择执行操作
                 if (result == JOptionPane.NO_OPTION) {
-                    System.out.println("You choose not to undo the last step");
+                    System.out.println("You choose not to undo the last step.");
                 } else {
                     if (result == JOptionPane.YES_OPTION) {
-                        System.out.println("You choose to undo the last step");
+                        System.out.println("You choose to undo the last step.");
                         model.setCheckIfOnlyOneUndo(true);
                         this.model.undo();
                         eachScore.remove(eachScore.size() - 1);
@@ -246,12 +248,13 @@ public class GamePanel extends ListenerPanel {
                         this.scoreLabel.setText(String.format("<html>Score:<br> %d</html>", this.score));
                     }
                 }
-            } else {
-                System.out.println("No more steps to undo");
+            } else if (steps == 0) {
+                System.out.println("No more steps to undo.");
+                JOptionPane.showMessageDialog(null, "No more steps to undo.", "Warning", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            System.out.println("You can only undo once");
-            JOptionPane.showMessageDialog(this, "You can only undo once", "Warning", JOptionPane.WARNING_MESSAGE);
+            System.out.println("You can only undo once.");
+            JOptionPane.showMessageDialog(null, "You can only undo once.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -344,7 +347,7 @@ public class GamePanel extends ListenerPanel {
     }
 
     public void setGameOverDialog() {
-        gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over", this.score, 0, this.steps, controller);
+        gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over.", this.score, 0, this.steps, controller);
         //this.controller.frame和null的区别，null是为了在游戏结束时关闭窗口，而controller.frame是为了显示游戏结束的对话框
         gameOverDialog.setVisible(true);
     }
@@ -369,13 +372,27 @@ public class GamePanel extends ListenerPanel {
 
     public void doMagic() {
         if (model.getCheckIfOnlyOneMagic() == true) {
-            JOptionPane.showMessageDialog(null, "You can only use magic once", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You can only use magic once.", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            int result = JOptionPane.showConfirmDialog(null, "This magic button will eliminate all 2 and 4 in the game board, do you want to use it?", "Magic", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                model.doMagic();
-                updateGridsNumber();
-                model.setCheckIfOnlyOneMagic(true);
+            boolean check = false;
+            for (int i = 0; i < XCOUNT; i++) {
+                for (int j = 0; j < YCOUNT; j++) {
+                    if (model.getNumber(i, j) > 4) {
+                        check = true;
+                    }
+
+                }
+            }
+            if (check == false) {
+                JOptionPane.showMessageDialog(null, "You can only use magic after generating a number greater than 4.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }else {
+                int result = JOptionPane.showConfirmDialog(null, "This magic button will eliminate all 2 and 4 in the game board, do you want to use it?", "Magic", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    model.doMagic();
+                    updateGridsNumber();
+                    model.setCheckIfOnlyOneMagic(true);
+                }
             }
         }
     }
