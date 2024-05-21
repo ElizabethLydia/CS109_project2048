@@ -125,10 +125,7 @@ public class UserManager {
         try {
             //创建一个文件读取器,读取文件savegame.txt,如果文件不存在会抛出异常
             BufferedWriter writer = new BufferedWriter(new FileWriter("DataField.txt"));
-            int lineNumber = 0;
             //读取文件的每一行
-            String line;
-            System.out.println("loading data...");
             for (User user : users.keySet()) {
                 //第一行为用户名
                 writer.write("UseName:" + user.name + "\n");

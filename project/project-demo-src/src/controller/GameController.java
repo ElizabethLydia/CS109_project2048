@@ -4,6 +4,7 @@ import model.GridNumber;
 import view.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 //导入音乐播放器
 //import javazoom.jl.decoder.JavaLayerException;
 //import javazoom.jl.player.Player;
@@ -20,8 +21,12 @@ public class GameController {
         this.view = view;
         this.model = model;
         this.frame = frame;
-        Timer timer = new Timer(60000, e -> saveGame()); // 每60秒保存一次
-        timer.start(); // 启动定时器
+        if (frame.user!= null) {
+            Timer timer = new Timer(60000, e ->{
+                saveGame();
+            }); // 每60秒保存一次
+            timer.start(); // 启动定时器
+        }
     }
 
     public void restartGame() {

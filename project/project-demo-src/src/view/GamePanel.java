@@ -22,7 +22,6 @@ public class GamePanel extends ListenerPanel {
     private ArrayList<Integer> eachScore = new ArrayList<>();
     GameOverDialog gameOverDialog;
     GameController controller;
-    private int state;
 
     public GamePanel(int size, int xcount, int ycount) {//构造方法
         this.setVisible(true);
@@ -35,8 +34,18 @@ public class GamePanel extends ListenerPanel {
         this.GRID_SIZE = size / (Math.max(XCOUNT, YCOUNT));
         this.grids = new GridComponent[XCOUNT][YCOUNT];
         this.model = new GridNumber(XCOUNT, YCOUNT);
-        this.state=0;
         initialGame();
+        int[][] initialArray = new int[XCOUNT][YCOUNT];
+        for (int i = 0; i <XCOUNT ; i++) {
+            for (int j = 0; j <YCOUNT ; j++) {
+                initialArray[i][j] = model.getNumber(i, j);
+            }
+        }
+        this.model.addEachArray(initialArray);
+        this.score = 0;
+        this.eachScore.add(score);
+        this.model.addEachScore(score);
+
     }
 
     public void initialGame() {
