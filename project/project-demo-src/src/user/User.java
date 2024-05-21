@@ -12,6 +12,7 @@ public class User {
     public int time ;
     public int indexLine;//行索引
     public UserManager userManager;
+    boolean haveSaved;
     public User(UserManager userManager){
         HighestScore = 0;
         TimeModeHighestScore = 0;
@@ -22,6 +23,7 @@ public class User {
         step = 0;
         time = 0;
         indexLine = 0;
+        haveSaved = false;
         this.userManager = userManager;
     }
 }

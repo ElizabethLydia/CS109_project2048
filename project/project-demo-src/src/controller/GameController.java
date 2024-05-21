@@ -42,12 +42,12 @@ public class GameController {
                 TimingGameFrame timingGameFrame = (TimingGameFrame) frame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 timingGameFrame.timer.stop();
                 timingGameFrame.dispose(); // 关闭当前窗口
-                TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(),frame.user,60); // 创建新的游戏窗口
+                TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user, 60); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 // 停止定时器
-            }else {
+            } else {
                 this.frame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT(),frame.user); // 创建新的游戏窗口
+                GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         } else if (result == JOptionPane.NO_OPTION) {
@@ -59,28 +59,27 @@ public class GameController {
     //todo: add other methods such as loadGame, saveGame...
 
     public void saveGame() {
-        if(frame.user != null) {
-            frame.user.xCount=model.getNumbers().length;
-            frame.user.yCount=model.getNumbers()[0].length;
+        if (frame.user != null) {
+            frame.user.xCount = model.getNumbers().length;
+            frame.user.yCount = model.getNumbers()[0].length;
             for (int i = 0; i < model.getNumbers().length; i++) {
                 for (int j = 0; j < model.getNumbers()[i].length; j++) {
-                    frame.user.numbers[i][j]=model.getNumbers()[i][j];
+                    frame.user.numbers[i][j] = model.getNumbers()[i][j];
                 }
             }
-            frame.user.score=model.getScore();
-            frame.user.step=view.getSteps();
+            frame.user.score = model.getScore();
+            frame.user.step = view.getSteps();
             if (frame instanceof TimingGameFrame) {
-                frame.user.time=((TimingGameFrame) frame).timeLeft;
+                frame.user.time = ((TimingGameFrame) frame).timeLeft;
             }
             frame.user.userManager.updateUser();
-        }else{
+        } else {
             System.out.println("用户未登录，无法保存游戏");
         }
-
     }
 
     public void loadGame() {
-        if(frame.user != null) {
+        if (frame.user != null) {
             if (frame.user.time == 0) {
                 GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
@@ -109,7 +108,7 @@ public class GameController {
                 newGameFrame.getGamePanel().updateGridsNumber();
             }
             frame.dispose(); // 关闭当前窗口
-        }else{
+        } else {
             System.out.println("用户未登录，无法加载游戏");
         }
     }
@@ -129,6 +128,7 @@ public class GameController {
 //            e.printStackTrace();
 //        }
     }
+
     public void callParentMethod(GameFrame object) {
         if (object instanceof TimingGameFrame) {
             System.out.println("调用对象是 ChildClass1");
@@ -144,19 +144,19 @@ public class GameController {
     }
 
     public void exit() {
-        if(frame.user != null) {
+        if (frame.user != null) {
             saveGame();//退出游戏时保存游戏
         }
         System.exit(0);
     }
 
     public void gotoHome() {
-        if(frame.user != null){
+        if (frame.user != null) {
             // 跳转到主页
             Menu2 menu2 = new Menu2(frame.user);
             menu2.setVisible(true);
             frame.dispose();
-        } else{
+        } else {
             Menu1 menu = new Menu1();
             menu.setVisible(true);
             frame.dispose();
@@ -164,4 +164,3 @@ public class GameController {
 
     }
 }
-

@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class GameMenu extends JMenuBar {
     //这个用于显示游戏菜单（游戏上面的一栏）
-    public GameMenu(GameFrame gameFrame) {
+    public GameMenu(GameFrame gameFrame, User user) {
         Font font = new Font("Arial", Font.PLAIN, 20);
         Color color = new Color(0x545151);
         JMenuBar menuBar = new JMenuBar();
@@ -64,7 +64,7 @@ public class GameMenu extends JMenuBar {
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 gameFrame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(4, 4,gameFrame.user);
+                GameFrame newGameFrame = new GameFrame(4, 4, gameFrame.user);
                 // 创建新的游戏窗口,gamframe.user是用户信息,这里传入建立这位用户的新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
@@ -74,33 +74,43 @@ public class GameMenu extends JMenuBar {
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to start a new game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 gameFrame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(5, 5,gameFrame.user); // 创建新的游戏窗口
+                GameFrame newGameFrame = new GameFrame(5, 5, gameFrame.user); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         });
 
         saveGame.addActionListener(e -> {
             System.out.println("you choose save game");
-            //我想这里先不要直接保存，而是弹出一个对话框，让用户选择是否保存
-            int result = JOptionPane.showConfirmDialog(null, "Are you sure to save the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                gameFrame.getController().saveGame();
-            }else if (result == JOptionPane.NO_OPTION){
-                System.out.println("you choose not to save the game");
-                //这里应该是不保存游戏，并且游戏还可以继续操作
-                this.requestFocusInWindow();//这句话的意思是让这个窗口获得焦点
+            if (gameFrame.user == null) {
+                JOptionPane.showMessageDialog(null, "Please login first!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            } else {
+                //我想这里先不要直接保存，而是弹出一个对话框，让用户选择是否保存
+                int result = JOptionPane.showConfirmDialog(null, "Are you sure to save the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    gameFrame.getController().saveGame();
+                } else if (result == JOptionPane.NO_OPTION) {
+                    System.out.println("you choose not to save the game");
+                    //这里应该是不保存游戏，并且游戏还可以继续操作
+                    this.requestFocusInWindow();//这句话的意思是让这个窗口获得焦点
+                }
             }
         });
 
         loadGame.addActionListener(e -> {
             System.out.println("you choose load game");
-            //我想这里先不要直接加载，而是弹出一个对话框，让用户选择是否加载
-            int result = JOptionPane.showConfirmDialog(null, "Are you sure to load the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                gameFrame.getController().loadGame();
-            }else if (result == JOptionPane.NO_OPTION){
-                System.out.println("you choose not to load the game");
-                this.requestFocusInWindow();
+            if (gameFrame.user == null) {
+                JOptionPane.showMessageDialog(null, "Please login first!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            } else {
+                //我想这里先不要直接加载，而是弹出一个对话框，让用户选择是否加载
+                int result = JOptionPane.showConfirmDialog(null, "Are you sure to load the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    gameFrame.getController().loadGame();
+                } else if (result == JOptionPane.NO_OPTION) {
+                    System.out.println("you choose not to load the game");
+                    this.requestFocusInWindow();
+                }
             }
         });
 
@@ -113,7 +123,7 @@ public class GameMenu extends JMenuBar {
             int result1 = JOptionPane.showConfirmDialog(null, "Do you want to save the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result1 == JOptionPane.YES_OPTION) {
                 gameFrame.getController().saveGame();
-            }else if (result1 == JOptionPane.NO_OPTION){
+            } else if (result1 == JOptionPane.NO_OPTION) {
                 System.out.println("you choose not to save the game");
                 //这里应该是不保存游戏，并且游戏还可以继续操作
                 this.requestFocusInWindow();//这句话的意思是让这个窗口获得焦点

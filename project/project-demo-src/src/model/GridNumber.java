@@ -1,5 +1,6 @@
 package model;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -14,6 +15,7 @@ public class GridNumber {
 
     static Random random = new Random();
     boolean checkIfOnlyOneUndo;
+    boolean checkIfOnlyOneMagic;
 
     private ArrayList<int[][]> eachArray = new ArrayList<>();
     private ArrayList<Integer> eachScore = new ArrayList<>();
@@ -21,8 +23,17 @@ public class GridNumber {
     public boolean getCheckIfOnlyOneUndo() {
         return checkIfOnlyOneUndo;
     }
+
     public void setCheckIfOnlyOneUndo(Boolean checkIfOnlyOneUndo) {
         this.checkIfOnlyOneUndo = checkIfOnlyOneUndo;
+    }
+
+    public boolean getCheckIfOnlyOneMagic() {
+        return checkIfOnlyOneMagic;
+    }
+
+    public void setCheckIfOnlyOneMagic(Boolean checkIfOnlyOneMagic) {
+        this.checkIfOnlyOneMagic = checkIfOnlyOneMagic;
     }
 
     public GridNumber(int xCount, int yCount) {
@@ -93,11 +104,11 @@ public class GridNumber {
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             int indexY_last = Y_COUNT - 1;//这样每行判断时都能从最后一个位置开始
             if (list.size() > 1) {
-                for (int j = list.size()-1; j >0; j--) {
+                for (int j = list.size() - 1; j > 0; j--) {
                     if (list.get(j).equals(list.get(j - 1))) {
-                        list.set(j, list.get(j)*2);
-                        list.set(j-1, 0);
-                        score+= list.get(j);
+                        list.set(j, list.get(j) * 2);
+                        list.set(j - 1, 0);
+                        score += list.get(j);
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -105,7 +116,7 @@ public class GridNumber {
                 //然后清零这一行，再从右往左填充
                 ArrayList<Integer> list2 = new ArrayList<>();
                 for (int j = 0; j < list.size(); j++) {
-                    if (list.get(j)!= 0) {
+                    if (list.get(j) != 0) {
                         list2.add(list.get(j));
                     }
                 }
@@ -115,7 +126,7 @@ public class GridNumber {
                     indexY_last--;
                 }
             }
-            if (list.size() == 1){
+            if (list.size() == 1) {
                 numbers[i][indexY_last] = list.get(0);
             }
         }
@@ -140,11 +151,11 @@ public class GridNumber {
             //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             if (list.size() > 1) {
-                for (int j = 0; j < list.size()-1; j++) {
+                for (int j = 0; j < list.size() - 1; j++) {
                     if (list.get(j).equals(list.get(j + 1))) {
-                        list.set(j, list.get(j)*2);
-                        list.set(j+1, 0);
-                        score+= list.get(j);
+                        list.set(j, list.get(j) * 2);
+                        list.set(j + 1, 0);
+                        score += list.get(j);
 
                     }
                 }
@@ -163,7 +174,7 @@ public class GridNumber {
                     numbers[i][j] = list2.get(j);
                 }
             }
-            if (list.size() == 1){
+            if (list.size() == 1) {
                 numbers[i][0] = list.get(0);
             }
         }
@@ -189,9 +200,9 @@ public class GridNumber {
             if (list.size() > 1) {
                 for (int i = 0; i < list.size() - 1; i++) {
                     if (list.get(i).equals(list.get(i + 1))) {
-                        list.set(i, list.get(i)*2);
+                        list.set(i, list.get(i) * 2);
                         list.set(i + 1, 0);
-                        score+= list.get(i);
+                        score += list.get(i);
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -234,9 +245,9 @@ public class GridNumber {
             if (list.size() > 1) {
                 for (int i = list.size() - 1; i > 0; i--) {
                     if (list.get(i).equals(list.get(i - 1))) {
-                        list.set(i, list.get(i)*2);
+                        list.set(i, list.get(i) * 2);
                         list.set(i - 1, 0);
-                        score+= list.get(i);
+                        score += list.get(i);
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -259,22 +270,24 @@ public class GridNumber {
             }
         }
     }
+
     public void undo() {
         this.numbers = eachArray.get(eachArray.size() - 1);
     }
+
     public void dead() {
         if (X_COUNT == 4 || Y_COUNT == 4) {
-            numbers=new int[][]{{2,4,2,4},
-                                 {4,2,4,2},
-                                 {2,4,2,4},
-                                 {4,2,4,2}
+            numbers = new int[][]{{2, 4, 2, 4},
+                    {4, 2, 4, 2},
+                    {2, 4, 2, 4},
+                    {4, 2, 4, 2}
             };
-        }else {
-            numbers=new int[][]{{2,4,2,4,2},
-                                {4,2,4,2,4},
-                                {2,4,2,4,2},
-                                {4,2,4,2,4},
-                                {2,4,2,4,2}
+        } else {
+            numbers = new int[][]{{2, 4, 2, 4, 2},
+                    {4, 2, 4, 2, 4},
+                    {2, 4, 2, 4, 2},
+                    {4, 2, 4, 2, 4},
+                    {2, 4, 2, 4, 2}
             };
         }
 
@@ -295,12 +308,15 @@ public class GridNumber {
             }
         }
     }
+
     public int getNumber(int i, int j) {
         return numbers[i][j];
     }
+
     public int[][] getNumbers() {
         return numbers;
     }
+
     public void setNumbers(int[][] numbers) {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[i].length; j++) {
@@ -308,11 +324,13 @@ public class GridNumber {
             }
         }
     }
+
     public void printNumber() {
         for (int[] line : numbers) {
             System.out.println(Arrays.toString(line));
         }
     }
+
     public int getScore() {
         return score;
     }
@@ -344,5 +362,16 @@ public class GridNumber {
     public void setStep(int steps) {
         //todo: add step
         this.step = steps;
+    }
+
+    public void doMagic() {
+        //遍历所有位置，把所有的2和4都变成0
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[i].length; j++) {
+                if (numbers[i][j] == 2 || numbers[i][j] == 4) {
+                    numbers[i][j] = 0;
+                }
+            }
+        }
     }
 }

@@ -91,7 +91,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 if (controller.frame instanceof TimingGameFrame) {
-                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
                     // 停止定时器
                 }
@@ -128,7 +128,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 if (controller.frame instanceof TimingGameFrame) {
-                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
                     // 停止定时器
                 }
@@ -165,7 +165,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 if (controller.frame instanceof TimingGameFrame) {
-                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
                     // 停止定时器
                 }
@@ -203,7 +203,7 @@ public class GamePanel extends ListenerPanel {
             if (checkIfEnded()) {
                 System.out.println("game is over");
                 if (controller.frame instanceof TimingGameFrame) {
-                    TimingGameFrame timingGameFrame = (TimingGameFrame)controller.frame;
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.timer.stop();
                     // 停止定时器
                 }
@@ -244,9 +244,10 @@ public class GamePanel extends ListenerPanel {
             JOptionPane.showMessageDialog(this, "You can only undo once", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }
+
     public void dead() {
-            this.model.dead();
-            this.updateGridsNumber();
+        this.model.dead();
+        this.updateGridsNumber();
     }
 
     //判断是否是有效移动
@@ -315,6 +316,7 @@ public class GamePanel extends ListenerPanel {
         scoreLabel.setText(String.format("<html>Score:<br> %d</html>", model.getScore()));
         eachScore.add(model.getScore());
     }
+
     public void setController(GameController controller) {
         this.controller = controller;
     }
@@ -322,16 +324,18 @@ public class GamePanel extends ListenerPanel {
     public void setScoreLabel(JLabel scoreLabel) {
         this.scoreLabel = scoreLabel;
     }
-    public int getXCOUNT(){
+
+    public int getXCOUNT() {
         return XCOUNT;
     }
-    public int getYCOUNT(){
+
+    public int getYCOUNT() {
         return YCOUNT;
     }
 
     public void setGameOverDialog() {
-        gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over", this.score, 0, this.steps ,controller);
-       //this.controller.frame和null的区别，null是为了在游戏结束时关闭窗口，而controller.frame是为了显示游戏结束的对话框
+        gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over", this.score, 0, this.steps, controller);
+        //this.controller.frame和null的区别，null是为了在游戏结束时关闭窗口，而controller.frame是为了显示游戏结束的对话框
         gameOverDialog.setVisible(true);
     }
 
@@ -344,11 +348,25 @@ public class GamePanel extends ListenerPanel {
         this.steps = step;
         stepLabel.setText(String.format("<html>Step:<br> %d</html>", step));
     }
+
     public int getSteps() {
         return steps;
     }
+
     public GridNumber getModel() {
         return model;
     }
 
+    public void doMagic() {
+        if (model.getCheckIfOnlyOneMagic() == true) {
+            JOptionPane.showMessageDialog(null, "You can only use magic once", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int result = JOptionPane.showConfirmDialog(null, "This magic button will eliminate all 2 and 4 in the game board, do you want to use it?", "Magic", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                model.doMagic();
+                updateGridsNumber();
+                model.setCheckIfOnlyOneMagic(true);
+            }
+        }
+    }
 }
