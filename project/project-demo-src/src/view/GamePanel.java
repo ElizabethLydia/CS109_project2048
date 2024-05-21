@@ -45,7 +45,6 @@ public class GamePanel extends ListenerPanel {
         this.score = 0;
         this.eachScore.add(score);
         this.model.addEachScore(score);
-
     }
 
     public void initialGame() {
