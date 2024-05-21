@@ -2,14 +2,14 @@ UseName:u6
 Password:11111
 HighestScore:0
 TimeModeHighestScore:0
-4 4
-2,8,16,8
-0,0,8,16
-4,0,16,4
-0,0,0,4
-
-Score:136
-Step:24
+5 5
+0,0,8,8,2
+0,2,0,32,2
+0,0,0,8,2
+0,0,0,64,4
+0,0,0,4,2
+Score:428
+Step:46
 Time:0
 ********
 UseName:u3
@@ -26,32 +26,32 @@ Score:2012
 Step:130
 Time:21
 ********
-UseName:123
-Password:123
-HighestScore:0
-TimeModeHighestScore:0
-4 4
-0,0,0,0
-0,4,0,0
-2,0,0,0
-8,8,0,0
-
-Score:24
-Step:6
-Time:0
-********
-UseName:u5
+UseName:u1
 Password:12345
-HighestScore:0
-TimeModeHighestScore:0
-5 5
-4096,128,16,8,2
-2,64,32,2,0
-16,4,0,0,4
-2,8,0,0,0
-4,0,0,0,0
-Score:151980
-Step:2003
+HighestScore:1220
+TimeModeHighestScore:30
+4 4
+8,2,16,2
+2048,4,8,32
+4,2,16,2
+2,0,0,2
+
+Score:1228
+Step:105
+Time:12
+********
+UseName:u2
+Password:11111
+HighestScore:1220
+TimeModeHighestScore:30
+4 4
+4,8,256,4
+32,8,32,0
+4,8,0,4
+4,0,0,0
+
+Score:1920
+Step:117
 Time:0
 ********
 UseName:u4
@@ -68,31 +68,31 @@ Score:0
 Step:0
 Time:0
 ********
-UseName:u2
-Password:11111
-HighestScore:1220
-TimeModeHighestScore:30
-4 4
-4,8,256,4
-32,8,32,0
-4,8,0,4
-4,0,0,0
-
-Score:1920
-Step:117
+UseName:u5
+Password:12345
+HighestScore:0
+TimeModeHighestScore:0
+5 5
+4096,128,16,8,2
+2,64,32,2,0
+16,4,0,0,4
+2,8,0,0,0
+4,0,0,0,0
+Score:151980
+Step:2003
 Time:0
 ********
-UseName:u1
-Password:12345
-HighestScore:1220
-TimeModeHighestScore:30
+UseName:123
+Password:123
+HighestScore:0
+TimeModeHighestScore:0
 4 4
-8,2,16,2
-2048,4,8,32
-4,2,16,2
-2,0,0,2
+0,0,0,0
+0,4,0,0
+2,0,0,0
+8,8,0,0
 
-Score:1228
-Step:105
-Time:12
+Score:24
+Step:6
+Time:0
 ********

@@ -21,9 +21,8 @@ public class GameController {
         this.model = model;
         this.frame = frame;
         if (frame.user!= null) {
-            Timer timer = new Timer(5000, e ->{
+            Timer timer = new Timer(60000, e ->{
                 saveGame();
-                System.out.println(111);
             }); // 每60秒保存一次
             timer.start(); // 启动定时器
         }
