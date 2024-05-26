@@ -84,22 +84,15 @@ public class GamePanel extends ListenerPanel {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
-        this.model.moveRight();
-        int[][] lastArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < lastArray.length; i++) {
-            for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] = model.getNumber(i, j);
-            }
-        }
-        if (this.checkValidMove(initialArray, lastArray)) {
+        if (this.model.moveRight()) {
             System.out.println("Click VK_RIGHT");
             this.afterMove();
             this.model.addRandomNumber();
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
-        } else {
-            System.out.println("Unable to move right,try another direction.");
+        }else{
+            System.out.println("Unable to move right,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
@@ -112,7 +105,6 @@ public class GamePanel extends ListenerPanel {
             }
         }
     }
-
     @Override
     public void doMoveLeft() {
         int[][] initialArray = new int[XCOUNT][YCOUNT];
@@ -121,22 +113,15 @@ public class GamePanel extends ListenerPanel {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
-        this.model.moveLeft();
-        int[][] lastArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < lastArray.length; i++) {
-            for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] = model.getNumber(i, j);
-            }
-        }
-        if (this.checkValidMove(initialArray, lastArray)) {
+        if (this.model.moveLeft()) {
             System.out.println("Click VK_LEFT");
             this.afterMove();
             this.model.addRandomNumber();
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
-        } else {
-            System.out.println("Unable to move left,try another direction.");
+        }else{
+            System.out.println("Unable to move left,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
@@ -158,22 +143,15 @@ public class GamePanel extends ListenerPanel {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
-        this.model.moveUp();
-        int[][] lastArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < lastArray.length; i++) {
-            for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] = model.getNumber(i, j);
-            }
-        }
-        if (this.checkValidMove(initialArray, lastArray)) {
+        if (this.model.moveUp()) {
             System.out.println("Click VK_UP");
             this.afterMove();
             this.model.addRandomNumber();
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
-        } else {
-            System.out.println("Unable to move up,try another direction.");
+        }else{
+            System.out.println("Unable to move up,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
@@ -183,7 +161,6 @@ public class GamePanel extends ListenerPanel {
                 }
                 setGameOverDialog();
                 //结束游戏界面
-
             }
         }
     }
@@ -196,22 +173,15 @@ public class GamePanel extends ListenerPanel {
                 initialArray[i][j] = model.getNumber(i, j);
             }
         }
-        this.model.moveDown();
-        int[][] lastArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < lastArray.length; i++) {
-            for (int j = 0; j < lastArray[i].length; j++) {
-                lastArray[i][j] = model.getNumber(i, j);
-            }
-        }
-        if (this.checkValidMove(initialArray, lastArray)) {
+        if (this.model.moveDown()) {
             System.out.println("Click VK_DOWN");
             this.afterMove();
             this.model.addRandomNumber();
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
-        } else {
-            System.out.println("Unable to move down,try another direction.");
+        }else{
+            System.out.println("Unable to move down,try another direction");
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
@@ -221,7 +191,6 @@ public class GamePanel extends ListenerPanel {
                 }
                 setGameOverDialog();
                 //结束游戏界面
-
             }
         }
     }

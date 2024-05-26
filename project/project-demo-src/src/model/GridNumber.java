@@ -78,12 +78,18 @@ public class GridNumber {
     }
 
     //todo: finish the method of four direction moving.
-    public void moveRight() {
+    public boolean moveRight() {
         //滑动和合并：当玩家滑动网格时，所有瓷砖会向所选方向移动，直到它们撞到边缘或另一个不可移动的瓷砖。
         //如果两个相邻的瓷砖编号相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，
         //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
         //如果存在三个相邻的相同值的瓷砖，滑动方向末端的两个块将合并在一起。
         //最后一个位置的索引
+        int[][] initialArray = new int[X_COUNT][Y_COUNT];
+        for (int i = 0; i < X_COUNT; i++) {
+            for (int j = 0; j < Y_COUNT; j++) {
+                initialArray[i][j] = numbers[i][j];
+            }
+        }
 
         for (int i = 0; i < numbers.length; i++) {
             //每一行都生成一个list，用于存储非0的数字
@@ -104,10 +110,10 @@ public class GridNumber {
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             int indexY_last = Y_COUNT - 1;//这样每行判断时都能从最后一个位置开始
             if (list.size() > 1) {
-                for (int j = list.size() - 1; j > 0; j--) {
+                for (int j = list.size()-1; j >0; j--) {
                     if (list.get(j).equals(list.get(j - 1))) {
-                        list.set(j, list.get(j) * 2);
-                        list.set(j - 1, 0);
+                        list.set(j, list.get(j)*2);
+                        list.set(j-1, 0);
                         score += list.get(j);
                     }
                 }
@@ -116,7 +122,7 @@ public class GridNumber {
                 //然后清零这一行，再从右往左填充
                 ArrayList<Integer> list2 = new ArrayList<>();
                 for (int j = 0; j < list.size(); j++) {
-                    if (list.get(j) != 0) {
+                    if (list.get(j)!= 0) {
                         list2.add(list.get(j));
                     }
                 }
@@ -126,13 +132,20 @@ public class GridNumber {
                     indexY_last--;
                 }
             }
-            if (list.size() == 1) {
+            if (list.size() == 1){
                 numbers[i][indexY_last] = list.get(0);
             }
         }
+        return checkValidMove(initialArray);
     }
 
-    public void moveLeft() {
+    public boolean moveLeft() {
+        int[][] initialArray = new int[X_COUNT][Y_COUNT];
+        for (int i = 0; i < X_COUNT; i++) {
+            for (int j = 0; j < Y_COUNT; j++) {
+                initialArray[i][j] = numbers[i][j];
+            }
+        }
         for (int i = 0; i < numbers.length; i++) {
             //每一行都生成一个list，用于存储非0的数字
             ArrayList<Integer> list = new ArrayList<>();
@@ -151,12 +164,11 @@ public class GridNumber {
             //如果里面元素大于等于2，就要判断两个相邻的瓷砖编号是否相同，
             //如果相同，它们将在停止移动后合并为一个瓷砖，其数值等于它们值的总和，前面的置为0
             if (list.size() > 1) {
-                for (int j = 0; j < list.size() - 1; j++) {
+                for (int j = 0; j < list.size()-1; j++) {
                     if (list.get(j).equals(list.get(j + 1))) {
-                        list.set(j, list.get(j) * 2);
-                        list.set(j + 1, 0);
+                        list.set(j, list.get(j)*2);
+                        list.set(j+1, 0);
                         score += list.get(j);
-
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -174,14 +186,21 @@ public class GridNumber {
                     numbers[i][j] = list2.get(j);
                 }
             }
-            if (list.size() == 1) {
+            if (list.size() == 1){
                 numbers[i][0] = list.get(0);
             }
         }
+        return checkValidMove(initialArray);
     }
 
 
-    public void moveUp() {
+    public boolean moveUp() {
+        int[][] initialArray = new int[X_COUNT][Y_COUNT];
+        for (int i = 0; i < X_COUNT; i++) {
+            for (int j = 0; j < Y_COUNT; j++) {
+                initialArray[i][j] = numbers[i][j];
+            }
+        }
         for (int j = 0; j < numbers[0].length; j++) {
             //每一列都生成一个list，用于存储非0的数字
             ArrayList<Integer> list = new ArrayList<>();
@@ -200,7 +219,7 @@ public class GridNumber {
             if (list.size() > 1) {
                 for (int i = 0; i < list.size() - 1; i++) {
                     if (list.get(i).equals(list.get(i + 1))) {
-                        list.set(i, list.get(i) * 2);
+                        list.set(i, list.get(i)*2);
                         list.set(i + 1, 0);
                         score += list.get(i);
                     }
@@ -223,9 +242,16 @@ public class GridNumber {
                 numbers[0][j] = list.get(0);
             }
         }
+        return checkValidMove(initialArray);
     }
 
-    public void moveDown() {
+    public boolean moveDown() {
+        int[][] initialArray = new int[X_COUNT][Y_COUNT];
+        for (int i = 0; i < X_COUNT; i++) {
+            for (int j = 0; j < Y_COUNT; j++) {
+                initialArray[i][j] = numbers[i][j];
+            }
+        }
         for (int j = 0; j < numbers[0].length; j++) {
             int indexX_last = X_COUNT - 1;//这样每列判断时都能从最后一个位置开始
             //每一列都生成一个list，用于存储非0的数字
@@ -245,9 +271,10 @@ public class GridNumber {
             if (list.size() > 1) {
                 for (int i = list.size() - 1; i > 0; i--) {
                     if (list.get(i).equals(list.get(i - 1))) {
-                        list.set(i, list.get(i) * 2);
+                        list.set(i, list.get(i)*2);
                         list.set(i - 1, 0);
                         score += list.get(i);
+
                     }
                 }
                 //并且这个新合并的瓷砖也将沿着移动方向继续移动，直到不能再移动。
@@ -269,6 +296,18 @@ public class GridNumber {
                 numbers[indexX_last][j] = list.get(0);
             }
         }
+        return checkValidMove(initialArray);
+    }
+
+    private boolean checkValidMove(int[][] initialArray) {
+        for (int i = 0; i < X_COUNT; i++) {
+            for (int j = 0; j < Y_COUNT; j++) {
+                if (initialArray[i][j] != numbers[i][j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void undo() {

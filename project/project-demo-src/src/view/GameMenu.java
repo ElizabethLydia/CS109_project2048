@@ -98,9 +98,10 @@ public class GameMenu extends JMenuBar {
                 } else if (gameFrame instanceof AIGameFrame) {
                     AIGameFrame AiGameFrame = (AIGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                     AiGameFrame.timer.stop();
-                    AiGameFrame.dispose(); // 关闭当前窗口
+                    JOptionPane.showMessageDialog(null, "AI mode can only play 4*4 game!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    /*AiGameFrame.dispose(); // 关闭当前窗口
                     AIGameFrame newGameFrame = new AIGameFrame(5, 5, gameFrame.user); // 创建新的游戏窗口
-                    newGameFrame.setVisible(true); // 显示新的游戏窗口
+                    newGameFrame.setVisible(true); // 显示新的游戏窗口*/
                     // 停止定时器
                 } else{
                     gameFrame.dispose(); // 关闭当前窗口

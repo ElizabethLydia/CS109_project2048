@@ -17,7 +17,7 @@ public class AIGameFrame extends GameFrame {
         this.timer = new Timer(1000, null);
         this.StartAIBtn = createButton("Start AI", new Point(500, 220), 110, 50, this);
         this.StartAIBtn.addActionListener(e -> {
-            timer = new Timer(100, new ActionListener() {
+            timer = new Timer(50, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     testAI(gamePanel);
@@ -46,8 +46,8 @@ public class AIGameFrame extends GameFrame {
     }
     public void testAI(GamePanel gamePanel) {
         String b;
-        AISolver solver = new AISolver(0.2, 2, 1);
-        solver.setBoard(gamePanel.getModel().numbers);
+        AISolver solver = new AISolver(gamePanel.getXCOUNT(), gamePanel.getYCOUNT(), 0.2, 2, 1);
+        solver.setNumbers(gamePanel.getModel().numbers);
         b = solver.minMaxAI();
         System.out.println("AI Choose the move " + b);
         if (b.equals("w")) gamePanel.doMoveUp();
