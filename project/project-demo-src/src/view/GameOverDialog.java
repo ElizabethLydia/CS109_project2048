@@ -13,7 +13,7 @@ public class GameOverDialog extends JDialog implements Create {
     private int Step;
     GameController controller;
 
-    public GameOverDialog(JFrame parent, String gameOverMessage, int currentScore, int highScore, int step, GameController controller) {
+    public GameOverDialog(GameFrame parent, String gameOverMessage, int currentScore, int highScore, int step, GameController controller) {
         super(parent, "Game Over", true); // 模态对话框
         this.Score = currentScore;
         this.highestScore = highScore;
@@ -76,13 +76,13 @@ public class GameOverDialog extends JDialog implements Create {
                 if (controller.frame instanceof TimingGameFrame) {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
                     timingGameFrame.dispose();
-                    TimingGameFrame newGameFrame = new TimingGameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT(),controller.frame.user,60); // 创建新的游戏窗口
+                    TimingGameFrame newGameFrame = new TimingGameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT(),controller.frame.user,60,parent.menu1); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     this.dispose(); // 关闭当前窗口
                     // 停止定时器
                 }else {
                     controller.frame.dispose(); // 关闭当前窗口
-                    GameFrame newGameFrame = new GameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT(),controller.frame.user); // 创建新的游戏窗口
+                    GameFrame newGameFrame = new GameFrame(controller.view.getXCOUNT(), controller.view.getYCOUNT(),controller.frame.user,parent.menu1); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     this.dispose(); // 关闭当前窗口
                 }

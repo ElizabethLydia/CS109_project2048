@@ -15,6 +15,7 @@ public class Menu1 extends JFrame implements Create {
     private JButton visitorsloginBtn;
     private JButton settingsBtn;
     private JButton exitBtn;
+    Settings settings= new Settings(this);
 
     public Menu1() {//用户登录界面
         this.setTitle("2024 CS109 Project Demo");
@@ -35,19 +36,17 @@ public class Menu1 extends JFrame implements Create {
         this.settingsBtn = createButtonWithIcon("Settings", new Point(120, 500), 80, 80, this);
         this.exitBtn = createButtonWithIcon("Exit", new Point(290, 500), 80, 80, this);
         //还要setVisible(true)和setVisible(false)
-        AudioPlay audioPlay = new AudioPlay("project/project-demo-src/src/controller/Yiruma - River Flows in You.wav");
-        audioPlay.start();
+        settings.StartSong();
         this.usersloginBtn.addActionListener(e -> {
-            LoginView loginView = new LoginView(this, userManager);
+            LoginView loginView = new LoginView(this, userManager,this);
             loginView.setVisible(true);
         });
         this.visitorsloginBtn.addActionListener(e -> {
-            ChooseGamemode chooseSize = new ChooseGamemode(this,null);
+            ChooseGamemode chooseSize = new ChooseGamemode(this,null,this);
             //此时是游客模式，所以userManager为null
             chooseSize.setVisible(true);
         });
         this.settingsBtn.addActionListener(e -> {
-            Settings settings = new Settings(this);
             settings.setVisible(true);
         });
         this.exitBtn.addActionListener(e -> {

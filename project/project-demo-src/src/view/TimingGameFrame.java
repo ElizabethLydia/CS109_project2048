@@ -10,8 +10,8 @@ public class TimingGameFrame extends GameFrame {
     public Timer timer;
     int timeInSeconds ; // 倒计时时间，以秒为单位
     public int timeLeft;
-    public TimingGameFrame(int xcount, int ycount, User user, int time) {
-        super(xcount, ycount,user);
+    public TimingGameFrame(int xcount, int ycount, User user, int time,Menu1 menu1) {
+        super(xcount, ycount,user,menu1);
         timeInSeconds =time; // 倒计时时间，以秒为单位
         timeLeft = timeInSeconds;
         this.HighestScoreLabel.setText(String.format("<html>Time:<br> %d:%02d</html>", timeInSeconds / 60, timeInSeconds % 60));

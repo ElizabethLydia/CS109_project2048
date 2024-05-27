@@ -45,19 +45,19 @@ public class GameController {
                 TimingGameFrame timingGameFrame = (TimingGameFrame) frame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 timingGameFrame.timer.stop();
                 timingGameFrame.dispose(); // 关闭当前窗口
-                TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user, 60); // 创建新的游戏窗口
+                TimingGameFrame newGameFrame = new TimingGameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user, 60,frame.menu1); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 // 停止定时器
             } else if (frame instanceof AIGameFrame) {
                 AIGameFrame AiGameFrame = (AIGameFrame) frame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 AiGameFrame.timer.stop();
                 AiGameFrame.dispose(); // 关闭当前窗口
-                AIGameFrame newGameFrame = new AIGameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user); // 创建新的游戏窗口
+                AIGameFrame newGameFrame = new AIGameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user,frame.menu1); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
                 // 停止定时器
             } else{
                 this.frame.dispose(); // 关闭当前窗口
-                GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user); // 创建新的游戏窗口
+                GameFrame newGameFrame = new GameFrame(view.getXCOUNT(), view.getYCOUNT(), frame.user,frame.menu1); // 创建新的游戏窗口
                 newGameFrame.setVisible(true); // 显示新的游戏窗口
             }
         } else if (result == JOptionPane.NO_OPTION) {
@@ -89,7 +89,7 @@ public class GameController {
 
     public void loadGame() {
         if (frame.user.time == 0) {
-            GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user); // 创建新的游戏窗口
+            GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user,frame.menu1); // 创建新的游戏窗口
             newGameFrame.setVisible(true); // 显示新的游戏窗口
             newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
             // 设置分数
@@ -102,7 +102,7 @@ public class GameController {
             // 更新游戏面板以显示加载的状态
             newGameFrame.getGamePanel().updateGridsNumber();
         } else {
-            TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user, frame.user.time); // 创建新的计时游戏窗口
+            TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user, frame.user.time,frame.menu1); // 创建新的计时游戏窗口
             newGameFrame.setVisible(true); // 显示新的游戏窗口
             newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
             // 设置分数
@@ -159,7 +159,7 @@ public class GameController {
     public void gotoHome() {
         if (frame.user != null) {
             // 跳转到主页
-            Menu2 menu2 = new Menu2(frame.user);
+            Menu2 menu2 = new Menu2(frame.user,frame.menu1);
             menu2.setVisible(true);
             frame.dispose();
         } else {

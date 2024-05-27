@@ -80,7 +80,7 @@ public class RegisterView extends JDialog implements Create {
                     }else{//如果用户不存在,则注册用户,并将用户的用户名和密码存储到users中
                         userManager.registerUser(username, password);
                         this.dispose();//关闭对话框
-                        LoginView loginView = new LoginView(parent.getParent(), userManager);
+                        LoginView loginView = new LoginView(parent.getParent(), userManager,parent.mainMenu);
                         loginView.setVisible(true);
                     }
                 } else {

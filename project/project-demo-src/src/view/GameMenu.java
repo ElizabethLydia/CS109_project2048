@@ -67,19 +67,19 @@ public class GameMenu extends JMenuBar {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                     timingGameFrame.timer.stop();
                     timingGameFrame.dispose(); // 关闭当前窗口
-                    TimingGameFrame newGameFrame = new TimingGameFrame(4, 4, gameFrame.user, 60); // 创建新的游戏窗口
+                    TimingGameFrame newGameFrame = new TimingGameFrame(4, 4, gameFrame.user, 60,gameFrame.menu1); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     // 停止定时器
                 } else if (gameFrame instanceof AIGameFrame) {
                     AIGameFrame AIGameFrame = (AIGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                     AIGameFrame.timer.stop();
                     AIGameFrame.dispose(); // 关闭当前窗口
-                    AIGameFrame newGameFrame = new AIGameFrame(4, 4, gameFrame.user); // 创建新的游戏窗口
+                    AIGameFrame newGameFrame = new AIGameFrame(4, 4, gameFrame.user,gameFrame.menu1); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     // 停止定时器
                 } else{
                     gameFrame.dispose(); // 关闭当前窗口
-                    GameFrame newGameFrame = new GameFrame(4, 4, gameFrame.user); // 创建新的游戏窗口
+                    GameFrame newGameFrame = new GameFrame(4, 4, gameFrame.user,gameFrame.menu1); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                 }
             }
@@ -92,7 +92,7 @@ public class GameMenu extends JMenuBar {
                     TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                     timingGameFrame.timer.stop();
                     timingGameFrame.dispose(); // 关闭当前窗口
-                    TimingGameFrame newGameFrame = new TimingGameFrame(5, 5, gameFrame.user, 60); // 创建新的游戏窗口
+                    TimingGameFrame newGameFrame = new TimingGameFrame(5, 5, gameFrame.user, 60,gameFrame.menu1); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                     // 停止定时器
                 } else if (gameFrame instanceof AIGameFrame) {
@@ -105,7 +105,7 @@ public class GameMenu extends JMenuBar {
                     // 停止定时器
                 } else{
                     gameFrame.dispose(); // 关闭当前窗口
-                    GameFrame newGameFrame = new GameFrame(5, 5, gameFrame.user); // 创建新的游戏窗口
+                    GameFrame newGameFrame = new GameFrame(5, 5, gameFrame.user,gameFrame.menu1); // 创建新的游戏窗口
                     newGameFrame.setVisible(true); // 显示新的游戏窗口
                 }
             }
@@ -180,7 +180,7 @@ public class GameMenu extends JMenuBar {
 
         settings1.addActionListener(e -> {
             System.out.println("you choose settings.");
-            gameFrame.getController().setVolume();
+            gameFrame.menu1.settings.audioPlay.pause();
         });
         settings2.addActionListener(e -> {
             System.out.println("you choose settings.");

@@ -1,6 +1,7 @@
 package user;
 
 import util.Create;
+import view.Menu1;
 import view.Menu2;
 
 import javax.swing.*;
@@ -19,8 +20,9 @@ public class LoginView extends JDialog implements Create {
     private JButton registerButton;
     private UserManager userManager;
     private User user;
+    Menu1 mainMenu;
 
-    public LoginView(JFrame parent, UserManager userManager) {
+    public LoginView(JFrame parent, UserManager userManager, Menu1 mainMenu) {
         super(parent, "Login", true);//设置对话框的标题和是否可见,这个对话框是模态的，即用户必须先关闭对话框才能回到父窗口
         this.userManager = userManager;//将传入的userManager赋值给类的userManager变量,这个userManager是用来管理用户的类,这个类的作用是用来管理用户的登录、注册等操作,这个类的实例化是在Main中进行的
         this.setLayout(null);//设置对话框的布局方式为null,即不使用布局管理器
@@ -29,6 +31,7 @@ public class LoginView extends JDialog implements Create {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//设置对话框关闭时的默认操作,这里设置为关闭对话框
         this.setResizable(false);//设置对话框是否可以改变大小
         this.getContentPane().setBackground(new Color(0xF6ECDF));//设置对话框的背景颜色
+        this.mainMenu = mainMenu;
 
         //当用户关闭对话框时,默认操作是关闭对话框
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,7 +73,7 @@ public class LoginView extends JDialog implements Create {
                 JOptionPane.showMessageDialog(null, "Login successful.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 parent.dispose();
-                Menu2 menu2 = new Menu2(user);
+                Menu2 menu2 = new Menu2(user, mainMenu);
                 menu2.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
