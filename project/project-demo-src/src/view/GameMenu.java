@@ -35,7 +35,7 @@ public class GameMenu extends JMenuBar {
         newGame.add(newGame1);
         newGame.add(newGame2);
 
-        JMenuItem settings1 = new JMenuItem("volume");
+        JMenuItem settings1 = new JMenuItem("settings");
         JMenuItem settings2 = new JMenuItem("returnToHomePage");
         JMenuItem settings3 = new JMenuItem("exit");
         settings1.setFont(font);
@@ -180,7 +180,9 @@ public class GameMenu extends JMenuBar {
 
         settings1.addActionListener(e -> {
             System.out.println("you choose settings.");
-            gameFrame.menu1.settings.audioPlay.pause();
+            gameFrame.menu1.settings.setUser(gameFrame.user);
+            gameFrame.menu1.settings.setFrame(gameFrame);
+            gameFrame.menu1.settings.setVisible(true);
         });
         settings2.addActionListener(e -> {
             System.out.println("you choose settings.");
@@ -213,7 +215,6 @@ public class GameMenu extends JMenuBar {
                 gameFrame.getController().exit();
             }
         });
-
         help1.addActionListener(e -> {
             System.out.println("how to play.");
             JOptionPane.showMessageDialog(null, "Use arrow keys to move the tiles. When two tiles with the same number touch, they merge into one!", "How to play", JOptionPane.INFORMATION_MESSAGE);

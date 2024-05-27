@@ -21,7 +21,7 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
         this.setSize(500, 700);
         this.setResizable(false);
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/2048title.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/2048title.png"));
         //修改图片的大小
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
         Image img = icon.getImage().getScaledInstance(400, 250, Image.SCALE_DEFAULT);
@@ -68,12 +68,12 @@ public class Menu2 extends JFrame implements Create {//选择游戏第二个主�
                 this.dispose(); // 关闭当前窗口
         });
         this.settingsBtn.addActionListener(e -> {
-            Settings settings = new Settings(this);
-            settings.setVisible(true);
+            mainMenu.settings.setUser(user);
+            mainMenu.settings.setFrame(this);
+            mainMenu.settings.setVisible(true);
         });
         this.returnBtn.addActionListener(e -> {
-            Menu1 menu1 = new Menu1();
-            menu1.setVisible(true);
+            mainMenu.setVisible(true);
             this.dispose();
         });
         this.setLocationRelativeTo(null);

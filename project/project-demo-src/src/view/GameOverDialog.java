@@ -27,7 +27,7 @@ public class GameOverDialog extends JDialog implements Create {
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
 
 
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/GameOver.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/GameOver.png"));
         //修改图片的大小
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
         Image img = icon.getImage().getScaledInstance(500, 280, Image.SCALE_DEFAULT);
@@ -35,7 +35,7 @@ public class GameOverDialog extends JDialog implements Create {
         imageLabel.setBounds(0, 0, 500, 260);
         this.add(imageLabel);
 
-        JLabel endLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/EndLabel.png"));
+        JLabel endLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/EndLabel.png"));
         //修改图片的大小
         ImageIcon icon2 = (ImageIcon) endLabel.getIcon();
         Image img2 = icon2.getImage().getScaledInstance(420, 250, Image.SCALE_DEFAULT);

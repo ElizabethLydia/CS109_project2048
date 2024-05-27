@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserManager {
-    private Map<User, String> users = new HashMap<>();
+    public Map<User, String> users = new HashMap<>();
     //这个类是用来管理用户的类,这个类的作用是用来管理用户的登录、注册等操作,这个类的实例化是在Main中进行的
     //这个类中有一个Map类型的users变量,用来存储用户的用户名和密码,通过用户名来判断用户是否存在,通过密码来验证用户是否登录成功
     //HashMap是一个散列表，它存储的内容是键值对(key-value)映射,HashMap类实现了Map接口,HashMap类中有一个内部类Entry,Entry类实现了Map.Entry接口,Entry类中有两个成员变量key和value,分别表示键和值。

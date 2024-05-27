@@ -1,6 +1,5 @@
 package view;
 
-import controller.AudioPlay;
 import user.LoginView;
 import user.UserManager;
 import util.Create;
@@ -9,7 +8,6 @@ import util.Create;
 import javax.swing.*;
 import java.awt.*;
 public class Menu1 extends JFrame implements Create {
-    LoginView loginView;
     UserManager userManager;
     private JButton usersloginBtn;
     private JButton visitorsloginBtn;
@@ -23,7 +21,7 @@ public class Menu1 extends JFrame implements Create {
         this.setSize(500, 700);
         this.setResizable(false);
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/2048title.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/2048title.png"));
         //修改图片的大小
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
         Image img = icon.getImage().getScaledInstance(400, 250, Image.SCALE_DEFAULT);
@@ -36,7 +34,7 @@ public class Menu1 extends JFrame implements Create {
         this.settingsBtn = createButtonWithIcon("Settings", new Point(120, 500), 80, 80, this);
         this.exitBtn = createButtonWithIcon("Exit", new Point(290, 500), 80, 80, this);
         //还要setVisible(true)和setVisible(false)
-        settings.StartSong();
+//        settings.music.start(true);
         this.usersloginBtn.addActionListener(e -> {
             LoginView loginView = new LoginView(this, userManager,this);
             loginView.setVisible(true);

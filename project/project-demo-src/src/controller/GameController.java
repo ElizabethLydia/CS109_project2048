@@ -163,8 +163,7 @@ public class GameController {
             menu2.setVisible(true);
             frame.dispose();
         } else {
-            Menu1 menu = new Menu1();
-            menu.setVisible(true);
+            frame.menu1.setVisible(true);
             frame.dispose();
         }
 

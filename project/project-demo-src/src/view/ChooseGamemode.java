@@ -28,7 +28,7 @@ public class ChooseGamemode extends JDialog implements Create {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);//设置关闭操作，这个对话框关闭时，只关闭这个对话框
         this.setLocationRelativeTo(parent);// 方法会将子窗口相对于父窗口进行定位，通常是使子窗口显示在父窗口的中央位置。
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/choose.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/choose.png"));
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
         Image img = icon.getImage().getScaledInstance(300, 200, Image.SCALE_DEFAULT);
         imageLabel.setIcon(new ImageIcon(img));

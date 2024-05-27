@@ -36,7 +36,7 @@ public class LoginView extends JDialog implements Create {
         //当用户关闭对话框时,默认操作是关闭对话框
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //设置对话框的界面元素
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/LoginTitle.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/LoginTitle.png"));
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
         Image img = icon.getImage().getScaledInstance(380, 250, Image.SCALE_DEFAULT);
         imageLabel.setIcon(new ImageIcon(img));

@@ -27,7 +27,7 @@ public class RegisterView extends JDialog implements Create {
         this.setResizable(false);//设置对话框是否可以改变大小
         this.getContentPane().setBackground(new Color(0xF6ECDF));//设置对话框的背景颜色
 
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/RegisterTitle.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/RegisterTitle.png"));
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
         Image img = icon.getImage().getScaledInstance(330, 200, Image.SCALE_DEFAULT);
         imageLabel.setIcon(new ImageIcon(img));
