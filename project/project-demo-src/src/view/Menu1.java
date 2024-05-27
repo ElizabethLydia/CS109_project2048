@@ -1,8 +1,10 @@
 package view;
 
+import controller.AudioPlay;
 import user.LoginView;
 import user.UserManager;
 import util.Create;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +35,8 @@ public class Menu1 extends JFrame implements Create {
         this.settingsBtn = createButtonWithIcon("Settings", new Point(120, 500), 80, 80, this);
         this.exitBtn = createButtonWithIcon("Exit", new Point(290, 500), 80, 80, this);
         //还要setVisible(true)和setVisible(false)
+        AudioPlay audioPlay = new AudioPlay("project/project-demo-src/src/controller/Yiruma - River Flows in You.wav");
+        audioPlay.start();
         this.usersloginBtn.addActionListener(e -> {
             LoginView loginView = new LoginView(this, userManager);
             loginView.setVisible(true);
