@@ -21,8 +21,10 @@ public class GamePanel extends ListenerPanel {
     private JLabel scoreLabel;
     private ArrayList<Integer> eachScore = new ArrayList<>();
     GameOverDialog gameOverDialog;
+    GameWinDialog gameWinDialog;
     GameController controller;
     private int state;
+    boolean checkIfHadInformWin;
 
     public GamePanel(int size, int xcount, int ycount) {//构造方法
         this.setVisible(true);
@@ -36,6 +38,7 @@ public class GamePanel extends ListenerPanel {
         this.grids = new GridComponent[XCOUNT][YCOUNT];
         this.model = new GridNumber(XCOUNT, YCOUNT);
         this.state=0;
+        checkIfHadInformWin=false;
         initialGame();
         int[][] initialArray = new int[XCOUNT][YCOUNT];
         for (int i = 0; i <XCOUNT ; i++) {
@@ -91,6 +94,16 @@ public class GamePanel extends ListenerPanel {
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
+            if (checkIf2048() && checkIfHadInformWin==false){
+                System.out.println("You win!");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
+                setWinDialog();
+                //结束游戏界面
+            }
         }else{
             System.out.println("Unable to move right,try another direction");
             if (checkIfEnded()) {
@@ -120,6 +133,16 @@ public class GamePanel extends ListenerPanel {
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
+            if (checkIf2048() && checkIfHadInformWin==false){
+                System.out.println("You win!");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
+                setWinDialog();
+                //结束游戏界面
+            }
         }else{
             System.out.println("Unable to move left,try another direction");
             if (checkIfEnded()) {
@@ -150,6 +173,16 @@ public class GamePanel extends ListenerPanel {
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
+            if (checkIf2048() && checkIfHadInformWin==false){
+                System.out.println("You win!");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
+                setWinDialog();
+                //结束游戏界面
+            }
         }else{
             System.out.println("Unable to move up,try another direction");
             if (checkIfEnded()) {
@@ -180,6 +213,16 @@ public class GamePanel extends ListenerPanel {
             this.model.addEachArray(initialArray);
             this.updateGridsNumber();
             this.setScore();
+            if (checkIf2048() && checkIfHadInformWin==false){
+                System.out.println("You win!");
+                if (controller.frame instanceof TimingGameFrame) {
+                    TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
+                    timingGameFrame.timer.stop();
+                    // 停止定时器
+                }
+                setWinDialog();
+                //结束游戏界面
+            }
         }else{
             System.out.println("Unable to move down,try another direction");
             if (checkIfEnded()) {
@@ -238,6 +281,19 @@ public class GamePanel extends ListenerPanel {
         for (int i = 0; i < initialArray.length; i++) {
             for (int j = 0; j < initialArray[i].length; j++) {
                 if (initialArray[i][j] != lastArray[i][j]) {
+                    check = true;
+                }
+            }
+        }
+        return check;
+    }
+
+    //判断游戏是否达到2048
+    public boolean checkIf2048() {
+        boolean check = false;
+        for (int i = 0; i < XCOUNT; i++) {
+            for (int j = 0; j < YCOUNT; j++) {
+                if (model.getNumber(i, j) == 16) {
                     check = true;
                 }
             }
@@ -315,6 +371,23 @@ public class GamePanel extends ListenerPanel {
         return YCOUNT;
     }
 
+    //建立一个游戏胜利的对话框
+    public void setWinDialog() {
+        //先做一个弹窗，询问是否继续游戏,如果是则继续游戏，就focus到这个窗口上，如果不是就弹出游戏胜利窗口
+        int result = JOptionPane.showConfirmDialog(null, "You win! Do you want to continue the game?", "Win", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            //关闭弹窗，继续游戏
+            checkIfHadInformWin=true;
+            this.requestFocus();
+            return;
+        } else {
+            gameWinDialog = new GameWinDialog(this.controller.frame, "Congratulations!", this.score, 1, this.steps, controller);
+            gameWinDialog.setVisible(true);
+        }
+    }
+
+
+    //建立一个游戏结束的对话框
     public void setGameOverDialog() {
         gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over.", this.score, 0, this.steps, controller);
         //this.controller.frame和null的区别，null是为了在游戏结束时关闭窗口，而controller.frame是为了显示游戏结束的对话框
