@@ -27,12 +27,12 @@ public class GameWinDialog extends JDialog implements Create {
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
 
 
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/GameWin.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/GameVictory.png"));
         //修改图片的大小
         ImageIcon icon = (ImageIcon) imageLabel.getIcon();
-        Image img = icon.getImage().getScaledInstance(450, 280, Image.SCALE_DEFAULT);
+        Image img = icon.getImage().getScaledInstance(320, 300, Image.SCALE_DEFAULT);
         imageLabel.setIcon(new ImageIcon(img));
-        imageLabel.setBounds(0, 0, 500, 260);
+        imageLabel.setBounds(0, 0, 480, 300);
         this.add(imageLabel);
 
         JLabel endLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/EndLabel.png"));
@@ -44,7 +44,7 @@ public class GameWinDialog extends JDialog implements Create {
         this.add(endLabel);
 
 
-        JLabel stepLabel = createLabel("Step:           " + Step, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70, this, 0x545454);
+        JLabel stepLabel = createLabel("Step:         " + Step, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70, this, 0x545454);
         endLabel.setComponentZOrder(stepLabel, 0);
 
         JLabel scoreLabel = createLabel("Score:       " + Score, new Font("Arial", Font.BOLD, 40), new Point(100, 90), 500, 70, this, 0x545454);

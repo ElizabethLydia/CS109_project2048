@@ -39,6 +39,8 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     private JButton rightBtn;
     private JButton upBtn;
     private JButton downBtn;
+    private int HighestScore;
+
 
     public GameFrame(int xcount, int ycount, User user,Menu1 menu1) {
         this.setTitle("2024 CS109 Project Demo");//窗口名称
@@ -51,6 +53,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         //可以通过setJMenuBar()方法将菜单栏添加到窗口中
         this.user = user;
         this.menu1 = menu1;
+
 
         this.titleLabel = createLabel("2048", new Font("Verdana", Font.BOLD, 80), new Point(35, 20), 240, 80, this, 0x463627);
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
@@ -65,8 +68,8 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
         if ((user != null&!(this instanceof AIGameFrame))|(this instanceof TimingGameFrame)) {
             HighestScorePanel = createPanel(418, 30, 110, 70, false);
-            this.HighestScoreLabel = createLabel("<html>Highest:<br>0 </html>",new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
-            this.HighestScoreLabel.setText(String.format("<html>Highest:<br> %d</html>", this.user.HighestScore));
+            this.HighestScoreLabel = createLabel("<html>Highest:<br>"+this.user.HighestScore+"</html>",new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
+//            this.HighestScoreLabel.setText(String.format("<html>Highest:<br> %d</html>", this.HighestScore));
             //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示
             HighestScorePanel.setComponentZOrder(HighestScoreLabel, 0);
         }

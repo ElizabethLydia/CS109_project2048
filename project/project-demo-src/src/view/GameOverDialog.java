@@ -44,7 +44,7 @@ public class GameOverDialog extends JDialog implements Create {
         this.add(endLabel);
 
 
-        JLabel stepLabel = createLabel("Step:           "+Step, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70,this,0x545454);
+        JLabel stepLabel = createLabel("Step:         "+Step, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70,this,0x545454);
         endLabel.setComponentZOrder(stepLabel, 0);
 
         JLabel scoreLabel = createLabel("Score:       "+Score, new Font("Arial", Font.BOLD, 40), new Point(100, 90), 500, 70,this,0x545454);
