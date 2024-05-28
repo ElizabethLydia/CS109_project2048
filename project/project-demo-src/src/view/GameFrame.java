@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 
 public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
-    private GameController controller;
+    GameController controller;
     public User user;
     public Menu1 menu1;
     private JButton restartBtn;
@@ -65,7 +65,8 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
         if ((user != null&!(this instanceof AIGameFrame))|(this instanceof TimingGameFrame)) {
             HighestScorePanel = createPanel(418, 30, 110, 70, false);
-            this.HighestScoreLabel = createLabel("<html>Highest:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
+            this.HighestScoreLabel = createLabel("<html>Highest:<br>0 </html>",new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
+            this.HighestScoreLabel.setText(String.format("<html>Highest:<br> %d</html>", this.user.HighestScore));
             //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示
             HighestScorePanel.setComponentZOrder(HighestScoreLabel, 0);
         }

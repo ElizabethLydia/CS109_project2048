@@ -282,6 +282,27 @@ public class GamePanel extends ListenerPanel {
         }
         return check;
     }
+    public void checkIfSuccess(int target) {
+
+        for (int i = 0; i < XCOUNT; i++) {
+            for (int j = 0; j < YCOUNT; j++) {
+                if (target== this.model.getNumber(i, j)) {
+                    int choice = showCustomButtonOptionPane("Success to reach the target!", "Congratulations!");
+                    if (choice == JOptionPane.YES_OPTION) {
+                        System.out.println("Restart");
+                        controller.restartGame();
+                    } else {
+                        System.out.println("Continue");
+                    }
+                }
+            }
+        }
+    }
+    public static int showCustomButtonOptionPane(String message, String title) {
+        UIManager.put("OptionPane.yesButtonText", "Restart");
+        UIManager.put("OptionPane.noButtonText", "Continue");
+        return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+    }
 
 
     public void afterMove() {//用于步数加1
@@ -316,7 +337,18 @@ public class GamePanel extends ListenerPanel {
     }
 
     public void setGameOverDialog() {
-        gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over.", this.score, 0, this.steps, controller);
+        if(this.controller.frame instanceof TimingGameFrame){
+            if(this.score >= this.controller.frame.user.TimeModeHighestScore) {
+                this.controller.frame.user.TimeModeHighestScore = this.score;
+            }
+            gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over.", this.score, this.controller.frame.user.HighestScore, this.steps, controller);
+        }else if (this.controller.frame.user!=null&&this.score >= this.controller.frame.user.HighestScore) {
+            this.controller.frame.user.HighestScore=this.score ;
+            gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over.", this.score, this.controller.frame.user.HighestScore, this.steps, controller);
+        }
+        else {
+            gameOverDialog = new GameOverDialog(this.controller.frame, "Game Over.", this.score, 0, this.steps, controller);
+        }
         //this.controller.frame和null的区别，null是为了在游戏结束时关闭窗口，而controller.frame是为了显示游戏结束的对话框
         gameOverDialog.setVisible(true);
     }
