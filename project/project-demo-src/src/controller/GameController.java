@@ -79,6 +79,7 @@ public class GameController {
         }
         frame.user.score = model.getScore();
         frame.user.step = view.getSteps();
+
         if (frame instanceof TimingGameFrame) {
             frame.user.time = ((TimingGameFrame) frame).timeLeft;
         }else{
