@@ -112,6 +112,18 @@ public interface Create {//创建按钮和标签
             case "VolumeDown":
                 icon = new ImageIcon("project/project-demo-src/src/util/pictures/VolumeDown.png");
                 break;
+            case "StartAI":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/startAI.png");
+                break;
+            case "StopAI":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/stopAI.png");
+                break;
+            case "Replay":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/replay.png");
+                break;
+            case"Pause":
+                icon = new ImageIcon("project/project-demo-src/src/util/pictures/pause.png");
+                break;
         }
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(img);

@@ -36,14 +36,17 @@ public class GameMenu extends JMenuBar {
         newGame.add(newGame2);
 
         JMenuItem settings1 = new JMenuItem("settings");
-        JMenuItem settings2 = new JMenuItem("returnToHomePage");
-        JMenuItem settings3 = new JMenuItem("exit");
+        JMenuItem settings2 = new JMenuItem("replay");
+        JMenuItem settings3 = new JMenuItem("returnToHomePage");
+        JMenuItem settings4 = new JMenuItem("exit");
         settings1.setFont(font);
         settings2.setFont(font);
         settings3.setFont(font);
+        settings4.setFont(font);
         settings.add(settings1);
         settings.add(settings2);
         settings.add(settings3);
+        settings.add(settings4);
 
         JMenuItem help1 = new JMenuItem("howToPlay");
         JMenuItem help2 = new JMenuItem("howToWin");
@@ -185,6 +188,11 @@ public class GameMenu extends JMenuBar {
             gameFrame.menu1.settings.setVisible(true);
         });
         settings2.addActionListener(e -> {
+            System.out.println("you choose to replay.");
+            ReplayFrame replayFrame = new ReplayFrame(gameFrame.gamePanel);
+            replayFrame.setVisible(true);
+        });
+        settings3.addActionListener(e -> {
             System.out.println("you choose settings.");
             if (gameFrame instanceof TimingGameFrame) {
                 TimingGameFrame timingGameFrame = (TimingGameFrame) gameFrame;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
@@ -208,7 +216,7 @@ public class GameMenu extends JMenuBar {
                 gameFrame.getController().gotoHome();
             }
         });
-        settings3.addActionListener(e -> {
+        settings4.addActionListener(e -> {
             System.out.println("you choose settings.");
             int result = JOptionPane.showConfirmDialog(null, "Are you sure to exit the game?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {

@@ -49,8 +49,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         通过调用这个方法，并将布局管理器设置为 null，你可以自由地使用绝对坐标来定位和放置窗口中的组件，而不受默认布局管理器的影响。*/
         this.setSize(800, 650);
         this.setResizable(false);//设置窗口大小不可变
-        createGameMenu();//创建游戏菜单,这个是在窗口上方的菜单栏,怎么让他显示出来？？？？
-        //可以通过setJMenuBar()方法将菜单栏添加到窗口中
+        createGameMenu();//通过setJMenuBar()方法将菜单栏添加到窗口中
         this.user = user;
         this.menu1 = menu1;
 
@@ -74,8 +73,6 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
             }else{
                 this.HighestScoreLabel = createLabel("<html>Highest:<br>"+this.user.HighestScore+"</html>",new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
             }
-
-
             HighestScorePanel.setComponentZOrder(HighestScoreLabel, 0);
         }
 

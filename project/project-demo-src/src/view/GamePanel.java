@@ -19,7 +19,7 @@ public class GamePanel extends ListenerPanel {
 
     private int score;
     private JLabel scoreLabel;
-    private ArrayList<Integer> eachScore = new ArrayList<>();
+    ArrayList<Integer> eachScore = new ArrayList<>();
     GameOverDialog gameOverDialog;
     GameWinDialog gameWinDialog;
     GameController controller;
@@ -253,7 +253,6 @@ public class GamePanel extends ListenerPanel {
                         this.model.undo();
                         eachScore.remove(eachScore.size() - 1);
                         this.updateGridsNumber();//更新游戏面板
-                        //为什么游戏面板没有更新
                         this.steps--;
                         this.stepLabel.setText(String.format("<html>Step:<br> %d</html>", this.steps));
                         this.score = eachScore.get(eachScore.size() - 1);
@@ -373,7 +372,36 @@ public class GamePanel extends ListenerPanel {
 
     //建立一个游戏胜利的对话框
     public void setWinDialog() {
-        if (controller.frame instanceof TimingGameFrame) {
+        if (controller.frame instanceof AIGameFrame) {
+            AIGameFrame aiGameFrame = (AIGameFrame) controller.frame;
+            aiGameFrame.timer.stop();
+            //先做一个弹窗，询问是否继续游戏,如果是则继续游戏，就focus到这个窗口上，如果不是就弹出游戏胜利窗口
+            int result = JOptionPane.showConfirmDialog(null, "You win! Do you want to continue the game?", "Win", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                //关闭弹窗，继续游戏
+                checkIfHadInformWin=true;
+                aiGameFrame.timer.start();
+                this.requestFocus();
+            } else {
+                if (this.controller.frame.user!=null){
+                    if(this.controller.frame instanceof TimingGameFrame){
+                        if(this.score >= this.controller.frame.user.TimeModeHighestScore) {
+                            this.controller.frame.user.TimeModeHighestScore = this.score;
+                        }
+                        gameWinDialog = new GameWinDialog(this.controller.frame, "Game Over.", this.score, this.controller.frame.user.HighestScore, this.steps, controller);
+                    }else {
+                        if (this.score >= this.controller.frame.user.HighestScore) {
+                            this.controller.frame.user.HighestScore = this.score;
+                        }
+                        gameWinDialog = new GameWinDialog(this.controller.frame, "Game Over.", this.score, this.controller.frame.user.HighestScore, this.steps, controller);
+                    }
+                }else {
+                    gameWinDialog = new GameWinDialog(this.controller.frame, "Game Over.", this.score, 0, this.steps, controller);
+                }
+                //this.controller.frame和null的区别，null是为了在游戏结束时关闭窗口，而controller.frame是为了显示游戏结束的对话框
+                gameWinDialog.setVisible(true);
+            }
+        }else if (controller.frame instanceof TimingGameFrame) {
             TimingGameFrame timingGameFrame = (TimingGameFrame) controller.frame;
             timingGameFrame.timer.stop();
             //先做一个弹窗，询问是否继续游戏,如果是则继续游戏，就focus到这个窗口上，如果不是就弹出游戏胜利窗口
