@@ -4,18 +4,12 @@ import model.GridNumber;
 import view.*;
 
 import javax.swing.*;
-//导入音乐播放器
-//import javazoom.jl.decoder.JavaLayerException;
-//import javazoom.jl.player.Player;
 
 
 public class GameController {
     public GamePanel view;
     private GridNumber model;
     public GameFrame frame;
-    boolean occurExceptionNumber; // 是否出现异常数据
-//    private Player player; // 用于播放音乐的 Player 对象
-//    private boolean isMusicPlaying = true; // 音乐播放状态
 
     public GameController(GamePanel view, GridNumber model, GameFrame frame) {
         this.view = view;
@@ -91,29 +85,6 @@ public class GameController {
 
     public void loadGame() {
         if (frame.user.time == 0) {
-            //首先要检查是否有异常数据，如果有异常数据则不加载游戏，做一个提示，提醒他存档已被破坏，是否重新开始游戏
-            if (frame.user.numbers.length != frame.user.xCount || frame.user.numbers[0].length != frame.user.yCount || occurExceptionNumber == true) {
-                int result = JOptionPane.showConfirmDialog(
-                        frame,
-                        "The save file is damaged, do you want to restart the game?",
-                        "Restart Game",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
-                );
-                if (result == JOptionPane.YES_OPTION) {
-                    frame.user.numbers = new int[frame.user.xCount][frame.user.yCount];
-                    frame.user.score = 0;
-                    frame.user.step = 0;
-                    frame.user.time = 0;
-                    frame.user.userManager.updateUser();
-                    frame.dispose();
-                    GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user,frame.menu1); // 创建新的游戏窗口
-                    newGameFrame.setVisible(true); // 显示新的游戏窗口
-                    return;
-                } else {
-                    return;
-                }
-            }
             GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user,frame.menu1); // 创建新的游戏窗口
             newGameFrame.setVisible(true); // 显示新的游戏窗口
             newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
@@ -127,29 +98,6 @@ public class GameController {
             // 更新游戏面板以显示加载的状态
             newGameFrame.getGamePanel().updateGridsNumber();
         } else {
-            //首先要检查是否有异常数据，如果有异常数据则不加载游戏，做一个提示，提醒他存档已被破坏，是否重新开始游戏
-            if (frame.user.numbers.length != frame.user.xCount || frame.user.numbers[0].length != frame.user.yCount || isOccurExceptionNumber()) {
-                int result = JOptionPane.showConfirmDialog(
-                        frame,
-                        "The save file is damaged, do you want to restart the game?",
-                        "Restart Game",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
-                );
-                if (result == JOptionPane.YES_OPTION) {
-                    frame.user.numbers = new int[frame.user.xCount][frame.user.yCount];
-                    frame.user.score = 0;
-                    frame.user.step = 0;
-                    frame.user.time = 0;
-                    frame.user.userManager.updateUser();
-                    frame.dispose();
-                    GameFrame newGameFrame = new GameFrame(frame.user.xCount, frame.user.yCount, frame.user,frame.menu1); // 创建新的游戏窗口
-                    newGameFrame.setVisible(true); // 显示新的游戏窗口
-                    return;
-                } else {
-                    return;
-                }
-            }
             TimingGameFrame newGameFrame = new TimingGameFrame(frame.user.xCount, frame.user.yCount, frame.user, frame.user.time,frame.menu1); // 创建新的计时游戏窗口
             newGameFrame.setVisible(true); // 显示新的游戏窗口
             newGameFrame.getGamePanel().getModel().setNumbers(frame.user.numbers); // 设置棋盘状态
@@ -164,7 +112,6 @@ public class GameController {
             newGameFrame.getGamePanel().updateGridsNumber();
         }
         frame.dispose(); // 关闭当前窗口
-
     }
 
     public void exit() {
@@ -186,17 +133,5 @@ public class GameController {
         }
     }
 
-    public boolean isOccurExceptionNumber() {
-        for (int i = 0; i < frame.user.xCount ; i++) {
-            for (int j = 0; j < frame.user.yCount; j++) {
-                // 如果出现异常数据,不是2的幂次方，则返回true
-                if ((frame.user.numbers[i][j]!= Math.pow(2, (int) (Math.log(frame.user.numbers[i][j]) / Math.log(2)))) && frame.user.numbers[i][j] != 0) {
-                    occurExceptionNumber = true;
-                    return occurExceptionNumber;
-                }
-            }
-        }
-        occurExceptionNumber = false;
-        return occurExceptionNumber;
-    }
+
 }

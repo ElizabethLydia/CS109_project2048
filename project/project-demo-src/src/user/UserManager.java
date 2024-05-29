@@ -12,6 +12,22 @@ public class UserManager {
     //HashMap是一个散列表，它存储的内容是键值对(key-value)映射,HashMap类实现了Map接口,HashMap类中有一个内部类Entry,Entry类实现了Map.Entry接口,Entry类中有两个成员变量key和value,分别表示键和值。
 
     public UserManager() {
+        File file = new File("DataField.txt");
+        if(file.exists()){
+            System.out.println("文件存在");
+        } else {
+            System.out.println("文件不存在");
+            System.out.println(101);
+            try {
+                File newfile = new File("DataField.txt");
+                if(newfile.createNewFile())
+                    System.out.println("文件创建成功");
+                else
+                    System.out.println("出错了，该文件已经存在");
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
         try {
             //创建一个文件读取器,读取文件savegame.txt,如果文件不存在会抛出异常
             BufferedReader reader = new BufferedReader(new FileReader("DataField.txt"));
@@ -41,15 +57,54 @@ public class UserManager {
                 user.yCount = Integer.parseInt(sizeParts[1]);
                 //棋盘
                 user.numbers = new int[user.xCount][user.yCount];
-                for (int i = 0; i < user.xCount; i++) {
+                if(user.xCount ==4){
+                    for (int i = 0; i < user.xCount; i++) {
+                        line = reader.readLine();
+                        String[] numberStrings = line.split(",");
+                        if(numberStrings.length!=user.yCount){
+                            System.out.println("文件格式错误");
+                            System.out.println(102);
+                            user.numbers = new int[][]{{0, 0, 2, 0}, {0, 0, 0, 0}, {0, 0, 4, 0}, {0, 0, 0, 0}};
+                            break;
+                        }
+                        for (int j = 0; j < user.yCount; j++) {
+                            user.numbers [i][j] = Integer.parseInt(numberStrings[j]);
+                        }
+                    }
                     line = reader.readLine();
-                    String[] numberStrings = line.split(",");
-                    for (int j = 0; j < user.yCount; j++) {
-                        user.numbers [i][j] = Integer.parseInt(numberStrings[j]);
+                    if(!line.isEmpty()){
+                        System.out.println("文件格式错误");
+                        System.out.println(102);
+                    }
+                }else{
+                    for (int i = 0; i < user.xCount; i++) {
+                        line = reader.readLine();
+                        String[] numberStrings = line.split(",");
+                        if(numberStrings.length!=user.yCount){
+                            System.out.println("文件格式错误");
+                            user.numbers = new int[][]{{0, 0, 2, 0,0}, {0, 0, 0, 0,0}, {0, 0,0, 4, 0}, {0,0, 0, 0, 0}, {0, 0, 0, 0,0}};
+                            break;
+                        }
+                        for (int j = 0; j < user.yCount; j++) {
+                            user.numbers [i][j] = Integer.parseInt(numberStrings[j]);
+                        }
                     }
                 }
-                if(user.xCount ==4){
-                    reader.readLine();
+                boolean occurExceptionNumber=false;
+                for (int i = 0; i < user.xCount ; i++) {
+                    for (int j = 0; j < user.yCount; j++) {
+                        // 如果出现异常数据,不是2的幂次方，则返回true
+                        if ((user.numbers[i][j]== Math.pow(2, (int) (Math.log(user.numbers[i][j]) / Math.log(2))))|user.numbers[i][j] == 0) {
+                            continue;
+                        }else{
+                            System.out.println("文件数字错误");
+                            user.numbers[i][j] = 0;
+                            occurExceptionNumber = true;
+                        }
+                    }
+                }
+                if(occurExceptionNumber){
+                    System.out.println(103);
                 }
                 //读出本局分数
                 line = reader.readLine();

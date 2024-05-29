@@ -68,9 +68,14 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 
         if ((user != null&!(this instanceof AIGameFrame))|(this instanceof TimingGameFrame)) {
             HighestScorePanel = createPanel(418, 30, 110, 70, false);
-            this.HighestScoreLabel = createLabel("<html>Highest:<br>"+this.user.HighestScore+"</html>",new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
-//            this.HighestScoreLabel.setText(String.format("<html>Highest:<br> %d</html>", this.HighestScore));
-            //<html>Step:<br> 0 </html>这个是为了让step和score在同一行显示
+            if(this instanceof TimingGameFrame){
+                this.HighestScoreLabel = createLabel("<html>Time:<br> 0:00</html>",new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
+
+            }else{
+                this.HighestScoreLabel = createLabel("<html>Highest:<br>"+this.user.HighestScore+"</html>",new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
+            }
+
+
             HighestScorePanel.setComponentZOrder(HighestScoreLabel, 0);
         }
 
