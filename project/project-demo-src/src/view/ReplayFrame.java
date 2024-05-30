@@ -44,8 +44,8 @@ public class ReplayFrame extends JFrame implements Create{
         scorePanel.setComponentZOrder(scoreLabel, 0);
         this.gamePanel.getModel().setNumbers(eachArray.get(0));
         this.gamePanel.updateGridsNumber();
-        replayButton = createButtonWithIcon("Replay", new Point(190, 50), 100, 50, this);
-        pauseButton = createButtonWithIcon("Pause", new Point(190, 50), 100, 50, this);
+        replayButton = createButtonWithIcon("Replay", new Point(185, 50), 100, 50, this);
+        pauseButton = createButtonWithIcon("Pause", new Point(185, 50), 100, 50, this);
         this.pauseButton.setEnabled(false);
         this.pauseButton.setVisible(false);
         this.replayButton.addActionListener(e -> {
@@ -55,8 +55,8 @@ public class ReplayFrame extends JFrame implements Create{
                     if (ReplayFrame.this.x < ReplayFrame.this.eachArray.size()) {
                         ReplayFrame.this.gamePanel.getModel().setNumbers(ReplayFrame.this.eachArray.get(ReplayFrame.this.x));
                         ReplayFrame.this.gamePanel.updateGridsNumber();
-                        ReplayFrame.this.stepLabel.setText("<html>Step:<br> " + ReplayFrame.this.x + " </html>");
-                        ReplayFrame.this.scoreLabel.setText("<html>Score:<br> " + ReplayFrame.this.eachScore.get(ReplayFrame.this.x) + " </html>");
+                        ReplayFrame.this.stepLabel.setText("<html>Step:<br> " + (ReplayFrame.this.x )+ " </html>");
+                        ReplayFrame.this.scoreLabel.setText("<html>Score:<br> " + ReplayFrame.this.eachScore.get(ReplayFrame.this.x)+ " </html>");
                         ReplayFrame.this.x++;
                     } else {
                         ReplayFrame.this.timer.stop();

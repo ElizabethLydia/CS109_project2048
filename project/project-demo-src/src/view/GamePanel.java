@@ -81,17 +81,17 @@ public class GamePanel extends ListenerPanel {
      */
     @Override
     public void doMoveRight() {//记得改现在是4*4的情况
-        int[][] initialArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < initialArray.length; i++) {
-            for (int j = 0; j < initialArray[i].length; j++) {
-                initialArray[i][j] = model.getNumber(i, j);
-            }
-        }
         if (this.model.moveRight()) {
             System.out.println("Click VK_RIGHT");
             this.afterMove();
             this.model.addRandomNumber();
-            this.model.addEachArray(initialArray);
+            int[][] afterArray = new int[XCOUNT][YCOUNT];
+            for (int i = 0; i < afterArray.length; i++) {
+                for (int j = 0; j < afterArray[i].length; j++) {
+                    afterArray[i][j] = model.getNumber(i, j);
+                }
+            }
+            this.model.addEachArray(afterArray);
             this.updateGridsNumber();
             this.setScore();
             if (checkIf2048() && checkIfHadInformWin==false){
@@ -120,17 +120,17 @@ public class GamePanel extends ListenerPanel {
     }
     @Override
     public void doMoveLeft() {
-        int[][] initialArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < initialArray.length; i++) {
-            for (int j = 0; j < initialArray[i].length; j++) {
-                initialArray[i][j] = model.getNumber(i, j);
-            }
-        }
         if (this.model.moveLeft()) {
             System.out.println("Click VK_LEFT");
             this.afterMove();
             this.model.addRandomNumber();
-            this.model.addEachArray(initialArray);
+            int[][] afterArray = new int[XCOUNT][YCOUNT];
+            for (int i = 0; i < afterArray.length; i++) {
+                for (int j = 0; j < afterArray[i].length; j++) {
+                    afterArray[i][j] = model.getNumber(i, j);
+                }
+            }
+            this.model.addEachArray(afterArray);
             this.updateGridsNumber();
             this.setScore();
             if (checkIf2048() && checkIfHadInformWin==false){
@@ -160,17 +160,17 @@ public class GamePanel extends ListenerPanel {
 
     @Override
     public void doMoveUp() {
-        int[][] initialArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < initialArray.length; i++) {
-            for (int j = 0; j < initialArray[i].length; j++) {
-                initialArray[i][j] = model.getNumber(i, j);
-            }
-        }
         if (this.model.moveUp()) {
             System.out.println("Click VK_UP");
             this.afterMove();
             this.model.addRandomNumber();
-            this.model.addEachArray(initialArray);
+            int[][] afterArray = new int[XCOUNT][YCOUNT];
+            for (int i = 0; i < afterArray.length; i++) {
+                for (int j = 0; j < afterArray[i].length; j++) {
+                    afterArray[i][j] = model.getNumber(i, j);
+                }
+            }
+            this.model.addEachArray(afterArray);
             this.updateGridsNumber();
             this.setScore();
             if (checkIf2048() && checkIfHadInformWin==false){
@@ -200,17 +200,17 @@ public class GamePanel extends ListenerPanel {
 
     @Override
     public void doMoveDown() {
-        int[][] initialArray = new int[XCOUNT][YCOUNT];
-        for (int i = 0; i < initialArray.length; i++) {
-            for (int j = 0; j < initialArray[i].length; j++) {
-                initialArray[i][j] = model.getNumber(i, j);
-            }
-        }
         if (this.model.moveDown()) {
             System.out.println("Click VK_DOWN");
             this.afterMove();
             this.model.addRandomNumber();
-            this.model.addEachArray(initialArray);
+            int[][] afterArray = new int[XCOUNT][YCOUNT];
+            for (int i = 0; i < afterArray.length; i++) {
+                for (int j = 0; j < afterArray[i].length; j++) {
+                    afterArray[i][j] = model.getNumber(i, j);
+                }
+            }
+            this.model.addEachArray(afterArray);
             this.updateGridsNumber();
             this.setScore();
             if (checkIf2048() && checkIfHadInformWin==false){
