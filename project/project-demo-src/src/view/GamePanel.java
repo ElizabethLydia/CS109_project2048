@@ -296,7 +296,7 @@ public class GamePanel extends ListenerPanel {
         boolean check = false;
         for (int i = 0; i < XCOUNT; i++) {
             for (int j = 0; j < YCOUNT; j++) {
-                if (model.getNumber(i, j) == 128) {
+                if (model.getNumber(i, j) == 2048) {
                     check = true;
                 }
             }
