@@ -22,22 +22,24 @@ public class RankingDialog extends JDialog implements Create {
         this.setLocationRelativeTo(parent); // 居中显示
         this.setResizable(false); // 不可调整大小
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
+        if(parent instanceof TimingGameFrame) {
+            JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/TimeRanking.png"));
+            //修改图片的大小
+            ImageIcon icon = (ImageIcon) imageLabel.getIcon();
+            Image img = icon.getImage().getScaledInstance(350, 200, Image.SCALE_DEFAULT);
+            imageLabel.setIcon(new ImageIcon(img));
+            imageLabel.setBounds(0, 0, 500, 220);
+            this.add(imageLabel);
+        }else{
+            JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/ClassicRanking.png"));
+            //修改图片的大小
+            ImageIcon icon = (ImageIcon) imageLabel.getIcon();
+            Image img = icon.getImage().getScaledInstance(370, 200, Image.SCALE_DEFAULT);
+            imageLabel.setIcon(new ImageIcon(img));
+            imageLabel.setBounds(0, 0, 500, 220);
+            this.add(imageLabel);
 
-        JLabel imageLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/RankingTitle.png"));
-        //修改图片的大小
-        ImageIcon icon = (ImageIcon) imageLabel.getIcon();
-        Image img = icon.getImage().getScaledInstance(500, 280, Image.SCALE_DEFAULT);
-        imageLabel.setIcon(new ImageIcon(img));
-        imageLabel.setBounds(0, 0, 500, 260);
-        this.add(imageLabel);
-
-        JLabel rankingLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/RankingLabel.png"));
-        //修改图片的大小
-        ImageIcon icon2 = (ImageIcon) rankingLabel.getIcon();
-        Image img2 = icon2.getImage().getScaledInstance(420, 250, Image.SCALE_DEFAULT);
-        rankingLabel.setIcon(new ImageIcon(img2));
-        rankingLabel.setBounds(0, 260, 500, 250);
-        this.add(rankingLabel);
+        }
 
         if(parent instanceof TimingGameFrame) {
             ArrayList<User> userList = new ArrayList<>(userManager.users.keySet());
@@ -51,23 +53,32 @@ public class RankingDialog extends JDialog implements Create {
             for(User u : userList) {
                 if (u.equals(user)) {
                     switch (rank%10) {
-                        case 1:YourRankLabel = createLabel(rank+"st", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
-                        case 2:YourRankLabel = createLabel(rank+"nd", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
-                        case 3:YourRankLabel = createLabel(rank+"rd", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
-                        default:YourRankLabel = createLabel(rank+"th", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
+                        case 1:
+                            YourRankLabel = createLabel(rank+"st", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xFF5B1E);
+                            break;
+                        case 2:
+                            YourRankLabel = createLabel(rank+"nd", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xFF924E);
+                            break;
+                        case 3:
+                            YourRankLabel = createLabel(rank+"rd", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xFADB54);
+                            break;
+                        default:
+                            YourRankLabel = createLabel(rank+"th", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xD86F2F);
+                            break;
                     }
                     break;
                 }
                 rank++;
             }
-            FirstLabel = createLabel(userList.get(0).name + ":" + userList.get(0).TimeModeHighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70, this, 0x545454);
-            FirstLabel.setComponentZOrder(rankingLabel, 0);
-            SecondLabel = createLabel(userList.get(1).name + ":" + userList.get(1).TimeModeHighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 100), 500, 70, this, 0x545454);
-            SecondLabel.setComponentZOrder(rankingLabel, 1);
-            ThirdLabel = createLabel(userList.get(2).name + ":" + userList.get(2).TimeModeHighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 180), 500, 70, this, 0x545454);
-            ThirdLabel.setComponentZOrder(rankingLabel, 2);
-            YouLabel = createLabel("You:" + user.TimeModeHighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 260), 500, 70, this, 0x545454);
-            YouLabel.setComponentZOrder(rankingLabel, 3);
+            FirstLabel = createLabel(userList.get(0).name + ":" , new Font("Arial", Font.BOLD, 40), new Point(150, 240), 500, 70, this, 0x463627);
+            JLabel label1 = createLabel(String.valueOf(userList.get(0).HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 240), 500, 70, this, 0x463627);
+            SecondLabel = createLabel(userList.get(1).name + ":" , new Font("Arial", Font.BOLD, 40), new Point(150, 323), 500, 70, this, 0x463627);
+            JLabel label2 = createLabel(String.valueOf(userList.get(1).HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 323), 500, 70, this, 0x463627);
+            ThirdLabel = createLabel(userList.get(2).name + ":" , new Font("Arial", Font.BOLD, 40), new Point(150, 406), 500, 70, this, 0x463627);
+            JLabel label3 = createLabel(String.valueOf(userList.get(2).HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 406), 500, 70, this, 0x463627);
+            YouLabel = createLabel("You:" , new Font("Arial", Font.BOLD, 40), new Point(150, 550), 500, 70, this, 0x463627);
+            JLabel labelY = createLabel(String.valueOf(user.HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 550), 500, 70, this, 0x463627);
+
         }else{
             ArrayList<User> userList = new ArrayList<>(userManager.users.keySet());
             Collections.sort(userList, new Comparator<User>() {
@@ -80,25 +91,39 @@ public class RankingDialog extends JDialog implements Create {
             for(User u : userList) {
                 if (u.equals(user)) {
                     switch (rank%10) {
-                        case 1:YourRankLabel = createLabel(rank+"st", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
-                        case 2:YourRankLabel = createLabel(rank+"nd", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
-                        case 3:YourRankLabel = createLabel(rank+"rd", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
-                        default:YourRankLabel = createLabel(rank+"th", new Font("Arial", Font.BOLD, 40), new Point(100, 340), 500, 70, this, 0x545454);
+                        case 1:
+                            YourRankLabel = createLabel(rank+"st", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xFF5B1E);
+                            break;
+                        case 2:
+                            YourRankLabel = createLabel(rank+"nd", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xFF924E);
+                            break;
+                        case 3:
+                            YourRankLabel = createLabel(rank+"rd", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xFADB54);
+                            break;
+                        default:
+                            YourRankLabel = createLabel(rank+"th", new Font("Arial", Font.BOLD, 30), new Point(95, 570), 500, 70, this, 0xD86F2F);
+                            break;
                     }
                     break;
                 }
                 rank++;
             }
-            FirstLabel = createLabel(userList.get(0).name + ":" + userList.get(0).HighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70, this, 0x545454);
-            FirstLabel.setComponentZOrder(rankingLabel, 0);
-            SecondLabel = createLabel(userList.get(1).name + ":" + userList.get(1).HighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 100), 500, 70, this, 0x545454);
-            SecondLabel.setComponentZOrder(rankingLabel, 1);
-            ThirdLabel = createLabel(userList.get(2).name + ":" + userList.get(2).HighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 180), 500, 70, this, 0x545454);
-            ThirdLabel.setComponentZOrder(rankingLabel, 2);
-            YouLabel = createLabel("You:" + user.HighestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 260), 500, 70, this, 0x545454);
-            YouLabel.setComponentZOrder(rankingLabel, 3);
+            FirstLabel = createLabel(userList.get(0).name + ":" , new Font("Arial", Font.BOLD, 40), new Point(150, 240), 500, 70, this, 0x463627);
+            JLabel label1 = createLabel(String.valueOf(userList.get(0).HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 240), 500, 70, this, 0x463627);
+            SecondLabel = createLabel(userList.get(1).name + ":" , new Font("Arial", Font.BOLD, 40), new Point(150, 323), 500, 70, this, 0x463627);
+            JLabel label2 = createLabel(String.valueOf(userList.get(1).HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 323), 500, 70, this, 0x463627);
+            ThirdLabel = createLabel(userList.get(2).name + ":" , new Font("Arial", Font.BOLD, 40), new Point(150, 406), 500, 70, this, 0x463627);
+            JLabel label3 = createLabel(String.valueOf(userList.get(2).HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 406), 500, 70, this, 0x463627);
+            YouLabel = createLabel("You:" , new Font("Arial", Font.BOLD, 40), new Point(150, 550), 500, 70, this, 0x463627);
+            JLabel labelY = createLabel(String.valueOf(user.HighestScore), new Font("Arial", Font.BOLD, 40), new Point(300, 550), 500, 70, this, 0x463627);
         }
-
+        JLabel rankingLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/RankingLabel.png"));
+        //修改图片的大小
+        ImageIcon icon2 = (ImageIcon) rankingLabel.getIcon();
+        Image img2 = icon2.getImage().getScaledInstance(430, 430, Image.SCALE_DEFAULT);
+        rankingLabel.setIcon(new ImageIcon(img2));
+        rankingLabel.setBounds(0, 170, 500, 500);
+        this.add(rankingLabel);
 
     }
 }

@@ -37,19 +37,19 @@ public class GameOverDialog extends JDialog implements Create {
         JLabel endLabel = new JLabel(new ImageIcon("project/project-demo-src/src/util/pictures/title/EndLabel.png"));
         //修改图片的大小
         ImageIcon icon2 = (ImageIcon) endLabel.getIcon();
-        Image img2 = icon2.getImage().getScaledInstance(420, 250, Image.SCALE_DEFAULT);
+        Image img2 = icon2.getImage().getScaledInstance(350, 330, Image.SCALE_DEFAULT);
         endLabel.setIcon(new ImageIcon(img2));
-        endLabel.setBounds(0, 260, 500, 250);
+        endLabel.setBounds(0, 200, 500, 330);
         this.add(endLabel);
 
 
-        JLabel stepLabel = createLabel("Step:         "+Step, new Font("Arial", Font.BOLD, 40), new Point(100, 15), 500, 70,this,0x545454);
+        JLabel stepLabel = createLabel("Step:           "+Step, new Font("Arial", Font.BOLD, 40), new Point(90, 70), 500, 70,this,0x463627);
         endLabel.setComponentZOrder(stepLabel, 0);
 
-        JLabel scoreLabel = createLabel("Score:       "+Score, new Font("Arial", Font.BOLD, 40), new Point(100, 90), 500, 70,this,0x545454);
+        JLabel scoreLabel = createLabel("Score:         "+Score, new Font("Arial", Font.BOLD, 40), new Point(90, 140), 500, 70,this,0x463627);
         endLabel.setComponentZOrder(scoreLabel, 0);
 
-        JLabel highScoreLabel = createLabel("Highest:    "+ this.highestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 165), 500, 70,this,0x545454);
+        JLabel highScoreLabel = createLabel("Highest:      "+ this.highestScore, new Font("Arial", Font.BOLD, 40), new Point(90, 205), 500, 70,this,0x463627);
         endLabel.setComponentZOrder(highScoreLabel, 0);
 
 

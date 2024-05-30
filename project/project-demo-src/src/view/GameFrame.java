@@ -19,7 +19,6 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     private JButton magicBtn;
     private JButton undoBtn;
     private JButton rankingBtn;
-//    private JButton loadBtn;
 //    private JButton deadBtn;
 
     protected GamePanel gamePanel;
@@ -90,7 +89,6 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.undoBtn = createButtonWithIcon("Undo", new Point(630, 130), 50, 50, this);
         this.magicBtn = createButtonWithIcon("Magic", new Point(700, 130), 50, 50, this);
 
-//        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
 //        this.deadBtn = createButton("Dead", new Point(500, 290), 110, 50, this);
 
         buttonPanel = createPanel(450, 330, 320, 210, true);
@@ -119,11 +117,6 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
             gamePanel.requestFocusInWindow();//当重启按钮被点击时，游戏将重新开始并且游戏面板会请求焦点，以便启用键盘事件监听，为玩家提供交互操作的功能。
         });
 
-//        this.loadBtn.addActionListener(e -> {
-//            String string = JOptionPane.showInputDialog(this, "Input path:");
-//            System.out.println(string);
-//            gamePanel.requestFocusInWindow();//启用键盘事件监听？？？？
-//        });
 
         this.undoBtn.addActionListener(e -> {
             gamePanel.doUndo();
@@ -134,10 +127,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 //            gamePanel.requestFocusInWindow();
 //        });
         this.rankingBtn.addActionListener(e -> {
-            if (this instanceof TimingGameFrame) {
-                TimingGameFrame timingGameFrame = (TimingGameFrame) this;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
-                timingGameFrame.timer.stop();
-            } else if (this instanceof AIGameFrame) {
+            if (this instanceof AIGameFrame) {
                 AIGameFrame AiGameFrame = (AIGameFrame) this;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
                 AiGameFrame.timer.stop();
                 AiGameFrame.StartAIBtn.setEnabled(true);
@@ -148,16 +138,14 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
             if (this.user == null) {
                 JOptionPane.showMessageDialog(null, "Please login first!", "Warning", JOptionPane.WARNING_MESSAGE);
                 System.out.println("用户未登录，无法查看排行榜");
-                return;
             } else if (this instanceof AIGameFrame) {
                 JOptionPane.showMessageDialog(null, "AI mode cannot be ranked! ", "Warning", JOptionPane.WARNING_MESSAGE);
                 System.out.println("AI模式得分无法计入排行榜");
-                return;
             } else{
                 RankingDialog rankingFrame = new RankingDialog(user.userManager,this,user);//创建排行榜窗口
                 rankingFrame.setVisible(true);
             }
-
+            gamePanel.requestFocusInWindow();
         });
 
         this.leftBtn.addActionListener(e -> {

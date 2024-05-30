@@ -14,7 +14,7 @@ public class AIGameFrame extends GameFrame {
     public JButton StopAIBtn;
     public AIGameFrame(int xcount, int ycount, User user,Menu1 menu1) {
         super(xcount, ycount, user, menu1);
-
+        timer = new Timer(50, null);
         this.StartAIBtn = createButtonWithIcon("StartAI", new Point(600, 220), 110, 50, this);
         this.StartAIBtn.addActionListener(e -> {
             timer = new Timer(50, new ActionListener() {
