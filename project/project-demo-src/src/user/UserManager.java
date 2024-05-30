@@ -18,6 +18,7 @@ public class UserManager {
         } else {
             System.out.println("文件不存在");
             System.out.println(101);
+            JOptionPane.showMessageDialog(null, "The datafile does not exist, a new file will be created!!!", "101!!!", JOptionPane.WARNING_MESSAGE);
             try {
                 File newfile = new File("DataField.txt");
                 if(newfile.createNewFile())
@@ -57,15 +58,15 @@ public class UserManager {
                 user.yCount = Integer.parseInt(sizeParts[1]);
                 //棋盘
                 user.numbers = new int[user.xCount][user.yCount];
+                boolean occurException=false;
                 if(user.xCount ==4){
                     for (int i = 0; i < user.xCount; i++) {
                         line = reader.readLine();
                         String[] numberStrings = line.split(",");
                         if(numberStrings.length!=user.yCount){
-                            System.out.println("文件格式错误");
-                            System.out.println(102);
-                            user.numbers = new int[][]{{0, 0, 2, 0}, {0, 0, 0, 0}, {0, 0, 4, 0}, {0, 0, 0, 0}};
-                            break;
+                            occurException=true;
+                            user.numbers [i]= new int[]{0, 0, 0, 0};
+                            continue;
                         }
                         for (int j = 0; j < user.yCount; j++) {
                             user.numbers [i][j] = Integer.parseInt(numberStrings[j]);
@@ -73,20 +74,51 @@ public class UserManager {
                     }
                     line = reader.readLine();
                     if(!line.isEmpty()){
+                        occurException=true;
+                    }
+                    if(occurException){
                         System.out.println("文件格式错误");
                         System.out.println(102);
+                        JOptionPane.showMessageDialog(null, "The data of user "+ user.name + " is damaged, the data will be maintained!!!", "102!!!", JOptionPane.WARNING_MESSAGE);
+                        int countZero=0;
+                        for (int i = 0; i < user.xCount ; i++) {
+                            for (int j = 0; j < user.yCount; j++) {
+                                if(user.numbers[i][j] == 0){
+                                    countZero++;
+                                }
+                            }
+                        }
+                        if(countZero==16){
+                            user.numbers=new int[][]{{0, 0, 2, 0}, {0, 0, 0, 0}, {0, 4, 0,0}, {0, 0, 0, 0}};
+                        }
                     }
                 }else{
                     for (int i = 0; i < user.xCount; i++) {
                         line = reader.readLine();
                         String[] numberStrings = line.split(",");
                         if(numberStrings.length!=user.yCount){
-                            System.out.println("文件格式错误");
-                            user.numbers = new int[][]{{0, 0, 2, 0,0}, {0, 0, 0, 0,0}, {0, 0,0, 4, 0}, {0,0, 0, 0, 0}, {0, 0, 0, 0,0}};
-                            break;
+                            occurException=true;
+                            user.numbers [i]= new int[]{0, 0, 0, 0,0};
+                            continue;
                         }
                         for (int j = 0; j < user.yCount; j++) {
                             user.numbers [i][j] = Integer.parseInt(numberStrings[j]);
+                        }
+                    }
+                    if(occurException){
+                        System.out.println("文件格式错误");
+                        System.out.println(102);
+                        JOptionPane.showMessageDialog(null, "The data of user "+ user.name + " is damaged, the data will be maintained!!!", "102!!!", JOptionPane.WARNING_MESSAGE);
+                        int countZero=0;
+                        for (int i = 0; i < user.xCount ; i++) {
+                            for (int j = 0; j < user.yCount; j++) {
+                                if(user.numbers[i][j] == 0){
+                                    countZero++;
+                                }
+                            }
+                        }
+                        if(countZero==25){
+                            user.numbers=new int[][]{{0, 0, 2, 0,0}, {0, 0, 0, 0,0}, {0, 0,0, 4, 0}, {0, 0,0, 0,0}, {0, 0,0, 0, 0}};
                         }
                     }
                 }
@@ -105,6 +137,7 @@ public class UserManager {
                 }
                 if(occurExceptionNumber){
                     System.out.println(103);
+                    JOptionPane.showMessageDialog(null, "The data of user "+ user.name + " is damaged, the data will be maintained!!!", "103!!!", JOptionPane.WARNING_MESSAGE);
                 }
                 //读出本局分数
                 line = reader.readLine();

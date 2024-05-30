@@ -1,0 +1,14 @@
+UseName:123
+Password:123
+HighestScore:1684
+TimeModeHighestScore:0
+4 4
+133,16,8,3
+16,8,2,5
+8,245,2,0
+2,0,0,4
+
+Score:240
+Step:32
+Time:41
+********
