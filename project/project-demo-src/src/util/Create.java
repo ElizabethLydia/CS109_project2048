@@ -40,6 +40,9 @@ public interface Create {//创建按钮和标签
             case "Magic":
                 icon =new ImageIcon("project/project-demo-src/src/util/pictures/magic.png");
                 break;
+            case "Ranking":
+                icon =new ImageIcon("project/project-demo-src/src/util/pictures/ranking.png");
+                break;
             case "Left":
                 icon = new ImageIcon("project/project-demo-src/src/util/pictures/left.png");//这里的路径是相对路径，所以要加上"project/project-demo-src/src/util/pictures/"
                 break;

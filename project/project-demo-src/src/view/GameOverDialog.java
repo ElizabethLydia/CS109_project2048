@@ -13,16 +13,15 @@ public class GameOverDialog extends JDialog implements Create {
     private int Step;
     GameController controller;
 
-    public GameOverDialog(GameFrame parent, String gameOverMessage, int currentScore, int highScore, int step, GameController controller) {
+    public GameOverDialog(GameFrame parent, String gameOverMessage, int currentScore, int highestScore, int step, GameController controller) {
         super(parent, "Game Over", true); // 模态对话框
         this.Score = currentScore;
-        this.highestScore = highScore;
+        this.highestScore = highestScore;
         this.controller = controller;
         this.Step = step;
         this.setSize(500, 700); // 对话框大小
         this.setLayout(null);
         this.setLocationRelativeTo(parent); // 居中显示
-        this.controller = controller;
         this.setResizable(false); // 不可调整大小
         getContentPane().setBackground(new Color(0xF6ECDF));//设置窗口背景颜色
 
@@ -50,7 +49,7 @@ public class GameOverDialog extends JDialog implements Create {
         JLabel scoreLabel = createLabel("Score:       "+Score, new Font("Arial", Font.BOLD, 40), new Point(100, 90), 500, 70,this,0x545454);
         endLabel.setComponentZOrder(scoreLabel, 0);
 
-        JLabel highScoreLabel = createLabel("Highest:    "+highestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 165), 500, 70,this,0x545454);
+        JLabel highScoreLabel = createLabel("Highest:    "+ this.highestScore, new Font("Arial", Font.BOLD, 40), new Point(100, 165), 500, 70,this,0x545454);
         endLabel.setComponentZOrder(highScoreLabel, 0);
 
 

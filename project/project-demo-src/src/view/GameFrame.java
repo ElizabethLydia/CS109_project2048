@@ -18,7 +18,7 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
     private JButton restartBtn;
     private JButton magicBtn;
     private JButton undoBtn;
-
+    private JButton rankingBtn;
 //    private JButton loadBtn;
 //    private JButton deadBtn;
 
@@ -85,13 +85,13 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
         this.stepLabel = createLabel("<html>Step:<br> 0 </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
         this.scoreLabel = createLabel("<html>Score:<br>0  </html>", new Font("Arial", Font.BOLD, 22), new Point(10, 10), 180, 50, this, 0xF1EDEA);
 
+        this.rankingBtn = createButtonWithIcon("Ranking", new Point(490, 130), 50, 50, this);
         this.restartBtn = createButtonWithIcon("Restart", new Point(560, 130), 50, 50, this);
         this.undoBtn = createButtonWithIcon("Undo", new Point(630, 130), 50, 50, this);
         this.magicBtn = createButtonWithIcon("Magic", new Point(700, 130), 50, 50, this);
 
 //        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50, this);
 //        this.deadBtn = createButton("Dead", new Point(500, 290), 110, 50, this);
-
 
         buttonPanel = createPanel(450, 330, 320, 210, true);
         this.leftBtn = createButtonWithIcon("Left", new Point(15, 110), 90, 90, this);
@@ -133,6 +133,32 @@ public class GameFrame extends JFrame implements Create {//整个游戏的窗口
 //            gamePanel.dead();
 //            gamePanel.requestFocusInWindow();
 //        });
+        this.rankingBtn.addActionListener(e -> {
+            if (this instanceof TimingGameFrame) {
+                TimingGameFrame timingGameFrame = (TimingGameFrame) this;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                timingGameFrame.timer.stop();
+            } else if (this instanceof AIGameFrame) {
+                AIGameFrame AiGameFrame = (AIGameFrame) this;//判断是否为计时模式，如果是则停止计时器，并创建新的计时游戏窗口，否则创建新的游戏窗口
+                AiGameFrame.timer.stop();
+                AiGameFrame.StartAIBtn.setEnabled(true);
+                AiGameFrame.StartAIBtn.setVisible(true);
+                AiGameFrame.StopAIBtn.setEnabled(false);
+                AiGameFrame.StopAIBtn.setVisible(false);
+            }
+            if (this.user == null) {
+                JOptionPane.showMessageDialog(null, "Please login first!", "Warning", JOptionPane.WARNING_MESSAGE);
+                System.out.println("用户未登录，无法查看排行榜");
+                return;
+            } else if (this instanceof AIGameFrame) {
+                JOptionPane.showMessageDialog(null, "AI mode cannot be ranked! ", "Warning", JOptionPane.WARNING_MESSAGE);
+                System.out.println("AI模式得分无法计入排行榜");
+                return;
+            } else{
+                RankingDialog rankingFrame = new RankingDialog(user.userManager,this,user);//创建排行榜窗口
+                rankingFrame.setVisible(true);
+            }
+
+        });
 
         this.leftBtn.addActionListener(e -> {
             gamePanel.doMoveLeft();
