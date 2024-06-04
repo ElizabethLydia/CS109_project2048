@@ -106,7 +106,7 @@ public class GamePanel extends ListenerPanel {
             }
         }else{
             System.out.println("Unable to move right,try another direction");
-            JOptionPane.showMessageDialog(null, "Unable to move right,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "Unable to move right,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
@@ -146,7 +146,7 @@ public class GamePanel extends ListenerPanel {
             }
         }else{
             System.out.println("Unable to move left,try another direction");
-            JOptionPane.showMessageDialog(null, "Unable to move left,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "Unable to move left,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
@@ -187,7 +187,7 @@ public class GamePanel extends ListenerPanel {
             }
         }else{
             System.out.println("Unable to move up,try another direction");
-            JOptionPane.showMessageDialog(null, "Unable to move up ,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "Unable to move up ,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
@@ -228,7 +228,7 @@ public class GamePanel extends ListenerPanel {
             }
         }else{
             System.out.println("Unable to move down,try another direction");
-            JOptionPane.showMessageDialog(null, "Unable to move down,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "Unable to move down,try another direction", "Warning", JOptionPane.WARNING_MESSAGE);
             if (checkIfEnded()) {
                 System.out.println("game is over.");
                 if (controller.frame instanceof TimingGameFrame) {
