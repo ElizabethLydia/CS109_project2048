@@ -126,7 +126,7 @@ public class UserManager {
                 for (int i = 0; i < user.xCount ; i++) {
                     for (int j = 0; j < user.yCount; j++) {
                         // 如果出现异常数据,不是2的幂次方，则返回true
-                        if ((user.numbers[i][j]== Math.pow(2, (int) (Math.log(user.numbers[i][j]) / Math.log(2))))|user.numbers[i][j] == 0) {
+                        if (((user.numbers[i][j]== Math.pow(2, (int) (Math.log(user.numbers[i][j])/ Math.log(2))))&user.numbers[i][j] !=1)|user.numbers[i][j] == 0) {
                             continue;
                         }else{
                             System.out.println("文件数字错误");
@@ -160,8 +160,21 @@ public class UserManager {
                 users.put(user, password);
             }
             reader.close();
-        } catch (IOException | NumberFormatException e) {
+        } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "The datafile is damaged, the data will be maintained!!!", "104!!!", JOptionPane.WARNING_MESSAGE);
+            File file1 = new File("DataField.txt");
+            file1.delete();
+            try {
+                File newfile = new File("DataField.txt");
+                if(newfile.createNewFile())
+                    System.out.println("文件创建成功");
+                else
+                    System.out.println("出错了，该文件已经存在");
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+
         }
     }
     //判断用户是否存在,如果用户存在,则返回true,否则返回false
